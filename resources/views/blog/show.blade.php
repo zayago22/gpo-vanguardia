@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $post->titulo }} — GPO Vanguardia</title>
     <meta name="description" content="{{ Str::limit($post->extracto ?? strip_tags($post->contenido), 160) }}">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         :root { --primary: #4338CA; --primary-light: #6366F1; --dark: #1E1B4B; }
-        body { font-family: 'Inter', sans-serif; color: #334155; }
+        body { font-family: 'Montserrat', sans-serif; color: #334155; }
         .navbar-blog { background: var(--dark); padding: 14px 0; }
         .navbar-blog .navbar-brand img { height: 36px; }
         .navbar-blog .nav-link { color: rgba(255,255,255,0.8) !important; font-size: 14px; font-weight: 500; }

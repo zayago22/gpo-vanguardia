@@ -15,7 +15,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@1,700;1,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700&display=swap" rel="stylesheet">
 
     <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -45,7 +45,7 @@
 
         * { box-sizing: border-box; }
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
             color: var(--gray-700);
             line-height: 1.6;
             overflow-x: hidden;
@@ -104,10 +104,10 @@
             z-index: 2;
         }
         .hero h1 {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-style: italic;
+            font-family: 'Montserrat', sans-serif;
+            font-style: normal;
             font-size: 52px;
-            font-weight: 700;
+            font-weight: 800;
             color: var(--white);
             line-height: 1.15;
             margin-bottom: 24px;
@@ -152,10 +152,11 @@
         .section { padding: 80px 0; }
         .section-gray { background: var(--gray-50); }
         .section-title {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-style: italic;
+            font-family: 'Montserrat', sans-serif;
+            font-style: normal;
             font-size: 38px;
             font-weight: 700;
+            letter-spacing: -0.5px;
             color: var(--dark);
             margin-bottom: 8px;
         }
@@ -297,7 +298,8 @@
             font-weight: 700;
             color: var(--dark);
             margin-bottom: 16px;
-            font-family: 'Playfair Display', serif;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: -0.3px;
         }
         .servicio-content p {
             font-size: 16px;

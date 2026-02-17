@@ -69,7 +69,10 @@ docker/                     → Dockerfile, nginx.conf, supervisord.conf, entryp
 ## Design System (Figma-matched)
 - **Primary Color**: `--primary: #4338CA` (indigo)
 - **Gradient**: `#4338CA → #6366F1`
-- **Fonts**: Inter (body), Playfair Display italic (section titles, hero h1, servicio h3)
+- **Fonts**: Montserrat (all weights 300-900, italic) used throughout:
+  - Body: Montserrat 400/500 (regular text)
+  - Headings: Montserrat 700/800 (section titles, hero h1, servicio h3)
+  - Nav/UI: Montserrat 500/600
 - **Section Titles**: Playfair Display italic + `::after` blue underline (60px wide, 3px)
 - **Navbar**: White bg, `border-bottom: 3px solid var(--primary)`, dark text links
 - **Hero**: Building photo bg (Unsplash), blue overlay `rgba(55,48,163,0.82)`, Playfair Display italic h1, white wave curve `::after`
