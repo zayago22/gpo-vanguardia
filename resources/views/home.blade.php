@@ -659,9 +659,9 @@
                     @else
                         @php
                             $placeholders = [
-                                'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=300&fit=crop',
-                                'https://images.unsplash.com/photo-1563986768609-322da13575f2?w=600&h=300&fit=crop',
-                                'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&h=300&fit=crop',
+                                'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&h=500&fit=crop',
+                                'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&h=500&fit=crop',
+                                'https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=500&fit=crop',
                             ];
                         @endphp
                         <img src="{{ $placeholders[$index % 3] }}" alt="{{ $servicio->nombre }}">
