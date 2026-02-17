@@ -134,7 +134,7 @@ docker/                     → Dockerfile, nginx.conf, supervisord.conf, entryp
 - All sections fully responsive with media queries for 991px, 575px breakpoints
 
 ### All Landing Page Sections Complete
-1. ✅ Navbar (white, blue border)
+1. ✅ Navbar (white, blue border, dropdown servicios)
 2. ✅ Hero (building bg, blue overlay, wave)
 3. ✅ El Propósito (gray bg, 50/50 layout)
 4. ✅ Casos de Éxito (3x2 logo grid)
@@ -142,4 +142,29 @@ docker/                     → Dockerfile, nginx.conf, supervisord.conf, entryp
 6. ✅ Valores Corporativos (4-col grid)
 7. ✅ Testimonios (3-col cards)
 8. ✅ Contacto (dark bg, form + map)
-9. ✅ Footer (4-col, dark bg)
+9. ✅ Footer (4-col, dark bg, términos link)
+
+### Session 7 (CCTV Page + Términos) — Commits `790059c`, `0115042`
+- **Navbar dropdown**: "Servicios" now a dropdown with IA/PNL, Ciberseguridad, BPO + CCTV (divider separated)
+- **CCTV Page** (`/cctv` → `cctv.blade.php`):
+  - Hero with security camera bg + dark overlay + wave
+  - 4 CCTV services in 2x2 grid: Videovigilancia, Sensores de Alarma, Monitoreo Continuo, Analítica IA
+  - Equipamiento grid (15 items, 3 cols): cámaras, servidores, monitores, backup nube, etc.
+  - 5 RFID sections alternating layout: Control Herramientas, Inventario Activos, Control Armas, Acceso Eventos, Acceso Vehicular
+  - CTA section + full footer
+- **Términos y Condiciones** (`/terminos-y-condiciones` → `terminos.blade.php`):
+  - Gradient header + legal card with 8 numbered articles
+  - Content from original gpovanguardia.com.mx/terminos-y-condiciones/
+  - Styled with numbered badges, left-border intro, Montserrat typography
+- **Footer updated** on all 3 pages: "Términos y Condiciones" link added
+- **Routes added**: `cctv`, `terminos` in `HomeController`
+
+### Pages Summary
+| Route | View | Description |
+|-------|------|-------------|
+| `/` | home.blade.php | Landing page (all sections) |
+| `/cctv` | cctv.blade.php | CCTV + RFID services |
+| `/terminos-y-condiciones` | terminos.blade.php | Legal terms |
+| `/blog` | blog/index.blade.php | Blog listing |
+| `/blog/{slug}` | blog/show.blade.php | Blog post |
+| `/admin` | admin/ | Admin panel (CRUD) |
