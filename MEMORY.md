@@ -66,9 +66,20 @@ docker/                     → Dockerfile, nginx.conf, supervisord.conf, entryp
 4. Set domain in Coolify
 5. Deploy — entrypoint.sh handles migrations, seeding, admin creation, caching
 
+## Design System (Figma-matched)
+- **Primary Color**: `--primary: #4338CA` (indigo)
+- **Gradient**: `#4338CA → #6366F1`
+- **Fonts**: Inter (body), Playfair Display italic (section titles, hero h1, servicio h3)
+- **Section Titles**: Playfair Display italic + `::after` blue underline (60px wide, 3px)
+- **Navbar**: White bg, `border-bottom: 3px solid var(--primary)`, dark text links
+- **Hero**: Building photo bg (Unsplash), blue overlay `rgba(55,48,163,0.82)`, Playfair Display italic h1, white wave curve `::after`
+- **El Propósito**: Gray bg, serif title with blue underline, icon squares in cards, 50/50 layout with taller image
+- **Casos de Éxito**: 3x2 CSS grid, white rounded cards, 6 client logos in `public/images/casos/`
+- **Servicios**: 50/50 flex layout, alternating image/text, solid blue icon (58px), image height 360px, Playfair h3 28px, responsive stacking at 991px
+
 ## Sessions Log
 
-### Session 1 (Initial Build)
+### Session 1 (Initial Build) — Commit `a8f2f82`
 - Created Laravel 12 project with Breeze (Blade)
 - Built 7 models with migrations (servicios, posts, galeria_imagenes, testimonios, redes_sociales, contacts, valores_corporativos)
 - Created 11 controllers (3 public + 8 admin)
@@ -80,3 +91,27 @@ docker/                     → Dockerfile, nginx.conf, supervisord.conf, entryp
 - Disabled public registration
 - Added trustProxies for Coolify/Traefik
 - Created admin user (local dev)
+
+### Session 2 (Header Redesign) — Commit `9536093`
+- Redesigned navbar: white bg + blue bottom border, dark text links
+- Redesigned hero: building photo bg + blue overlay + Playfair Display italic title + white wave curve
+
+### Session 3 (El Propósito + Casos de Éxito) — Commit `b0523e3`, `1772e0d`
+- Redesigned "El Propósito" section: serif title, blue underline, icon circles, gray bg, taller image
+- Added "Casos de Éxito" section: 3x2 CSS grid with 6 client logos (Grin, Econduce, partner, Walmart, Big Cola, Gobierno de México)
+- Logos stored in `public/images/casos/`
+
+### Session 4 (Servicios Redesign) — Commit `30e6358`
+- Redesigned "Servicios Especializados" to match Figma
+- Icon: 48px→58px, solid blue bg (no gradient), border-radius 16px, blue box-shadow
+- Image: height 280px→360px, border-radius 20px, stronger shadow
+- Title: 24px→28px, Playfair Display serif font
+- Description: 14px→16px, line-height 1.9
+- Added responsive breakpoint at 991px
+- Fixed extra `}` CSS syntax error after casos media query
+
+### Remaining Figma Sections (not yet reviewed)
+- Valores Corporativos
+- Testimonios
+- Contacto
+- Footer
