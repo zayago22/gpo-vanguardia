@@ -256,50 +256,63 @@
                 gap: 16px;
             }
         }
-        }
 
         /* ===== SERVICIOS ===== */
         .servicio-row {
             display: flex;
             align-items: center;
-            gap: 60px;
-            margin-bottom: 60px;
+            gap: 70px;
+            margin-bottom: 70px;
         }
+        .servicio-row:last-child { margin-bottom: 0; }
         .servicio-row.reverse { flex-direction: row-reverse; }
         .servicio-img {
             flex: 1;
-            border-radius: 16px;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.10);
         }
         .servicio-img img {
             width: 100%;
-            height: 280px;
+            height: 360px;
             object-fit: cover;
+            display: block;
         }
         .servicio-content { flex: 1; }
         .servicio-icon {
-            width: 48px;
-            height: 48px;
-            background: var(--gradient);
-            border-radius: 12px;
+            width: 58px;
+            height: 58px;
+            background: var(--primary);
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--white);
-            font-size: 20px;
-            margin-bottom: 16px;
+            font-size: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 20px rgba(67,56,202,0.25);
         }
         .servicio-content h3 {
-            font-size: 24px;
+            font-size: 28px;
             font-weight: 700;
             color: var(--dark);
-            margin-bottom: 12px;
+            margin-bottom: 16px;
+            font-family: 'Playfair Display', serif;
         }
         .servicio-content p {
-            font-size: 14px;
+            font-size: 16px;
             color: var(--gray-600);
-            line-height: 1.8;
+            line-height: 1.9;
+        }
+        @media (max-width: 991px) {
+            .servicio-row,
+            .servicio-row.reverse {
+                flex-direction: column;
+                gap: 30px;
+            }
+            .servicio-img img {
+                height: 280px;
+            }
         }
 
         /* ===== VALORES ===== */
