@@ -27,4 +27,11 @@ class HomeController extends Controller
 
         return view('cctv', compact('redes'));
     }
+
+    public function terminos()
+    {
+        $redes = RedSocial::activas()->get();
+
+        return view('terminos', compact('redes'));
+    }
 }

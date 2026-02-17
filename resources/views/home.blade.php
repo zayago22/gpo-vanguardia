@@ -1118,12 +1118,8 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; {{ date('Y') }} Grupo Vanguardia. Todos los derechos reservados.</p>
+                <p>&copy; {{ date('Y') }} Grupo Vanguardia. Todos los derechos reservados. &middot; <a href="{{ route('terminos') }}" style="color: rgba(255,255,255,0.55); text-decoration: none;">Términos y Condiciones</a></p>
             </div>
-        </div>
-    </footer>
-
-    <!-- Toast de éxito -->
     <div class="toast-success" id="toastSuccess">
         <i class="fas fa-check-circle me-2"></i>
         <span id="toastMessage">Mensaje enviado correctamente</span>
