@@ -152,49 +152,71 @@
         .section { padding: 80px 0; }
         .section-gray { background: var(--gray-50); }
         .section-title {
-            font-size: 32px;
+            font-family: 'Playfair Display', Georgia, serif;
+            font-style: italic;
+            font-size: 38px;
             font-weight: 700;
             color: var(--dark);
-            margin-bottom: 12px;
+            margin-bottom: 8px;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--primary);
+            margin: 14px auto 0;
+            border-radius: 2px;
         }
         .section-subtitle {
             font-size: 16px;
             color: var(--gray-500);
             max-width: 600px;
-            margin: 0 auto 50px;
+            margin: 16px auto 50px;
         }
 
         /* ===== PROPÓSITO (Misión/Visión) ===== */
+        .proposito-section { background: var(--gray-50); }
         .proposito-img {
             border-radius: 16px;
             overflow: hidden;
             box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            height: 100%;
         }
         .proposito-img img {
             width: 100%;
-            height: 400px;
+            height: 100%;
+            min-height: 480px;
             object-fit: cover;
         }
         .proposito-card {
             background: var(--white);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            margin-bottom: 24px;
+            border: 1px solid var(--gray-200);
+        }
+        .proposito-card-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(67, 56, 202, 0.08);
             border-radius: 12px;
-            padding: 24px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-            margin-bottom: 20px;
-            border-left: 4px solid var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 20px;
+            margin-bottom: 14px;
         }
         .proposito-card h4 {
-            font-size: 18px;
+            font-size: 19px;
             font-weight: 700;
             color: var(--dark);
-            margin-bottom: 8px;
-        }
-        .proposito-card h4 i {
-            color: var(--primary);
-            margin-right: 8px;
+            margin-bottom: 10px;
         }
         .proposito-card p {
-            font-size: 14px;
+            font-size: 15px;
             color: var(--gray-600);
             margin-bottom: 0;
             line-height: 1.7;
@@ -509,24 +531,30 @@
     </section>
 
     <!-- ===== EL PROPÓSITO ===== -->
-    <section class="section" id="proposito">
+    <section class="section proposito-section" id="proposito">
         <div class="container">
             <div class="text-center mb-5">
                 <h2 class="section-title">El Propósito</h2>
             </div>
-            <div class="row align-items-center g-5">
-                <div class="col-lg-5">
+            <div class="row g-4">
+                <div class="col-lg-6">
                     <div class="proposito-img">
-                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop" alt="Equipo de trabajo">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop" alt="Equipo de trabajo">
                     </div>
                 </div>
-                <div class="col-lg-7">
+                <div class="col-lg-6 d-flex flex-column justify-content-center">
                     <div class="proposito-card">
-                        <h4><i class="fas fa-bullseye"></i> Nuestra Misión</h4>
+                        <div class="proposito-card-icon">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <h4>Nuestra Misión</h4>
                         <p>Ser el socio estratégico que impulsa el éxito empresarial mediante soluciones personalizadas y talento humano altamente capacitado.</p>
                     </div>
-                    <div class="proposito-card">
-                        <h4><i class="fas fa-eye"></i> Nuestra Visión</h4>
+                    <div class="proposito-card mb-0">
+                        <div class="proposito-card-icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <h4>Nuestra Visión</h4>
                         <p>Aspiramos a ser referentes globales en la gestión del conocimiento, guiados por la innovación constante, la excelencia operativa y un firme compromiso con la responsabilidad social.</p>
                     </div>
                 </div>
