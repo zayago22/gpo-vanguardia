@@ -126,8 +126,20 @@ docker/                     → Dockerfile, nginx.conf, supervisord.conf, entryp
   - BPO: `photo-1552664730` (team working)
 - Increased placeholder resolution from 600×300 → 800×500
 
-### Remaining Figma Sections (not yet reviewed)
-- Valores Corporativos
-- Testimonios
-- Contacto
-- Footer
+### Session 6 (Complete Remaining Sections) — Commit `e311dbe`
+- **Valores Corporativos**: CSS grid 4-col layout, cards with gradient top-bar on hover, 72px icons, smooth transitions
+- **Testimonios**: Dedicated `.testimonio-card` with quote icon, star ratings, italic text, avatar circle with initial, author info with border-top separator
+- **Contacto**: Dark bg (`--dark`) with decorative circles, 3-col info cards grid with gradient icon squares, 2-col form+map grid, form with row layout (2 fields per row), rounded 20px cards, min-height 480px map
+- **Footer**: 4-column grid (about + 3 link columns), logo + brand text, social icons as rounded squares, Navegación/Servicios/Contacto columns, dark bg `#0F0D2E`
+- All sections fully responsive with media queries for 991px, 575px breakpoints
+
+### All Landing Page Sections Complete
+1. ✅ Navbar (white, blue border)
+2. ✅ Hero (building bg, blue overlay, wave)
+3. ✅ El Propósito (gray bg, 50/50 layout)
+4. ✅ Casos de Éxito (3x2 logo grid)
+5. ✅ Servicios Especializados (alternating layout)
+6. ✅ Valores Corporativos (4-col grid)
+7. ✅ Testimonios (3-col cards)
+8. ✅ Contacto (dark bg, form + map)
+9. ✅ Footer (4-col, dark bg)
