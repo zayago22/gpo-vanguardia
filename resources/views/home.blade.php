@@ -222,6 +222,42 @@
             line-height: 1.7;
         }
 
+        /* ===== CASOS DE ÉXITO ===== */
+        .casos-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        .caso-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            aspect-ratio: 1;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+            border: 1px solid var(--gray-200);
+            transition: all 0.3s;
+        }
+        .caso-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        }
+        .caso-card img {
+            max-width: 80%;
+            max-height: 80%;
+            object-fit: contain;
+            border-radius: 12px;
+        }
+        @media (max-width: 767px) {
+            .casos-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
+            }
+        }
+        }
+
         /* ===== SERVICIOS ===== */
         .servicio-row {
             display: flex;
@@ -557,6 +593,36 @@
                         <h4>Nuestra Visión</h4>
                         <p>Aspiramos a ser referentes globales en la gestión del conocimiento, guiados por la innovación constante, la excelencia operativa y un firme compromiso con la responsabilidad social.</p>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CASOS DE ÉXITO ===== -->
+    <section class="section" id="casos">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Casos de Éxito</h2>
+                <p class="section-subtitle">Empresas que confían en nuestras soluciones</p>
+            </div>
+            <div class="casos-grid">
+                <div class="caso-card">
+                    <img src="{{ asset('images/casos/1DpZjhTl_400x400.jpg.webp') }}" alt="Grin">
+                </div>
+                <div class="caso-card">
+                    <img src="{{ asset('images/casos/ECONDUCE.jpeg.webp') }}" alt="Econduce">
+                </div>
+                <div class="caso-card">
+                    <img src="{{ asset('images/casos/1DpZjhTl_400x400-1.jpg.webp') }}" alt="Partner">
+                </div>
+                <div class="caso-card">
+                    <img src="{{ asset('images/casos/WALMART-80.jpeg.webp') }}" alt="Walmart">
+                </div>
+                <div class="caso-card">
+                    <img src="{{ asset('images/casos/BIG-COLA-80.jpeg.webp') }}" alt="Big Cola">
+                </div>
+                <div class="caso-card">
+                    <img src="{{ asset('images/casos/logo4.jpeg.webp') }}" alt="Gobierno de México">
                 </div>
             </div>
         </div>
