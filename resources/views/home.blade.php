@@ -318,187 +318,418 @@
         }
 
         /* ===== VALORES ===== */
+        .valores-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 28px;
+        }
         .valor-card {
             background: var(--white);
-            border-radius: 16px;
-            padding: 32px 24px;
+            border-radius: 20px;
+            padding: 40px 28px;
             text-align: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-            transition: all 0.3s;
-            border: 1px solid var(--gray-200);
+            box-shadow: 0 6px 24px rgba(0,0,0,0.06);
+            transition: all 0.4s ease;
+            border: 1px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        .valor-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient);
+            opacity: 0;
+            transition: opacity 0.4s;
         }
         .valor-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 30px rgba(67,56,202,0.12);
-            border-color: var(--primary-light);
+            transform: translateY(-8px);
+            box-shadow: 0 16px 40px rgba(67,56,202,0.15);
+            border-color: rgba(67,56,202,0.1);
+        }
+        .valor-card:hover::before {
+            opacity: 1;
         }
         .valor-icon {
-            width: 64px;
-            height: 64px;
-            background: linear-gradient(135deg, rgba(67,56,202,0.1), rgba(99,102,241,0.1));
-            border-radius: 16px;
+            width: 72px;
+            height: 72px;
+            background: linear-gradient(135deg, rgba(67,56,202,0.08), rgba(99,102,241,0.12));
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 16px;
-            font-size: 24px;
+            margin: 0 auto 20px;
+            font-size: 28px;
             color: var(--primary);
-            transition: all 0.3s;
+            transition: all 0.4s;
         }
         .valor-card:hover .valor-icon {
             background: var(--gradient);
             color: var(--white);
+            transform: scale(1.08);
         }
         .valor-card h5 {
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 700;
             color: var(--dark);
-            margin-bottom: 4px;
+            margin-bottom: 10px;
+            letter-spacing: -0.2px;
         }
         .valor-card p {
+            font-size: 14px;
+            color: var(--gray-500);
+            line-height: 1.7;
+            margin-bottom: 0;
+        }
+        @media (max-width: 991px) {
+            .valores-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 575px) {
+            .valores-grid { grid-template-columns: 1fr; max-width: 360px; margin: 0 auto; }
+        }
+
+        /* ===== TESTIMONIOS ===== */
+        .testimonio-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 36px 32px;
+            box-shadow: 0 6px 24px rgba(0,0,0,0.06);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            border: 1px solid transparent;
+            transition: all 0.4s;
+        }
+        .testimonio-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 35px rgba(67,56,202,0.12);
+        }
+        .testimonio-card .quote-icon {
+            font-size: 32px;
+            color: var(--primary-light);
+            opacity: 0.25;
+            margin-bottom: 12px;
+            line-height: 1;
+        }
+        .testimonio-stars {
+            margin-bottom: 16px;
+        }
+        .testimonio-stars i {
+            color: #F59E0B;
+            font-size: 15px;
+            margin-right: 2px;
+        }
+        .testimonio-text {
+            font-size: 15px;
+            color: var(--gray-600);
+            line-height: 1.8;
+            flex: 1;
+            margin-bottom: 24px;
+            font-style: italic;
+        }
+        .testimonio-author {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding-top: 20px;
+            border-top: 1px solid var(--gray-100);
+        }
+        .testimonio-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: 700;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+        .testimonio-author-info strong {
+            display: block;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--dark);
+        }
+        .testimonio-author-info span {
             font-size: 13px;
             color: var(--gray-500);
-            margin-bottom: 0;
         }
 
         /* ===== CONTACTO ===== */
         .contacto-section {
-            background: var(--gradient);
-            padding: 60px 0 0;
+            background: var(--dark);
+            position: relative;
+            padding: 80px 0;
+            overflow: hidden;
         }
-        .contacto-section h2 {
+        .contacto-section::before {
+            content: '';
+            position: absolute;
+            top: -80px;
+            right: -80px;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: rgba(99,102,241,0.08);
+        }
+        .contacto-section::after {
+            content: '';
+            position: absolute;
+            bottom: -60px;
+            left: -60px;
+            width: 240px;
+            height: 240px;
+            border-radius: 50%;
+            background: rgba(67,56,202,0.06);
+        }
+        .contacto-header {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+            z-index: 1;
+        }
+        .contacto-header h2 {
             color: var(--white);
-            font-size: 28px;
+            font-size: 36px;
             font-weight: 700;
-            text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
         }
-        .contacto-section h2 span { font-weight: 400; }
+        .contacto-header p {
+            color: rgba(255,255,255,0.6);
+            font-size: 16px;
+            max-width: 520px;
+            margin: 0 auto;
+        }
+        .contacto-body {
+            position: relative;
+            z-index: 1;
+        }
+        .info-cards-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 50px;
+        }
         .info-card {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
+            background: rgba(255,255,255,0.06);
+            backdrop-filter: blur(12px);
             border-radius: 16px;
-            padding: 24px;
+            padding: 28px 24px;
             text-align: center;
             color: var(--white);
-            border: 1px solid rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.08);
+            transition: all 0.3s;
+        }
+        .info-card:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-3px);
         }
         .info-card-icon {
-            width: 56px;
-            height: 56px;
-            background: rgba(255,255,255,0.15);
-            border-radius: 50%;
+            width: 52px;
+            height: 52px;
+            background: var(--gradient);
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 12px;
-            font-size: 22px;
+            margin: 0 auto 14px;
+            font-size: 20px;
         }
         .info-card h6 {
             font-size: 14px;
-            font-weight: 600;
+            font-weight: 700;
             margin-bottom: 4px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
         }
         .info-card p {
-            font-size: 13px;
-            opacity: 0.85;
+            font-size: 15px;
+            opacity: 0.8;
             margin-bottom: 0;
         }
-        .contacto-form-wrapper {
-            background: var(--white);
-            padding: 60px 0 0;
+        .contacto-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            align-items: start;
         }
         .form-card {
             background: var(--white);
-            border-radius: 16px;
-            padding: 32px;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
-            border: 1px solid var(--gray-200);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
         }
         .form-card h4 {
-            font-size: 20px;
+            font-size: 22px;
             font-weight: 700;
             color: var(--dark);
-            margin-bottom: 24px;
+            margin-bottom: 28px;
         }
         .form-card .form-label {
             font-size: 13px;
             font-weight: 600;
             color: var(--gray-700);
-            margin-bottom: 4px;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
         }
         .form-card .form-control {
             border: 1px solid var(--gray-200);
-            border-radius: 10px;
-            padding: 10px 14px;
-            font-size: 14px;
-            transition: border-color 0.3s;
+            border-radius: 12px;
+            padding: 12px 16px;
+            font-size: 15px;
+            background: var(--gray-50);
+            transition: all 0.3s;
         }
         .form-card .form-control:focus {
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(67,56,202,0.1);
+            box-shadow: 0 0 0 4px rgba(67,56,202,0.08);
+            background: var(--white);
         }
         .btn-enviar {
             background: var(--gradient);
             color: var(--white);
             border: none;
-            padding: 12px 32px;
-            border-radius: 50px;
-            font-weight: 600;
+            padding: 14px 32px;
+            border-radius: 12px;
+            font-weight: 700;
             font-size: 15px;
             width: 100%;
             transition: all 0.3s;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 10px;
+            letter-spacing: 0.3px;
         }
         .btn-enviar:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(67,56,202,0.3);
+            box-shadow: 0 10px 30px rgba(67,56,202,0.35);
             color: var(--white);
         }
         .mapa-container {
-            border-radius: 16px;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
             height: 100%;
-            min-height: 380px;
+            min-height: 480px;
         }
         .mapa-container iframe {
             width: 100%;
             height: 100%;
             border: 0;
         }
+        @media (max-width: 991px) {
+            .info-cards-row { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto 40px; }
+            .contacto-grid { grid-template-columns: 1fr; }
+            .mapa-container { min-height: 350px; }
+        }
 
         /* ===== FOOTER ===== */
         .footer {
-            background: var(--dark);
-            padding: 30px 0;
+            background: #0F0D2E;
+            padding: 60px 0 30px;
+        }
+        .footer-top {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            margin-bottom: 30px;
+        }
+        .footer-about .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .footer-about .footer-brand img {
+            height: 36px;
+        }
+        .footer-about .footer-brand span {
+            font-weight: 700;
+            color: var(--white);
+            font-size: 18px;
+            letter-spacing: -0.3px;
+        }
+        .footer-about p {
+            color: rgba(255,255,255,0.55);
+            font-size: 14px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+        .footer-socials {
+            display: flex;
+            gap: 10px;
+        }
+        .footer-socials a {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.07);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255,255,255,0.6);
+            font-size: 16px;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        .footer-socials a:hover {
+            background: var(--primary);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+        .footer-col h6 {
+            color: var(--white);
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+        .footer-col ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col ul li a {
+            color: rgba(255,255,255,0.55);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+        .footer-col ul li a:hover { color: var(--white); }
+        .footer-col ul li i {
+            width: 20px;
+            color: var(--primary-light);
+            margin-right: 6px;
+            font-size: 13px;
+        }
+        .footer-bottom {
             text-align: center;
         }
-        .footer p {
-            color: rgba(255,255,255,0.6);
+        .footer-bottom p {
+            color: rgba(255,255,255,0.4);
             font-size: 13px;
             margin-bottom: 0;
         }
-        .footer a {
-            color: rgba(255,255,255,0.8);
-            text-decoration: none;
+        @media (max-width: 991px) {
+            .footer-top { grid-template-columns: 1fr 1fr; }
         }
-        .footer-brand {
-            font-weight: 700;
-            color: var(--white);
-            font-size: 16px;
-            margin-bottom: 8px;
+        @media (max-width: 575px) {
+            .footer-top { grid-template-columns: 1fr; gap: 30px; }
         }
-        .footer-socials a {
-            color: rgba(255,255,255,0.6);
-            font-size: 18px;
-            margin: 0 8px;
-            transition: color 0.3s;
-        }
-        .footer-socials a:hover { color: var(--secondary); }
 
         /* ===== TOAST ===== */
         .toast-success {
@@ -686,16 +917,14 @@
                 <h2 class="section-title">Valores Corporativos</h2>
                 <p class="section-subtitle">Principios que guían nuestra forma de trabajar y relacionarnos</p>
             </div>
-            <div class="row g-4">
+            <div class="valores-grid">
                 @foreach($valores as $valor)
-                <div class="col-lg-3 col-md-6">
-                    <div class="valor-card">
-                        <div class="valor-icon">
-                            <i class="{{ $valor->icono ?? 'fas fa-star' }}"></i>
-                        </div>
-                        <h5>{{ $valor->nombre }}</h5>
-                        <p>{{ $valor->descripcion }}</p>
+                <div class="valor-card">
+                    <div class="valor-icon">
+                        <i class="{{ $valor->icono ?? 'fas fa-star' }}"></i>
                     </div>
+                    <h5>{{ $valor->nombre }}</h5>
+                    <p>{{ $valor->descripcion }}</p>
                 </div>
                 @endforeach
             </div>
@@ -713,22 +942,28 @@
             <div class="row g-4">
                 @foreach($testimonios as $testimonio)
                 <div class="col-lg-4 col-md-6">
-                    <div class="valor-card" style="text-align: left; padding: 28px;">
-                        <div class="mb-2">
+                    <div class="testimonio-card">
+                        <div class="quote-icon">
+                            <i class="fas fa-quote-left"></i>
+                        </div>
+                        <div class="testimonio-stars">
                             @for($i = 0; $i < $testimonio->estrellas; $i++)
-                                <i class="fas fa-star" style="color: #F59E0B; font-size: 14px;"></i>
+                                <i class="fas fa-star"></i>
                             @endfor
                         </div>
-                        <p style="font-size: 14px; color: var(--gray-600); line-height: 1.7; margin-bottom: 16px;">
+                        <p class="testimonio-text">
                             "{{ $testimonio->texto }}"
                         </p>
-                        <div>
-                            <strong style="font-size: 14px; color: var(--dark);">{{ $testimonio->nombre }}</strong>
-                            @if($testimonio->cargo || $testimonio->empresa)
-                            <p style="font-size: 12px; color: var(--gray-500); margin-bottom: 0;">
-                                {{ $testimonio->cargo }}{{ $testimonio->empresa ? ' — ' . $testimonio->empresa : '' }}
-                            </p>
-                            @endif
+                        <div class="testimonio-author">
+                            <div class="testimonio-avatar">
+                                {{ strtoupper(substr($testimonio->nombre, 0, 1)) }}
+                            </div>
+                            <div class="testimonio-author-info">
+                                <strong>{{ $testimonio->nombre }}</strong>
+                                @if($testimonio->cargo || $testimonio->empresa)
+                                <span>{{ $testimonio->cargo }}{{ $testimonio->empresa ? ' — ' . $testimonio->empresa : '' }}</span>
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -739,72 +974,65 @@
     @endif
 
     <!-- ===== CONTACTO ===== -->
-    <section id="contacto">
-        <div class="contacto-section">
-            <div class="container">
-                <h2>Póngase en contacto con los <span>líderes en soluciones integrales</span></h2>
-                <div class="row g-4 pb-5">
-                    <div class="col-md-4">
-                        <div class="info-card">
-                            <div class="info-card-icon"><i class="fas fa-phone-alt"></i></div>
-                            <h6>Teléfono</h6>
-                            <p>55 8526 3542</p>
-                        </div>
+    <section class="contacto-section" id="contacto">
+        <div class="container">
+            <div class="contacto-header">
+                <h2>Conversemos sobre su próximo proyecto</h2>
+                <p>Estamos listos para ayudarle a transformar su negocio con soluciones tecnológicas de vanguardia</p>
+            </div>
+            <div class="contacto-body">
+                <div class="info-cards-row">
+                    <div class="info-card">
+                        <div class="info-card-icon"><i class="fas fa-phone-alt"></i></div>
+                        <h6>Teléfono</h6>
+                        <p>55 8526 3542</p>
                     </div>
-                    <div class="col-md-4">
-                        <div class="info-card">
-                            <div class="info-card-icon"><i class="fas fa-envelope"></i></div>
-                            <h6>Correo Electrónico</h6>
-                            <p>soporte@cgpvc.com</p>
-                        </div>
+                    <div class="info-card">
+                        <div class="info-card-icon"><i class="fas fa-envelope"></i></div>
+                        <h6>Correo</h6>
+                        <p>soporte@cgpvc.com</p>
                     </div>
-                    <div class="col-md-4">
-                        <div class="info-card">
-                            <div class="info-card-icon"><i class="fas fa-map-marker-alt"></i></div>
-                            <h6>Ubicación</h6>
-                            <p>Calzada de Tlalpan 609, CDMX</p>
-                        </div>
+                    <div class="info-card">
+                        <div class="info-card-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <h6>Ubicación</h6>
+                        <p>Calzada de Tlalpan 609, CDMX</p>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="contacto-form-wrapper">
-            <div class="container py-5">
-                <div class="row g-4">
-                    <div class="col-lg-6">
-                        <div class="form-card">
-                            <h4><i class="fas fa-paper-plane me-2" style="color: var(--primary);"></i>Envíanos un mensaje</h4>
-                            <form id="contactForm">
-                                <div class="mb-3">
-                                    <label class="form-label">Nombre completo *</label>
+                <div class="contacto-grid">
+                    <div class="form-card">
+                        <h4><i class="fas fa-paper-plane me-2" style="color: var(--primary);"></i>Envíanos un mensaje</h4>
+                        <form id="contactForm">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">Nombre *</label>
                                     <input type="text" class="form-control" name="nombre" placeholder="Tu nombre" required>
                                 </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Correo electrónico *</label>
+                                <div class="col-md-6">
+                                    <label class="form-label">Correo *</label>
                                     <input type="email" class="form-control" name="email" placeholder="tu@email.com" required>
                                 </div>
-                                <div class="mb-3">
+                                <div class="col-md-6">
                                     <label class="form-label">Teléfono</label>
                                     <input type="tel" class="form-control" name="telefono" placeholder="55 1234 5678">
                                 </div>
-                                <div class="mb-3">
+                                <div class="col-md-6">
                                     <label class="form-label">Empresa</label>
                                     <input type="text" class="form-control" name="empresa" placeholder="Nombre de tu empresa">
                                 </div>
-                                <div class="mb-3">
+                                <div class="col-12">
                                     <label class="form-label">Mensaje *</label>
                                     <textarea class="form-control" name="mensaje" rows="4" placeholder="¿Cómo podemos ayudarte?" required></textarea>
                                 </div>
-                                <button type="submit" class="btn-enviar" id="btnEnviar">
-                                    Enviar mensaje <i class="fas fa-paper-plane"></i>
-                                </button>
-                            </form>
-                        </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn-enviar" id="btnEnviar">
+                                        Enviar mensaje <i class="fas fa-paper-plane"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                    <div class="col-lg-6">
-                        <div class="mapa-container">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3763.5!2d-99.1439!3d19.3537!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1ff35f5bd1563%3A0x6c366f0e2de02ff7!2sCalzada%20de%20Tlalpan%20609%2C%20CDMX!5e0!3m2!1ses!2smx" allowfullscreen="" loading="lazy"></iframe>
-                        </div>
+                    <div class="mapa-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3763.5!2d-99.1439!3d19.3537!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1ff35f5bd1563%3A0x6c366f0e2de02ff7!2sCalzada%20de%20Tlalpan%20609%2C%20CDMX!5e0!3m2!1ses!2smx" allowfullscreen="" loading="lazy"></iframe>
                     </div>
                 </div>
             </div>
@@ -814,16 +1042,52 @@
     <!-- ===== FOOTER ===== -->
     <footer class="footer">
         <div class="container">
-            <p class="footer-brand">Grupo Vanguardia</p>
-            @if($redes->count() > 0)
-            <div class="footer-socials mb-3">
-                @foreach($redes as $red)
-                    <a href="{{ $red->url }}" target="_blank" rel="noopener" title="{{ $red->nombre }}"><i class="{{ $red->icono }}"></i></a>
-                @endforeach
+            <div class="footer-top">
+                <div class="footer-about">
+                    <div class="footer-brand">
+                        <img src="{{ asset('images/logo.png') }}" alt="GPO Vanguardia">
+                        <span>Grupo Vanguardia</span>
+                    </div>
+                    <p>Soluciones empresariales que marcan la diferencia. Líderes en BPO, IA, ciberseguridad y transformación tecnológica.</p>
+                    @if($redes->count() > 0)
+                    <div class="footer-socials">
+                        @foreach($redes as $red)
+                            <a href="{{ $red->url }}" target="_blank" rel="noopener" title="{{ $red->nombre }}"><i class="{{ $red->icono }}"></i></a>
+                        @endforeach
+                    </div>
+                    @endif
+                </div>
+                <div class="footer-col">
+                    <h6>Navegación</h6>
+                    <ul>
+                        <li><a href="#inicio">Inicio</a></li>
+                        <li><a href="#proposito">Misión y Visión</a></li>
+                        <li><a href="#servicios">Servicios</a></li>
+                        <li><a href="#valores">Valores</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h6>Servicios</h6>
+                    <ul>
+                        <li><a href="#servicios">Inteligencia Artificial</a></li>
+                        <li><a href="#servicios">Ciberseguridad</a></li>
+                        <li><a href="#servicios">BPO</a></li>
+                        <li><a href="#servicios">Consultoría</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h6>Contacto</h6>
+                    <ul>
+                        <li><a href="tel:5585263542"><i class="fas fa-phone-alt"></i>55 8526 3542</a></li>
+                        <li><a href="mailto:soporte@cgpvc.com"><i class="fas fa-envelope"></i>soporte@cgpvc.com</a></li>
+                        <li><a href="#contacto"><i class="fas fa-map-marker-alt"></i>CDMX, México</a></li>
+                    </ul>
+                </div>
             </div>
-            @endif
-            <p>&copy; {{ date('Y') }} Grupo Vanguardia. Todos los derechos reservados.</p>
-            <p style="font-size: 12px; opacity: 0.6;">Soluciones empresariales que marcan la diferencia</p>
+            <div class="footer-bottom">
+                <p>&copy; {{ date('Y') }} Grupo Vanguardia. Todos los derechos reservados.</p>
+            </div>
         </div>
     </footer>
 
