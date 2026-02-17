@@ -113,6 +113,19 @@ docker/                     → Dockerfile, nginx.conf, supervisord.conf, entryp
 - Added responsive breakpoint at 991px
 - Fixed extra `}` CSS syntax error after casos media query
 
+### Session 5 (Font + Image Fixes) — Commits `02105d1`, `0c8dff4`
+- Replaced ALL fonts from Inter + Playfair Display → **Montserrat** across all views:
+  - home.blade.php (body, hero h1, section-title, servicio h3)
+  - admin/layouts/app.blade.php
+  - blog/index.blade.php
+  - blog/show.blade.php
+- Weight system: 800 for hero h1, 700 for section titles/h3, 400-500 for body, letter-spacing -0.5px on titles
+- Fixed broken Unsplash placeholder images for services:
+  - IA y PNL: `photo-1485827404703` (robot/technology)
+  - Ciberseguridad: `photo-1550751827` (digital security circuits)
+  - BPO: `photo-1552664730` (team working)
+- Increased placeholder resolution from 600×300 → 800×500
+
 ### Remaining Figma Sections (not yet reviewed)
 - Valores Corporativos
 - Testimonios
