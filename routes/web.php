@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 // ===== RUTAS PÚBLICAS =====
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/cctv', [HomeController::class, 'cctv'])->name('cctv');
 Route::post('/contacto', [ContactController::class, 'store'])->middleware('throttle:5,1')->name('contacto.store');
 Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
 Route::get('/blog/{post:slug}', [BlogController::class, 'show'])->name('blog.show');

@@ -75,6 +75,29 @@
         .navbar-custom .nav-link.active {
             color: var(--primary) !important;
         }
+        .navbar-custom .dropdown-menu {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+            padding: 8px 0;
+            margin-top: 8px;
+        }
+        .navbar-custom .dropdown-item {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--gray-700);
+            padding: 10px 20px;
+            transition: all 0.2s;
+        }
+        .navbar-custom .dropdown-item:hover {
+            background: rgba(67,56,202,0.06);
+            color: var(--primary);
+        }
+        .navbar-custom .dropdown-item i {
+            width: 22px;
+            color: var(--primary-light);
+            margin-right: 6px;
+        }
 
         /* ===== HERO ===== */
         .hero {
@@ -785,7 +808,16 @@
                 <ul class="navbar-nav">
                     <li class="nav-item"><a class="nav-link active" href="#inicio">Inicio</a></li>
                     <li class="nav-item"><a class="nav-link" href="#proposito">Misión y Visión</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#servicios">Servicios</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#servicios" data-bs-toggle="dropdown" aria-expanded="false">Servicios</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#servicios"><i class="fas fa-brain"></i>IA y PNL</a></li>
+                            <li><a class="dropdown-item" href="#servicios"><i class="fas fa-shield-alt"></i>Ciberseguridad</a></li>
+                            <li><a class="dropdown-item" href="#servicios"><i class="fas fa-cogs"></i>BPO</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="{{ route('cctv') }}"><i class="fas fa-video"></i>CCTV</a></li>
+                        </ul>
+                    </li>
                     <li class="nav-item"><a class="nav-link" href="#valores">Valores</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
                     @if($posts->count() > 0)
@@ -1073,7 +1105,7 @@
                         <li><a href="#servicios">Inteligencia Artificial</a></li>
                         <li><a href="#servicios">Ciberseguridad</a></li>
                         <li><a href="#servicios">BPO</a></li>
-                        <li><a href="#servicios">Consultoría</a></li>
+                        <li><a href="{{ route('cctv') }}">CCTV</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
