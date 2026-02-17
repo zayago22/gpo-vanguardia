@@ -15,7 +15,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@1,700;1,800&display=swap" rel="stylesheet">
 
     <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -53,20 +53,19 @@
 
         /* ===== NAVBAR ===== */
         .navbar-custom {
-            background: rgba(30, 27, 75, 0.95);
-            backdrop-filter: blur(10px);
+            background: var(--white);
             padding: 12px 0;
             transition: all 0.3s ease;
+            border-bottom: 3px solid var(--primary);
         }
         .navbar-custom.scrolled {
-            background: rgba(30, 27, 75, 0.98);
-            box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
         }
         .navbar-custom .navbar-brand img {
             height: 40px;
         }
         .navbar-custom .nav-link {
-            color: rgba(255,255,255,0.85) !important;
+            color: var(--gray-700) !important;
             font-weight: 500;
             font-size: 14px;
             padding: 8px 16px !important;
@@ -74,48 +73,60 @@
         }
         .navbar-custom .nav-link:hover,
         .navbar-custom .nav-link.active {
-            color: var(--white) !important;
+            color: var(--primary) !important;
         }
 
         /* ===== HERO ===== */
         .hero {
-            background: var(--gradient);
-            padding: 120px 0 80px;
+            background: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1600&h=800&fit=crop') center/cover no-repeat;
+            padding: 140px 0 120px;
             position: relative;
             overflow: hidden;
         }
         .hero::before {
             content: '';
             position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 600px;
-            height: 600px;
-            background: rgba(255,255,255,0.05);
-            border-radius: 50%;
+            inset: 0;
+            background: rgba(55, 48, 163, 0.82);
         }
         .hero::after {
             content: '';
             position: absolute;
-            bottom: -30%;
-            left: -10%;
-            width: 400px;
-            height: 400px;
-            background: rgba(255,255,255,0.03);
-            border-radius: 50%;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background: var(--white);
+            border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+        }
+        .hero .container {
+            position: relative;
+            z-index: 2;
         }
         .hero h1 {
-            font-size: 42px;
-            font-weight: 800;
+            font-family: 'Playfair Display', Georgia, serif;
+            font-style: italic;
+            font-size: 52px;
+            font-weight: 700;
             color: var(--white);
             line-height: 1.15;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
         }
         .hero p {
             color: rgba(255,255,255,0.85);
             font-size: 16px;
             line-height: 1.7;
-            max-width: 500px;
+            max-width: 600px;
+        }
+        .hero .lead {
+            color: var(--white);
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 1.6;
+        }
+        .hero .sub-lead {
+            color: rgba(255,255,255,0.65);
+            font-size: 15px;
         }
         .btn-hero {
             background: var(--white);
@@ -434,22 +445,24 @@
 
         /* ===== RESPONSIVE ===== */
         @media (max-width: 991px) {
-            .hero { padding: 100px 0 60px; }
-            .hero h1 { font-size: 32px; }
+            .hero { padding: 110px 0 90px; }
+            .hero h1 { font-size: 38px; }
             .servicio-row, .servicio-row.reverse {
                 flex-direction: column;
                 gap: 30px;
             }
         }
         @media (max-width: 767px) {
-            .hero h1 { font-size: 28px; }
+            .hero h1 { font-size: 30px; }
+            .hero::after { height: 40px; }
             .section { padding: 60px 0; }
             .section-title { font-size: 26px; }
             .contacto-section h2 { font-size: 22px; }
         }
         @media (max-width: 480px) {
-            .hero { padding: 90px 0 50px; }
-            .hero h1 { font-size: 24px; }
+            .hero { padding: 90px 0 70px; }
+            .hero h1 { font-size: 26px; }
+            .hero::after { height: 30px; }
             .section-title { font-size: 22px; }
         }
     </style>
@@ -461,8 +474,8 @@
             <a class="navbar-brand" href="{{ route('home') }}">
                 <img src="{{ asset('images/logo.png') }}" alt="GPO Vanguardia">
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" style="border-color: rgba(255,255,255,0.3);">
-                <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" style="border-color: var(--gray-200);">
+                <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
@@ -485,8 +498,8 @@
             <div class="row align-items-center">
                 <div class="col-lg-7">
                     <h1>Grupo Vanguardia:<br>Soluciones empresariales<br>que marcan la diferencia</h1>
-                    <p class="mb-2">Líderes en BPO y transformación tecnológica con servicios certificados para el crecimiento de su empresa.</p>
-                    <p class="mb-4">Contamos con el equipo profesional y la estructura necesaria para impulsar la eficiencia operativa de su negocio.</p>
+                    <p class="lead mb-3">Líderes en BPO y transformación tecnológica con servicios certificados para el crecimiento de su empresa.</p>
+                    <p class="sub-lead mb-4">Contamos con el equipo profesional y la estructura necesaria para impulsar la eficiencia operativa de su negocio.</p>
                     <a href="#contacto" class="btn-hero">
                         Solicitar Asesoría Profesional <i class="fas fa-arrow-right"></i>
                     </a>
