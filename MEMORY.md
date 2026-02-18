@@ -174,6 +174,33 @@ docker/                     → Dockerfile, nginx.conf, supervisord.conf, entryp
 - **Redes sociales reales**: Facebook → facebook.com/callcentergrupovanguardia | LinkedIn → linkedin.com/company/gpo-vanguardia
 - Todas las páginas nuevas tienen navbar + footer consistentes con diseño del proyecto
 
+### Session 9 (Aviso de Privacidad completo) — Commits `664c68f`, `cc196e2`
+- **aviso.blade.php reescrito completamente** con contenido real de gpovanguardia.com.mx/aviso-de-privacidad/
+- 15 secciones numeradas con badges, mismo diseño que terminos.blade.php:
+  1. Finalidad del Tratamiento de Datos (principales + secundarias)
+  2. ¿Qué Datos Personales Recabamos? (identificación, académicos, laborales, económicos, fiscales, sensibles)
+  3. Consentimiento
+  4. Medios por los que Obtiene sus Datos (personal, directa, indirecta)
+  5. Uso de Cookies y Web Beacons
+  6. Medidas de Seguridad Implementadas
+  7. Transferencia de Datos Personales (6 supuestos)
+  8. Oposición a la Transferencia
+  9. Derecho ARCO (procedimiento, requisitos, encargado, plazos, negativa)
+  10. Revocación del Consentimiento
+  11. Obligaciones como Encargado
+  12. Vigencia de la Información
+  13. Aceptación de los Términos
+  14. Cambios al Aviso de Privacidad
+  15. Encargado: Jeniffer Haide López Romero (comentarios@ccgvic.com)
+- Botón de descarga formato ARCO (GV-FOR-GDP-007)
+- Actualización: 30 de mayo de 2025
+- **Fix encoding UTF-8**: archivo reconstruido desde cero por corrupción de caracteres (PowerShell heredoc convirtió acentos en `�` y `'` en `''`)
+- Navbar y footer consistentes con todas las demás páginas
+
+### ⚠️ Nota importante para futuras sesiones
+- **NO usar PowerShell heredoc (`@' ... '@`)** para escribir archivos Blade con acentos/español — corrompe el encoding
+- Usar siempre `create_file` del editor o herramientas nativas de VS Code para crear/editar archivos con caracteres UTF-8
+
 ### Pages Summary (Updated)
 | Route | View | Description |
 |-------|------|-------------|
