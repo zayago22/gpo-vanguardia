@@ -12,8 +12,7 @@ Sitio web corporativo para **Grupo Vanguardia**, empresa especializada en BPO, I
 | Backend | Laravel 12.52.0, PHP 8.3 |
 | Frontend | Blade templates, Bootstrap 5.3 (CDN), Font Awesome 6.4 |
 | Fuente | Montserrat (Google Fonts, pesos 300-900) |
-| Base de datos (local) | SQLite |
-| Base de datos (producción) | PostgreSQL (Coolify) |
+| Base de datos | MySQL (servidor separado por seguridad) |
 | Autenticación | Laravel Breeze (Blade stack), registro público deshabilitado |
 | Deploy | Docker → Coolify v4 (Traefik proxy) |
 
@@ -25,9 +24,9 @@ Sitio web corporativo para **Grupo Vanguardia**, empresa especializada en BPO, I
 - PHP 8.3+
 - Composer
 - Node.js 20+
-- SQLite
+- MySQL 8.0+
 - Git
-- Laragon (recomendado en Windows)
+- Laragon (recomendado en Windows, incluye MySQL)
 
 ### Instalación desde cero
 
@@ -44,13 +43,17 @@ cp .env.example .env
 # Editar .env para desarrollo local:
 #   APP_ENV=local
 #   APP_DEBUG=true
-#   DB_CONNECTION=sqlite
+#   DB_CONNECTION=mysql
+#   DB_HOST=127.0.0.1
+#   DB_PORT=3306
+#   DB_DATABASE=gpo_vanguardia
+#   DB_USERNAME=root
+#   DB_PASSWORD=
 #   APP_URL=http://127.0.0.1:8001
 
-# 4. Crear base de datos SQLite
-# (Crear archivo vacío si no existe)
-# Windows: New-Item database/database.sqlite -ItemType File
-# Linux/Mac: touch database/database.sqlite
+# 4. Crear base de datos MySQL
+# En Laragon: abrir HeidiSQL o terminal MySQL y ejecutar:
+#   CREATE DATABASE gpo_vanguardia CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 # 5. Generar key y migrar
 php artisan key:generate
@@ -261,21 +264,21 @@ docker run -p 80:80 --env-file .env gpo-vanguardia
 ## Deploy en Producción (Coolify)
 
 ### Pasos
-1. Crear servicio PostgreSQL en Coolify
+1. Crear servicio MySQL en servidor separado (por seguridad, no en el mismo servidor de la app)
 2. Crear nuevo recurso Laravel apuntando al repositorio Git
 3. Configurar variables de entorno:
-   - `DB_CONNECTION=pgsql`
-   - `DB_HOST=<hostname interno de PostgreSQL>`
-   - `DB_PORT=5432`
+   - `DB_CONNECTION=mysql`
+   - `DB_HOST=<IP o hostname del servidor MySQL separado>`
+   - `DB_PORT=3306`
    - `DB_DATABASE=gpo_vanguardia`
-   - `DB_USERNAME=postgres`
-   - `DB_PASSWORD=<del servicio PostgreSQL>`
+   - `DB_USERNAME=gpo_vanguardia`
+   - `DB_PASSWORD=<contraseña segura del usuario MySQL>`
    - `APP_URL=https://tu-dominio.com`
    - `ADMIN_EMAIL=admin@gpovanguardia.com`
    - `ADMIN_PASSWORD=<contraseña segura>`
 4. Configurar dominio en Coolify
 5. Deploy — `entrypoint.sh` se encarga de:
-   - Esperar a que PostgreSQL esté listo
+   - Esperar a que MySQL esté listo
    - Ejecutar migraciones
    - Sembrar datos iniciales (solo primer deploy)
    - Crear usuario admin (si `ADMIN_PASSWORD` está configurado y no hay usuarios)
@@ -321,9 +324,11 @@ docker run -p 80:80 --env-file .env gpo-vanguardia
 - URL local: http://127.0.0.1:8001
 
 ### Base de datos
-- En desarrollo local se usa **SQLite** (archivo `database/database.sqlite`)
-- En producción se usa **PostgreSQL** (configurado en Coolify)
-- La variable `DB_CONNECTION` en `.env` determina cuál se usa
+- Se usa **MySQL** en servidor separado (por seguridad, la BD no comparte servidor con la app)
+- En desarrollo local: MySQL de Laragon (`127.0.0.1:3306`)
+- En producción: servidor MySQL dedicado (IP privada o hostname interno)
+- `DB_CONNECTION=mysql` en `.env`
+- Charset: `utf8mb4`, Collation: `utf8mb4_unicode_ci`
 
 ---
 
