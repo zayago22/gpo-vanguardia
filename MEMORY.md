@@ -159,12 +159,34 @@ docker/                     → Dockerfile, nginx.conf, supervisord.conf, entryp
 - **Footer updated** on all 3 pages: "Términos y Condiciones" link added
 - **Routes added**: `cctv`, `terminos` in `HomeController`
 
-### Pages Summary
+### Session 8 (URLs from gpovanguardia.com.mx) — Commit `782b6a3`
+- Analizó gpovanguardia.com.mx y replicó todas las URLs/páginas faltantes
+- **Nuevas páginas creadas**:
+  - `/servicios` → servicios.blade.php (BPO, Desarrollo Web, Ciberseguridad, Agencia Digital)
+  - `/clientes` → clientes.blade.php (casos de éxito: VBike, Econduce, Grin)
+  - `/contacto` → contacto.blade.php (form AJAX + mapa + redes sociales)
+  - `/call-center-omnicanal` → call-center.blade.php (contenido original del sitio)
+  - `/chat-bots-y-ai` → chatbots.blade.php (contenido original del sitio)
+  - `/mesa-de-servicios` → mesa-servicios.blade.php (contenido original del sitio)
+  - `/aviso-de-privacidad` → aviso.blade.php
+- **Navbar actualizada** en home.blade.php: dropdown con todos los servicios, Clientes, Contacto como rutas reales
+- **Footer actualizado** en home.blade.php: redes sociales con links reales (Facebook: callcentergrupovanguardia, LinkedIn: gpo-vanguardia), columna Servicios con links reales
+- **Redes sociales reales**: Facebook → facebook.com/callcentergrupovanguardia | LinkedIn → linkedin.com/company/gpo-vanguardia
+- Todas las páginas nuevas tienen navbar + footer consistentes con diseño del proyecto
+
+### Pages Summary (Updated)
 | Route | View | Description |
 |-------|------|-------------|
 | `/` | home.blade.php | Landing page (all sections) |
+| `/servicios` | servicios.blade.php | Página de todos los servicios |
+| `/clientes` | clientes.blade.php | Casos de éxito |
+| `/contacto` | contacto.blade.php | Página de contacto con form + mapa |
+| `/call-center-omnicanal` | call-center.blade.php | Call Center Omnicanal |
+| `/chat-bots-y-ai` | chatbots.blade.php | Chat Bots y AI |
+| `/mesa-de-servicios` | mesa-servicios.blade.php | Mesa de Servicios |
 | `/cctv` | cctv.blade.php | CCTV + RFID services |
 | `/terminos-y-condiciones` | terminos.blade.php | Legal terms |
+| `/aviso-de-privacidad` | aviso.blade.php | Aviso de privacidad |
 | `/blog` | blog/index.blade.php | Blog listing |
 | `/blog/{slug}` | blog/show.blade.php | Blog post |
 | `/admin` | admin/ | Admin panel (CRUD) |
