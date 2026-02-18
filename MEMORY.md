@@ -186,7 +186,7 @@ docker/                     → Dockerfile, nginx.conf, supervisord.conf, entryp
 | `/mesa-de-servicios` | mesa-servicios.blade.php | Mesa de Servicios |
 | `/cctv` | cctv.blade.php | CCTV + RFID services |
 | `/terminos-y-condiciones` | terminos.blade.php | Legal terms |
-| `/aviso-de-privacidad` | aviso.blade.php | Aviso de privacidad |
+| `/aviso-de-privacidad` | aviso.blade.php | Aviso de Privacidad Integral (15 secciones, contenido real de gpovanguardia.com.mx) |
 | `/blog` | blog/index.blade.php | Blog listing |
 | `/blog/{slug}` | blog/show.blade.php | Blog post |
 | `/admin` | admin/ | Admin panel (CRUD) |
