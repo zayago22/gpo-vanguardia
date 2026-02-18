@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Bots y AI | Grupo Vanguardia</title>
+    <link rel="icon" href="{{ asset('images/logo.png') }}" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root{--primary:#4338CA;--primary-light:#6366F1;--primary-dark:#3730A3;--secondary:#818CF8;--dark:#1E1B4B;--gray-50:#F8FAFC;--gray-200:#E2E8F0;--gray-500:#64748B;--gray-600:#475569;--gray-700:#334155;--white:#FFFFFF;--gradient:linear-gradient(135deg,var(--primary) 0%,var(--primary-light) 50%,var(--secondary) 100%)}
+        *{box-sizing:border-box}body{font-family:'Montserrat',sans-serif;color:var(--gray-700);overflow-x:hidden}
+        .navbar-custom{background:var(--white);padding:12px 0;border-bottom:3px solid var(--primary)}.navbar-custom.scrolled{box-shadow:0 2px 20px rgba(0,0,0,.08)}.navbar-custom .navbar-brand img{height:40px}.navbar-custom .nav-link{color:var(--gray-700)!important;font-weight:500;font-size:14px;padding:8px 16px!important;transition:color .3s}.navbar-custom .nav-link:hover,.navbar-custom .nav-link.active{color:var(--primary)!important}.navbar-custom .dropdown-menu{border:none;border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,.12);padding:8px 0}.navbar-custom .dropdown-item{font-size:14px;font-weight:500;color:var(--gray-700);padding:10px 20px;transition:all .2s}.navbar-custom .dropdown-item:hover{background:rgba(67,56,202,.06);color:var(--primary)}.navbar-custom .dropdown-item i{width:22px;color:var(--primary-light);margin-right:6px}
+        .page-hero{background:linear-gradient(135deg,var(--primary-dark) 0%,var(--primary) 50%,var(--primary-light) 100%);padding:100px 0 80px;color:#fff;position:relative;overflow:hidden}.page-hero::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:60px;background:var(--gray-50);clip-path:ellipse(55% 100% at 50% 100%)}.page-hero h1{font-size:48px;font-weight:800;margin-bottom:16px;letter-spacing:-.5px}.page-hero p{font-size:18px;opacity:.85;max-width:680px}
+        .section{padding:90px 0}
+        .content-card{background:#fff;border-radius:20px;padding:48px;box-shadow:0 8px 30px rgba(0,0,0,.07);font-size:16px;line-height:1.9;color:var(--gray-600)}.content-card p{margin-bottom:20px}.content-card p:last-child{margin-bottom:0}
+        .related-nav{display:flex;gap:16px;flex-wrap:wrap;margin-top:40px}
+        .related-btn{display:inline-flex;align-items:center;gap:10px;padding:14px 24px;border-radius:12px;font-weight:600;font-size:14px;text-decoration:none;transition:all .3s}
+        .related-btn.active{background:var(--primary);color:#fff;box-shadow:0 6px 20px rgba(67,56,202,.3)}.related-btn.inactive{background:#fff;color:var(--primary);border:2px solid var(--gray-200)}.related-btn.inactive:hover{border-color:var(--primary);background:rgba(67,56,202,.04)}
+        .footer{background:var(--dark);padding:60px 0 30px}.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.08)}.footer-about{color:rgba(255,255,255,.6);font-size:14px;line-height:1.7}.footer-brand{display:flex;align-items:center;gap:10px;margin-bottom:16px}.footer-brand img{height:36px}.footer-brand span{color:#fff;font-size:17px;font-weight:700}.footer-socials{display:flex;gap:10px;margin-top:16px}.footer-socials a{width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.6);font-size:16px;transition:all .3s;text-decoration:none}.footer-socials a:hover{background:var(--primary);color:#fff}.footer-col h6{color:#fff;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:20px}.footer-col ul{list-style:none;padding:0;margin:0}.footer-col ul li{margin-bottom:10px}.footer-col ul li a{color:rgba(255,255,255,.55);text-decoration:none;font-size:14px;transition:color .3s}.footer-col ul li a:hover{color:#fff}.footer-col ul li i{width:20px;color:var(--primary-light);margin-right:6px;font-size:13px}.footer-bottom{text-align:center}.footer-bottom p{color:rgba(255,255,255,.4);font-size:13px;margin-bottom:0}
+        @media(max-width:991px){.footer-top{grid-template-columns:1fr 1fr}.page-hero h1{font-size:34px}}@media(max-width:575px){.footer-top{grid-template-columns:1fr;gap:30px}}
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-custom fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="{{ route('home') }}"><img src="{{ asset('images/logo.png') }}" alt="GPO Vanguardia"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" style="border-color:var(--gray-200)"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">Inicio</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" data-bs-toggle="dropdown">Servicios</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ route('servicios') }}"><i class="fas fa-cogs"></i>Todos los Servicios</a></li>
+                            <li><a class="dropdown-item" href="{{ route('call-center') }}"><i class="fas fa-headset"></i>Call Center Omnicanal</a></li>
+                            <li><a class="dropdown-item" href="{{ route('chatbots') }}"><i class="fas fa-robot"></i>Chat Bots y AI</a></li>
+                            <li><a class="dropdown-item" href="{{ route('mesa-servicios') }}"><i class="fas fa-tools"></i>Mesa de Servicios</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="{{ route('cctv') }}"><i class="fas fa-video"></i>CCTV</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('clientes') }}">Clientes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('contacto') }}">Contacto</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('blog.index') }}">Blog</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div style="padding-top:79px">
+        <section class="page-hero">
+            <div class="container">
+                <h1>Chat Bots y AI</h1>
+                <p>Gestionamos su negocio con los últimos avances en Inteligencia Artificial. Automatizamos Chat Bots para aprender, entender y resolver las necesidades de sus clientes en cualquier momento del día.</p>
+            </div>
+        </section>
+    </div>
+
+    <section class="section" style="background:var(--gray-50)">
+        <div class="container">
+            <div class="content-card">
+                <p>La inteligencia artificial y las tecnologías cognitivas se están adoptando rápidamente en las industrias que utilizan el marketing conversacional. La tecnología de Chat Bots ha tenido un gran crecimiento en las industrias de marketing, hotelería, finanzas y viajes.</p>
+                <p>Los Chat Bots combinan software, inteligencia artificial y una base de conocimiento para simular una conversación humana a través de la voz o el texto. Los Call Center deben mantenerse al día con estas tendencias tecnológicas para seguir el recorrido del cliente que abarca múltiples canales.</p>
+                <p>Los Chat Bots AI se basan en el procesamiento del lenguaje natural, lo que les permite llevar a cabo conversaciones similares a las de los humanos y ayudar a los clientes en tiempo real. AI Chat Bots también ayudan a los Call Center a obtener inteligencia empresarial sobre las preferencias de los clientes, las opiniones y el patrón de compra. Estos datos permiten a las empresas proporcionar recomendaciones proactivas y una experiencia personalizada para el cliente.</p>
+                <p>La implementación de inteligencia artificial en la industria de los Call Center será un gran éxito para los clientes que prefieren las opciones de autoservicio. La inteligencia artificial puede ayudar a los clientes a obtener información en el momento adecuado, lo que ahorra el tiempo y el esfuerzo dedicado a las llamadas de servicio.</p>
+                <p>La productividad de los agentes de los Call Center puede mejorarse considerablemente mediante el uso de inteligencia artificial. Los AI Chat Bots pueden responder consultas simples o repetidas para que los ejecutivos puedan responder consultas más complejas. Las interacciones de rutina se pueden automatizar, de modo que los agentes puedan centrarse en otras tareas más urgentes.</p>
+                <p>Las futuras mejoras en la inteligencia artificial y la tecnología de aprendizaje automático aumentarán su adopción en las principales industrias. Los primeros en adoptar estas tecnologías innovadoras en sus flujos de trabajo de soporte al cliente se mantendrán a la delantera de su competencia.</p>
+                <p>La consultora Gartner predice que para 2020, los clientes gestionarán el 85% de su relación con la empresa sin interacción humana. Dadas estas predicciones, la responsabilidad de la industria de los Call Center es adoptar la tecnología de inteligencia artificial para optimizar sus operaciones y aumentar los niveles de productividad. Además de mejorar la productividad de los centros de llamadas, la AI también proporciona alivio de la escasez de recursos que prevalece en la industria.</p>
+            </div>
+
+            <div class="related-nav">
+                <a href="{{ route('call-center') }}" class="related-btn inactive"><i class="fas fa-headset"></i>Call Center Omnicanal</a>
+                <a href="{{ route('chatbots') }}" class="related-btn active"><i class="fas fa-robot"></i>Chat Bots y AI</a>
+                <a href="{{ route('mesa-servicios') }}" class="related-btn inactive"><i class="fas fa-tools"></i>Mesa de Servicios</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-about">
+                    <div class="footer-brand"><img src="{{ asset('images/logo.png') }}" alt="GPO Vanguardia"><span>Grupo Vanguardia</span></div>
+                    <p>Soluciones empresariales que marcan la diferencia. Líderes en BPO, IA, ciberseguridad y transformación tecnológica.</p>
+                    <div class="footer-socials">
+                        <a href="https://www.facebook.com/callcentergrupovanguardia" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.linkedin.com/company/gpo-vanguardia/" target="_blank" rel="noopener"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://instagram.com/" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+                        <a href="https://twitter.com/" target="_blank" rel="noopener"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col"><h6>Navegación</h6><ul><li><a href="{{ route('home') }}">Inicio</a></li><li><a href="{{ route('servicios') }}">Servicios</a></li><li><a href="{{ route('clientes') }}">Clientes</a></li><li><a href="{{ route('blog.index') }}">Blog</a></li></ul></div>
+                <div class="footer-col"><h6>Servicios</h6><ul><li><a href="{{ route('call-center') }}">Call Center Omnicanal</a></li><li><a href="{{ route('chatbots') }}">Chat Bots y AI</a></li><li><a href="{{ route('mesa-servicios') }}">Mesa de Servicios</a></li><li><a href="{{ route('cctv') }}">CCTV</a></li></ul></div>
+                <div class="footer-col"><h6>Contacto</h6><ul><li><a href="tel:5585263542"><i class="fas fa-phone-alt"></i>55 8526 3542</a></li><li><a href="mailto:soporte@cgpvc.com"><i class="fas fa-envelope"></i>soporte@cgpvc.com</a></li><li><a href="{{ route('contacto') }}"><i class="fas fa-map-marker-alt"></i>CDMX, México</a></li><li><a href="{{ route('aviso') }}" style="color:var(--primary-light)">Aviso de privacidad</a></li></ul></div>
+            </div>
+            <div class="footer-bottom"><p>&copy; {{ date('Y') }} Grupo Vanguardia. Todos los derechos reservados. &middot; <a href="{{ route('terminos') }}" style="color:rgba(255,255,255,.55);text-decoration:none">Términos y Condiciones</a></p></div>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>window.addEventListener('scroll',()=>{document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>50)});</script>
+</body>
+</html>

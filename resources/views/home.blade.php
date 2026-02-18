@@ -809,20 +809,20 @@
                     <li class="nav-item"><a class="nav-link active" href="#inicio">Inicio</a></li>
                     <li class="nav-item"><a class="nav-link" href="#proposito">Misión y Visión</a></li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#servicios" data-bs-toggle="dropdown" aria-expanded="false">Servicios</a>
+                        <a class="nav-link dropdown-toggle" href="{{ route('servicios') }}" data-bs-toggle="dropdown" aria-expanded="false">Servicios</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#servicios"><i class="fas fa-brain"></i>IA y PNL</a></li>
-                            <li><a class="dropdown-item" href="#servicios"><i class="fas fa-shield-alt"></i>Ciberseguridad</a></li>
-                            <li><a class="dropdown-item" href="#servicios"><i class="fas fa-cogs"></i>BPO</a></li>
+                            <li><a class="dropdown-item" href="{{ route('servicios') }}"><i class="fas fa-cogs"></i>Todos los Servicios</a></li>
+                            <li><a class="dropdown-item" href="{{ route('call-center') }}"><i class="fas fa-headset"></i>Call Center Omnicanal</a></li>
+                            <li><a class="dropdown-item" href="{{ route('chatbots') }}"><i class="fas fa-robot"></i>Chat Bots y AI</a></li>
+                            <li><a class="dropdown-item" href="{{ route('mesa-servicios') }}"><i class="fas fa-tools"></i>Mesa de Servicios</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="{{ route('cctv') }}"><i class="fas fa-video"></i>CCTV</a></li>
                         </ul>
                     </li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('clientes') }}">Clientes</a></li>
                     <li class="nav-item"><a class="nav-link" href="#valores">Valores</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
-                    @if($posts->count() > 0)
+                    <li class="nav-item"><a class="nav-link" href="{{ route('contacto') }}">Contacto</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('blog.index') }}">Blog</a></li>
-                    @endif
                 </ul>
             </div>
         </div>
@@ -1083,9 +1083,10 @@
                     <p>Soluciones empresariales que marcan la diferencia. Líderes en BPO, IA, ciberseguridad y transformación tecnológica.</p>
                     @if($redes->count() > 0)
                     <div class="footer-socials">
-                        @foreach($redes as $red)
-                            <a href="{{ $red->url }}" target="_blank" rel="noopener" title="{{ $red->nombre }}"><i class="{{ $red->icono }}"></i></a>
-                        @endforeach
+                        <a href="https://www.facebook.com/callcentergrupovanguardia" target="_blank" rel="noopener" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.linkedin.com/company/gpo-vanguardia/" target="_blank" rel="noopener" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://instagram.com/" target="_blank" rel="noopener" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://twitter.com/" target="_blank" rel="noopener" title="Twitter"><i class="fab fa-twitter"></i></a>
                     </div>
                     @endif
                 </div>
@@ -1094,17 +1095,17 @@
                     <ul>
                         <li><a href="#inicio">Inicio</a></li>
                         <li><a href="#proposito">Misión y Visión</a></li>
-                        <li><a href="#servicios">Servicios</a></li>
+                        <li><a href="{{ route('servicios') }}">Servicios</a></li>
+                        <li><a href="{{ route('clientes') }}">Clientes</a></li>
                         <li><a href="#valores">Valores</a></li>
-                        <li><a href="#contacto">Contacto</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h6>Servicios</h6>
                     <ul>
-                        <li><a href="#servicios">Inteligencia Artificial</a></li>
-                        <li><a href="#servicios">Ciberseguridad</a></li>
-                        <li><a href="#servicios">BPO</a></li>
+                        <li><a href="{{ route('call-center') }}">Call Center Omnicanal</a></li>
+                        <li><a href="{{ route('chatbots') }}">Chat Bots y AI</a></li>
+                        <li><a href="{{ route('mesa-servicios') }}">Mesa de Servicios</a></li>
                         <li><a href="{{ route('cctv') }}">CCTV</a></li>
                     </ul>
                 </div>
@@ -1113,13 +1114,17 @@
                     <ul>
                         <li><a href="tel:5585263542"><i class="fas fa-phone-alt"></i>55 8526 3542</a></li>
                         <li><a href="mailto:soporte@cgpvc.com"><i class="fas fa-envelope"></i>soporte@cgpvc.com</a></li>
-                        <li><a href="#contacto"><i class="fas fa-map-marker-alt"></i>CDMX, México</a></li>
+                        <li><a href="{{ route('contacto') }}"><i class="fas fa-map-marker-alt"></i>CDMX, México</a></li>
+                        <li><a href="{{ route('aviso') }}" style="font-size: 0.95em; color: var(--primary);">Aviso de privacidad</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
                 <p>&copy; {{ date('Y') }} Grupo Vanguardia. Todos los derechos reservados. &middot; <a href="{{ route('terminos') }}" style="color: rgba(255,255,255,0.55); text-decoration: none;">Términos y Condiciones</a></p>
             </div>
+        </div>
+    </footer>
+
     <div class="toast-success" id="toastSuccess">
         <i class="fas fa-check-circle me-2"></i>
         <span id="toastMessage">Mensaje enviado correctamente</span>
