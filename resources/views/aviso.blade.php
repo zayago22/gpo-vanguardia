@@ -3,14 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Aviso de Privacidad Integral de Grupo Vanguardia en InformaciÛn y Conocimiento S.A. de C.V.">
-    <title>Aviso de Privacidad  GPO Vanguardia</title>
-    <link rel="icon" href="{{ asset(''images/logo.png'') }}" type="image/png">
+    <meta name="description" content="Aviso de Privacidad Integral de Grupo Vanguardia en Informaci√≥n y Conocimiento S.A. de C.V.">
+    <title>Aviso de Privacidad ‚Äî GPO Vanguardia</title>
+    <link rel="icon" href="{{ asset('images/logo.png') }}" type="image/png">
+
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Bootstrap 5.3 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <style>
         :root {
             --primary: #4338CA;
@@ -27,250 +34,501 @@
             --white: #FFFFFF;
             --gradient: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 50%, var(--secondary) 100%);
         }
+
         * { box-sizing: border-box; }
-        body { font-family: ''Montserrat'', -apple-system, BlinkMacSystemFont, sans-serif; color: var(--gray-700); line-height: 1.6; overflow-x: hidden; }
-        .navbar-custom { background: var(--white); padding: 12px 0; transition: all 0.3s ease; border-bottom: 3px solid var(--primary); }
+        body {
+            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--gray-700);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar-custom {
+            background: var(--white);
+            padding: 12px 0;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid var(--primary);
+        }
         .navbar-custom.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
         .navbar-custom .navbar-brand img { height: 40px; }
-        .navbar-custom .nav-link { color: var(--gray-700) !important; font-weight: 500; font-size: 14px; padding: 8px 16px !important; transition: color 0.3s; }
-        .navbar-custom .nav-link:hover, .navbar-custom .nav-link.active { color: var(--primary) !important; }
-        .navbar-custom .dropdown-menu { border: none; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.12); padding: 8px 0; margin-top: 8px; }
-        .navbar-custom .dropdown-item { font-size: 14px; font-weight: 500; color: var(--gray-700); padding: 10px 20px; transition: all 0.2s; }
-        .navbar-custom .dropdown-item:hover { background: rgba(67,56,202,0.06); color: var(--primary); }
-        .navbar-custom .dropdown-item i { width: 22px; color: var(--primary-light); margin-right: 6px; }
-        .page-header { background: var(--gradient); padding: 140px 0 70px; position: relative; }
-        .page-header::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 50px; background: var(--white); clip-path: ellipse(55% 100% at 50% 100%); }
-        .page-header h1 { font-size: 40px; font-weight: 800; color: var(--white); margin-bottom: 8px; letter-spacing: -0.5px; }
-        .page-header p { color: rgba(255,255,255,0.75); font-size: 15px; }
-        .legal-content { padding: 60px 0 80px; }
-        .legal-card { background: var(--white); border-radius: 20px; padding: 50px; box-shadow: 0 6px 30px rgba(0,0,0,0.06); max-width: 860px; margin: 0 auto; }
-        .legal-card h2 { font-size: 19px; font-weight: 700; color: var(--dark); margin-top: 40px; margin-bottom: 14px; display: flex; align-items: flex-start; gap: 12px; }
-        .legal-card h2 .num { width: 36px; height: 36px; background: linear-gradient(135deg, rgba(67,56,202,0.08), rgba(99,102,241,0.12)); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700; color: var(--primary); flex-shrink: 0; margin-top: 1px; }
-        .legal-card h3 { font-size: 15px; font-weight: 700; color: var(--primary); margin-top: 22px; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .navbar-custom .nav-link {
+            color: var(--gray-700) !important;
+            font-weight: 500;
+            font-size: 14px;
+            padding: 8px 16px !important;
+            transition: color 0.3s;
+        }
+        .navbar-custom .nav-link:hover,
+        .navbar-custom .nav-link.active { color: var(--primary) !important; }
+        .navbar-custom .dropdown-menu {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+            padding: 8px 0;
+            margin-top: 8px;
+        }
+        .navbar-custom .dropdown-item {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--gray-700);
+            padding: 10px 20px;
+            transition: all 0.2s;
+        }
+        .navbar-custom .dropdown-item:hover {
+            background: rgba(67,56,202,0.06);
+            color: var(--primary);
+        }
+        .navbar-custom .dropdown-item i {
+            width: 22px;
+            color: var(--primary-light);
+            margin-right: 6px;
+        }
+
+        /* ===== PAGE HEADER ===== */
+        .page-header {
+            background: var(--gradient);
+            padding: 140px 0 70px;
+            position: relative;
+        }
+        .page-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 50px;
+            background: var(--white);
+            clip-path: ellipse(55% 100% at 50% 100%);
+        }
+        .page-header h1 {
+            font-size: 40px;
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+        .page-header p {
+            color: rgba(255,255,255,0.75);
+            font-size: 15px;
+        }
+
+        /* ===== CONTENT ===== */
+        .legal-content {
+            padding: 60px 0 80px;
+        }
+        .legal-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 6px 30px rgba(0,0,0,0.06);
+            max-width: 860px;
+            margin: 0 auto;
+        }
+        .legal-card h2 {
+            font-size: 19px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-top: 40px;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        .legal-card h2 .num {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, rgba(67,56,202,0.08), rgba(99,102,241,0.12));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--primary);
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+        .legal-card h3 {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-top: 22px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
         .legal-card h2:first-child { margin-top: 0; }
-        .legal-card p { font-size: 14.5px; color: var(--gray-600); line-height: 1.85; margin-bottom: 12px; }
-        .legal-card ul, .legal-card ol { font-size: 14.5px; color: var(--gray-600); line-height: 1.85; padding-left: 24px; margin-bottom: 14px; }
+        .legal-card p {
+            font-size: 14.5px;
+            color: var(--gray-600);
+            line-height: 1.85;
+            margin-bottom: 12px;
+        }
+        .legal-card ul, .legal-card ol {
+            font-size: 14.5px;
+            color: var(--gray-600);
+            line-height: 1.85;
+            padding-left: 24px;
+            margin-bottom: 14px;
+        }
         .legal-card li { margin-bottom: 8px; }
-        .legal-card a { color: var(--primary); text-decoration: none; font-weight: 600; }
+        .legal-card a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
         .legal-card a:hover { text-decoration: underline; }
-        .legal-intro { font-size: 15px !important; color: var(--gray-700) !important; border-left: 4px solid var(--primary); padding-left: 20px; margin-bottom: 32px !important; }
-        .legal-note { background: rgba(67,56,202,0.04); border-radius: 10px; padding: 16px 20px; font-size: 14px !important; color: var(--gray-600) !important; border-left: 4px solid var(--primary-light); margin-top: 8px; margin-bottom: 14px; }
-        .download-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--gradient); color: var(--white) !important; padding: 12px 24px; border-radius: 10px; font-size: 14px; font-weight: 600; text-decoration: none !important; margin-top: 10px; transition: opacity 0.2s; }
+        .legal-intro {
+            font-size: 15px !important;
+            color: var(--gray-700) !important;
+            border-left: 4px solid var(--primary);
+            padding-left: 20px;
+            margin-bottom: 32px !important;
+        }
+        .legal-note {
+            background: rgba(67,56,202,0.04);
+            border-radius: 10px;
+            padding: 16px 20px;
+            font-size: 14px !important;
+            color: var(--gray-600) !important;
+            border-left: 4px solid var(--primary-light);
+            margin-top: 8px;
+            margin-bottom: 14px;
+        }
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--gradient);
+            color: var(--white) !important;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none !important;
+            margin-top: 10px;
+            transition: opacity 0.2s;
+        }
         .download-btn:hover { opacity: 0.88; }
-        .footer { background: #0F0D2E; padding: 60px 0 30px; }
-        .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 30px; }
-        .footer-about .footer-brand { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: #0F0D2E;
+            padding: 60px 0 30px;
+        }
+        .footer-top {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            margin-bottom: 30px;
+        }
+        .footer-about .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
         .footer-about .footer-brand img { height: 36px; }
-        .footer-about .footer-brand span { font-weight: 700; color: var(--white); font-size: 18px; }
-        .footer-about p { color: rgba(255,255,255,0.55); font-size: 14px; line-height: 1.7; margin-bottom: 20px; }
+        .footer-about .footer-brand span {
+            font-weight: 700;
+            color: var(--white);
+            font-size: 18px;
+        }
+        .footer-about p {
+            color: rgba(255,255,255,0.55);
+            font-size: 14px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
         .footer-socials { display: flex; gap: 10px; }
-        .footer-socials a { width: 38px; height: 38px; border-radius: 10px; background: rgba(255,255,255,0.07); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.6); font-size: 16px; transition: all 0.3s; text-decoration: none; }
-        .footer-socials a:hover { background: var(--primary); color: var(--white); transform: translateY(-2px); }
-        .footer-col h6 { color: var(--white); font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; }
+        .footer-socials a {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.07);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255,255,255,0.6);
+            font-size: 16px;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        .footer-socials a:hover {
+            background: var(--primary);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+        .footer-col h6 {
+            color: var(--white);
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
         .footer-col ul { list-style: none; padding: 0; margin: 0; }
         .footer-col ul li { margin-bottom: 10px; }
-        .footer-col ul li a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 14px; transition: color 0.3s; }
+        .footer-col ul li a {
+            color: rgba(255,255,255,0.55);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
         .footer-col ul li a:hover { color: var(--white); }
-        .footer-col ul li i { width: 20px; color: var(--primary-light); margin-right: 6px; font-size: 13px; }
+        .footer-col ul li i {
+            width: 20px;
+            color: var(--primary-light);
+            margin-right: 6px;
+            font-size: 13px;
+        }
         .footer-bottom { text-align: center; }
-        .footer-bottom p { color: rgba(255,255,255,0.4); font-size: 13px; margin-bottom: 0; }
-        @media (max-width: 991px) { .page-header { padding: 120px 0 60px; } .page-header h1 { font-size: 32px; } .legal-card { padding: 32px 24px; } .footer-top { grid-template-columns: 1fr 1fr; } }
-        @media (max-width: 575px) { .page-header h1 { font-size: 26px; } .footer-top { grid-template-columns: 1fr; gap: 30px; } }
+        .footer-bottom p {
+            color: rgba(255,255,255,0.4);
+            font-size: 13px;
+            margin-bottom: 0;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 991px) {
+            .page-header { padding: 120px 0 60px; }
+            .page-header h1 { font-size: 32px; }
+            .legal-card { padding: 32px 24px; }
+            .footer-top { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 575px) {
+            .page-header h1 { font-size: 26px; }
+            .footer-top { grid-template-columns: 1fr; gap: 30px; }
+        }
     </style>
 </head>
 <body>
+    <!-- ===== NAVBAR ===== -->
     <nav class="navbar navbar-expand-lg navbar-custom fixed-top" id="mainNav">
         <div class="container">
-            <a class="navbar-brand" href="{{ route(''home'') }}"><img src="{{ asset(''images/logo.png'') }}" alt="GPO Vanguardia"></a>
+            <a class="navbar-brand" href="{{ route('home') }}">
+                <img src="{{ asset('images/logo.png') }}" alt="GPO Vanguardia">
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" style="border-color: var(--gray-200);">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="{{ route(''home'') }}">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route(''home'') }}#proposito">MisiÛn y VisiÛn</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('home') }}#proposito">Misi√≥n y Visi√≥n</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Servicios</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{{ route(''servicios'') }}"><i class="fas fa-th-large"></i>Todos los Servicios</a></li>
+                            <li><a class="dropdown-item" href="{{ route('servicios') }}"><i class="fas fa-th-large"></i>Todos los Servicios</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="{{ route(''call-center'') }}"><i class="fas fa-headset"></i>Call Center Omnicanal</a></li>
-                            <li><a class="dropdown-item" href="{{ route(''chatbots'') }}"><i class="fas fa-robot"></i>Chat Bots y AI</a></li>
-                            <li><a class="dropdown-item" href="{{ route(''mesa-servicios'') }}"><i class="fas fa-tools"></i>Mesa de Servicios</a></li>
-                            <li><a class="dropdown-item" href="{{ route(''cctv'') }}"><i class="fas fa-video"></i>CCTV</a></li>
+                            <li><a class="dropdown-item" href="{{ route('call-center') }}"><i class="fas fa-headset"></i>Call Center Omnicanal</a></li>
+                            <li><a class="dropdown-item" href="{{ route('chatbots') }}"><i class="fas fa-robot"></i>Chat Bots y AI</a></li>
+                            <li><a class="dropdown-item" href="{{ route('mesa-servicios') }}"><i class="fas fa-tools"></i>Mesa de Servicios</a></li>
+                            <li><a class="dropdown-item" href="{{ route('cctv') }}"><i class="fas fa-video"></i>CCTV</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route(''clientes'') }}">Clientes</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route(''contacto'') }}">Contacto</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('clientes') }}">Clientes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('contacto') }}">Contacto</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
+    <!-- ===== PAGE HEADER ===== -->
     <section class="page-header">
         <div class="container">
             <h1>Aviso de Privacidad Integral</h1>
-            <p>ActualizaciÛn: 30 de mayo de 2025</p>
+            <p>Actualizaci√≥n: 30 de mayo de 2025</p>
         </div>
     </section>
 
+    <!-- ===== CONTENT ===== -->
     <section class="legal-content">
         <div class="container">
             <div class="legal-card">
                 <p class="legal-intro">
-                    <strong>GRUPO VANGUARDIA EN INFORMACI”N Y CONOCIMIENTO, S.A. DE C.V.</strong>, en lo sucesivo GRUPO VANGUARDIA, persona moral constituida conforme a las leyes mexicanas, con domicilio para oÌr y recibir notificaciones ubicado en Calz. de Tlalpan no. 609, Col. ¡lamos, C.P. 03400, AlcaldÌa Benito Ju·rez, CDMX, es consciente de la importancia que tienen el tratamiento legÌtimo, controlado e informado de sus datos personales, por lo que GRUPO VANGUARDIA pone a su disposiciÛn el presente Aviso de Privacidad, a fin de que conozca sus pr·cticas al obtener, usar, divulgar o almacenar sus datos personales, de conformidad con la <strong>Ley Federal de ProtecciÛn de Datos Personales en PosesiÛn de los Particulares</strong>.
+                    <strong>GRUPO VANGUARDIA EN INFORMACI√ìN Y CONOCIMIENTO, S.A. DE C.V.</strong>, en lo sucesivo GRUPO VANGUARDIA, persona moral constituida conforme a las leyes mexicanas, con domicilio para o√≠r y recibir notificaciones ubicado en Calz. de Tlalpan no. 609, Col. √Ålamos, C.P. 03400, Alcald√≠a Benito Ju√°rez, CDMX, es consciente de la importancia que tienen el tratamiento leg√≠timo, controlado e informado de sus datos personales, por lo que GRUPO VANGUARDIA pone a su disposici√≥n el presente Aviso de Privacidad, a fin de que conozca sus pr√°cticas al obtener, usar, divulgar o almacenar sus datos personales, de conformidad con la <strong>Ley Federal de Protecci√≥n de Datos Personales en Posesi√≥n de los Particulares</strong>.
                 </p>
 
+                <!-- 1 -->
                 <h2><span class="num">1</span> Finalidad del Tratamiento de Datos</h2>
-                <p>Los datos personales que recabamos de usted, los utilizaremos para las siguientes finalidades que son necesarias para los servicios que solicita o le ser·n proporcionados:</p>
+                <p>Los datos personales que recabamos de usted, los utilizaremos para las siguientes finalidades que son necesarias para los servicios que solicita o le ser√°n proporcionados:</p>
+
                 <h3>Finalidades principales</h3>
                 <ul>
-                    <li><strong>ProvisiÛn de Servicios de Contact Center y TecnologÌa:</strong> Para la operaciÛn, gestiÛn, an·lisis y mejora continua de nuestros servicios de Contact Center Omnicanal, Chat Bots e Inteligencia Artificial, Mesa de Servicios (Service Desk), soluciones de videovigilancia (CCTV) y plataformas de marketing digital, incluyendo la personalizaciÛn de la interacciÛn, el seguimiento de consultas, la resoluciÛn de incidentes y la gestiÛn de la calidad de servicio.</li>
-                    <li><strong>GestiÛn y Mejora de la RelaciÛn con Clientes y Usuarios:</strong> Para atender sus solicitudes, consultas, dudas, quejas o sugerencias relacionadas con nuestros servicios; realizar encuestas de satisfacciÛn para evaluar la calidad de nuestros servicios y la experiencia del usuario; y para mantener comunicaciÛn relevante con usted sobre la prestaciÛn y mejora de los servicios contratados.</li>
-                    <li><strong>Actividades de Marketing y ProspecciÛn Comercial:</strong> Para el envÌo de informaciÛn sobre nuestros productos, servicios, promociones, eventos, novedades y ofertas que puedan ser de su interÈs, tanto propios como de socios comerciales, si usted ha otorgado su consentimiento para ello o si existe una relaciÛn comercial preexistente. Esto incluye actividades de prospecciÛn comercial, publicidad segmentada y an·lisis de mercado para el desarrollo de nuevos servicios y la optimizaciÛn de nuestras estrategias de negocio.</li>
-                    <li><strong>An·lisis Internos y EstadÌsticos:</strong> Para realizar an·lisis internos, estudios estadÌsticos y elaboraciÛn de perfiles de uso que nos permitan entender las tendencias, optimizar la operaciÛn de nuestros servicios, evaluar el rendimiento y tomar decisiones estratÈgicas de negocio, siempre de forma anonimizada o agregada, cuando sea posible.</li>
-                    <li><strong>Cumplimiento de Obligaciones Legales y Contractuales:</strong> Para cumplir con las obligaciones legales aplicables, asÌ como para el cumplimiento de contratos y acuerdos con usted, incluyendo la facturaciÛn y cobranza de nuestros servicios.</li>
-                    <li><strong>Seguridad de la InformaciÛn y de las Operaciones:</strong> Para garantizar la seguridad, integridad y confidencialidad de la informaciÛn y de nuestras operaciones, incluyendo la prevenciÛn de fraudes, la detecciÛn de incidentes de seguridad y la protecciÛn contra actividades ilÌcitas o maliciosas.</li>
-                    <li><strong>Reclutamiento, selecciÛn y contrataciÛn de personal:</strong> Para llevar a cabo el proceso de reclutamiento, selecciÛn y contrataciÛn del personal. La informaciÛn formar· parte de la bolsa de trabajo de la empresa. La informaciÛn se podr· transferir a un tercero, outsourcing o InstituciÛn Financiera para que lleve a cabo el pago de la contraprestaciÛn de los servicios. Para generar perfiles y estructuras laborales, realizar informes estadÌsticos y evaluar el desempeÒo. Solicitar referencias personales y laborales del solicitante. Para integrar el expediente del colaborador, administrar la contraprestaciÛn de los servicios y cumplir las obligaciones contractuales. Mantener comunicaciÛn con el solicitante durante el proceso de reclutamiento.</li>
+                    <li><strong>Provisi√≥n de Servicios de Contact Center y Tecnolog√≠a:</strong> Para la operaci√≥n, gesti√≥n, an√°lisis y mejora continua de nuestros servicios de Contact Center Omnicanal, Chat Bots e Inteligencia Artificial, Mesa de Servicios (Service Desk), soluciones de videovigilancia (CCTV) y plataformas de marketing digital, incluyendo la personalizaci√≥n de la interacci√≥n, el seguimiento de consultas, la resoluci√≥n de incidentes y la gesti√≥n de la calidad de servicio.</li>
+                    <li><strong>Gesti√≥n y Mejora de la Relaci√≥n con Clientes y Usuarios:</strong> Para atender sus solicitudes, consultas, dudas, quejas o sugerencias relacionadas con nuestros servicios; realizar encuestas de satisfacci√≥n para evaluar la calidad de nuestros servicios y la experiencia del usuario; y para mantener comunicaci√≥n relevante con usted sobre la prestaci√≥n y mejora de los servicios contratados.</li>
+                    <li><strong>Actividades de Marketing y Prospecci√≥n Comercial:</strong> Para el env√≠o de informaci√≥n sobre nuestros productos, servicios, promociones, eventos, novedades y ofertas que puedan ser de su inter√©s, tanto propios como de socios comerciales, si usted ha otorgado su consentimiento para ello o si existe una relaci√≥n comercial preexistente. Esto incluye actividades de prospecci√≥n comercial, publicidad segmentada y an√°lisis de mercado para el desarrollo de nuevos servicios y la optimizaci√≥n de nuestras estrategias de negocio.</li>
+                    <li><strong>An√°lisis Internos y Estad√≠sticos:</strong> Para realizar an√°lisis internos, estudios estad√≠sticos y elaboraci√≥n de perfiles de uso que nos permitan entender las tendencias, optimizar la operaci√≥n de nuestros servicios, evaluar el rendimiento y tomar decisiones estrat√©gicas de negocio, siempre de forma anonimizada o agregada, cuando sea posible.</li>
+                    <li><strong>Cumplimiento de Obligaciones Legales y Contractuales:</strong> Para cumplir con las obligaciones legales aplicables, as√≠ como para el cumplimiento de contratos y acuerdos con usted, incluyendo la facturaci√≥n y cobranza de nuestros servicios.</li>
+                    <li><strong>Seguridad de la Informaci√≥n y de las Operaciones:</strong> Para garantizar la seguridad, integridad y confidencialidad de la informaci√≥n y de nuestras operaciones, incluyendo la prevenci√≥n de fraudes, la detecci√≥n de incidentes de seguridad y la protecci√≥n contra actividades il√≠citas o maliciosas.</li>
+                    <li><strong>Reclutamiento, selecci√≥n y contrataci√≥n de personal:</strong> Para llevar a cabo el proceso de reclutamiento, selecci√≥n y contrataci√≥n del personal. La informaci√≥n formar√° parte de la bolsa de trabajo de la empresa. La informaci√≥n se podr√° transferir a un tercero, outsourcing o Instituci√≥n Financiera para que lleve a cabo el pago de la contraprestaci√≥n de los servicios. Para generar perfiles y estructuras laborales, realizar informes estad√≠sticos y evaluar el desempe√±o. Solicitar referencias personales y laborales del solicitante. Para integrar el expediente del colaborador, administrar la contraprestaci√≥n de los servicios y cumplir las obligaciones contractuales. Mantener comunicaci√≥n con el solicitante durante el proceso de reclutamiento.</li>
                 </ul>
+
                 <h3>Finalidades secundarias</h3>
                 <ul>
-                    <li><strong>Registro y video grabaciÛn de visitantes a las instalaciones:</strong> Por motivos de seguridad. Ser· tratada con fines estadÌsticos, de seguridad y vigilancia durante el tiempo que dure su estancia en el edificio, en su caso, detectar alg˙n ilÌcito, o demostrar en controversias o requerimientos judiciales y/o administrativos, la estancia o no de dichas personas. En caso de negativa al registro y video grabaciÛn, por motivos de seguridad se les impedir· el acceso a las instalaciones. Las bit·coras de registro de accesos y candidatos ser·n resguardadas durante 3 meses.</li>
+                    <li><strong>Registro y video grabaci√≥n de visitantes a las instalaciones:</strong> Por motivos de seguridad. Ser√° tratada con fines estad√≠sticos, de seguridad y vigilancia durante el tiempo que dure su estancia en el edificio, en su caso, detectar alg√∫n il√≠cito, o demostrar en controversias o requerimientos judiciales y/o administrativos, la estancia o no de dichas personas. En caso de negativa al registro y video grabaci√≥n, por motivos de seguridad se les impedir√° el acceso a las instalaciones. Las bit√°coras de registro de accesos y candidatos ser√°n resguardadas durante 3 meses.</li>
                 </ul>
 
-                <h2><span class="num">2</span> øQuÈ Datos Personales Recabamos y Utilizamos de Usted?</h2>
-                <p>Las categorÌas de datos personales a recabar y sujetas a tratamiento son:</p>
+                <!-- 2 -->
+                <h2><span class="num">2</span> ¬øQu√© Datos Personales Recabamos y Utilizamos de Usted?</h2>
+                <p>Las categor√≠as de datos personales a recabar y sujetas a tratamiento son:</p>
                 <ul>
-                    <li><strong>Datos de identificaciÛn:</strong> Nombre completo, edad, fecha de nacimiento, gÈnero, estado civil, domicilio, nacionalidad, correo electrÛnico, telÈfono particular, fijo y celular, RFC, CURP, documento migratorio (en su caso), N˙mero de Seguridad Social, fotografÌa, imagen, firma.</li>
-                    <li><strong>Datos acadÈmicos:</strong> EducaciÛn, idiomas, aptitudes y habilidades.</li>
+                    <li><strong>Datos de identificaci√≥n:</strong> Nombre completo, edad, fecha de nacimiento, g√©nero, estado civil, domicilio, nacionalidad, correo electr√≥nico, tel√©fono particular, fijo y celular, RFC, CURP, documento migratorio (en su caso), N√∫mero de Seguridad Social, fotograf√≠a, imagen, firma.</li>
+                    <li><strong>Datos acad√©micos:</strong> Educaci√≥n, idiomas, aptitudes y habilidades.</li>
                     <li><strong>Datos laborales:</strong> Antecedentes y referencias laborales.</li>
-                    <li><strong>Datos econÛmicos:</strong> Los que se deriven de estudios socio-econÛmicos.</li>
+                    <li><strong>Datos econ√≥micos:</strong> Los que se deriven de estudios socio-econ√≥micos.</li>
                     <li><strong>Datos de terceros:</strong> Antecedentes laborales, referencias personales y laborales.</li>
-                    <li><strong>Datos fiscales:</strong> Trat·ndose de la prestaciÛn de servicios como proveedor de GRUPO VANGUARDIA, copia de su Alta en Hacienda.</li>
+                    <li><strong>Datos fiscales:</strong> Trat√°ndose de la prestaci√≥n de servicios como proveedor de GRUPO VANGUARDIA, copia de su Alta en Hacienda.</li>
                 </ul>
+
                 <h3>Datos Sensibles</h3>
                 <ul>
-                    <li><strong>Datos de salud:</strong> Los cuales se recaban a travÈs de los estudios psicomÈtricos que se efect˙an al candidato.</li>
+                    <li><strong>Datos de salud:</strong> Los cuales se recaban a trav√©s de los estudios psicom√©tricos que se efect√∫an al candidato.</li>
                 </ul>
 
+                <!-- 3 -->
                 <h2><span class="num">3</span> Consentimiento</h2>
-                <p>De acuerdo a lo anterior, el titular otorga su consentimiento por escrito para que sus datos personales sean tratados conforme a lo seÒalado en el presente aviso de privacidad.</p>
+                <p>De acuerdo a lo anterior, el titular otorga su consentimiento por escrito para que sus datos personales sean tratados conforme a lo se√±alado en el presente aviso de privacidad.</p>
 
+                <!-- 4 -->
                 <h2><span class="num">4</span> Medios por los que Grupo Vanguardia Obtiene sus Datos</h2>
-                <p>Le informamos que GRUPO VANGUARDIA obtendr· sus datos personales a travÈs de las siguientes formas:</p>
+                <p>Le informamos que GRUPO VANGUARDIA obtendr√° sus datos personales a trav√©s de las siguientes formas:</p>
                 <ol>
                     <li><strong>Personalmente:</strong> Cuando usted sea colaborador o solicite empleo, por medio del llenado de la solicitud de empleo que GRUPO VANGUARDIA proporciona.</li>
-                    <li><strong>Directa:</strong> Cuando nos proporciona sus datos para solicitar empleo por medio de los portales electrÛnicos en los que GRUPO VANGUARDIA publica sus ofertas de empleo o cuando nos hace llegar su currÌculum vitae por correo electrÛnico.</li>
-                    <li><strong>Indirecta:</strong> De cualquier otra fuente de informaciÛn disponibles o que sean permitidas por la Ley.</li>
+                    <li><strong>Directa:</strong> Cuando nos proporciona sus datos para solicitar empleo por medio de los portales electr√≥nicos en los que GRUPO VANGUARDIA publica sus ofertas de empleo o cuando nos hace llegar su curr√≠culum vitae por correo electr√≥nico.</li>
+                    <li><strong>Indirecta:</strong> De cualquier otra fuente de informaci√≥n disponibles o que sean permitidas por la Ley.</li>
                 </ol>
 
+                <!-- 5 -->
                 <h2><span class="num">5</span> Uso de Cookies y Web Beacons</h2>
-                <p>Le informamos que en GRUPO VANGUARDIA no recabamos datos personales a travÈs del uso de Cookies o Web Beacons, y otras tecnologÌas para obtener informaciÛn personal de usted, como pudiera ser la siguiente:</p>
+                <p>Le informamos que en GRUPO VANGUARDIA no recabamos datos personales a trav√©s del uso de Cookies o Web Beacons, y otras tecnolog√≠as para obtener informaci√≥n personal de usted, como pudiera ser la siguiente:</p>
                 <ul>
                     <li>Su tipo de navegador y sistema operativo.</li>
-                    <li>Las p·ginas de Internet que visita.</li>
-                    <li>Los vÌnculos que sigue.</li>
-                    <li>La direcciÛn IP.</li>
-                    <li>El sitio que visitÛ antes de entrar al nuestro.</li>
+                    <li>Las p√°ginas de Internet que visita.</li>
+                    <li>Los v√≠nculos que sigue.</li>
+                    <li>La direcci√≥n IP.</li>
+                    <li>El sitio que visit√≥ antes de entrar al nuestro.</li>
                 </ul>
 
+                <!-- 6 -->
                 <h2><span class="num">6</span> Medidas de Seguridad Implementadas</h2>
-                <p>Para la protecciÛn de sus datos personales hemos instrumentado medidas de seguridad de car·cter administrativo, fÌsico y tÈcnico con el objeto de evitar pÈrdidas, mal uso o alteraciÛn de su informaciÛn.</p>
+                <p>Para la protecci√≥n de sus datos personales hemos instrumentado medidas de seguridad de car√°cter administrativo, f√≠sico y t√©cnico con el objeto de evitar p√©rdidas, mal uso o alteraci√≥n de su informaci√≥n.</p>
 
+                <!-- 7 -->
                 <h2><span class="num">7</span> Transferencia de Datos Personales</h2>
-                <p>Le informamos que sus datos personales podr·n transferirse a terceros mexicanos y/o extranjeros y para los siguientes fines:</p>
+                <p>Le informamos que sus datos personales podr√°n transferirse a terceros mexicanos y/o extranjeros y para los siguientes fines:</p>
                 <ol>
-                    <li>Las autoridades competentes para el cumplimiento de las obligaciones legales que se derivan de la relaciÛn contractual entre el titular de datos personales y el responsable.</li>
-                    <li>Terceros, clientes de GRUPO VANGUARDIA, para dar cumplimiento a las obligaciones contractuales adquiridas por parte de GRUPO VANGUARDIA, para la prestaciÛn del servicio.</li>
-                    <li>Terceros que soliciten referencias laborales de empleados y exempleados de GRUPO VANGUARDIA.</li>
-                    <li>Terceros derivados de un reestructura corporativa, incluyendo, la fusiÛn, consolidaciÛn, venta, liquidaciÛn o transferencia de activos.</li>
+                    <li>Las autoridades competentes para el cumplimiento de las obligaciones legales que se derivan de la relaci√≥n contractual entre el titular de datos personales y el responsable.</li>
+                    <li>Terceros, clientes de GRUPO VANGUARDIA, para dar cumplimiento a las obligaciones contractuales adquiridas por parte de GRUPO VANGUARDIA, para la prestaci√≥n del servicio.</li>
+                    <li>Terceros que soliciten referencias laborales de empleados y ex‚Äëempleados de GRUPO VANGUARDIA.</li>
+                    <li>Terceros derivados de un reestructura corporativa, incluyendo, la fusi√≥n, consolidaci√≥n, venta, liquidaci√≥n o transferencia de activos.</li>
                     <li>Otras transmisiones previstas en la Ley citada y su Reglamento.</li>
                     <li>Los terceros y las entidades receptores de datos personales, asumen las mismas obligaciones y/o responsabilidades de GRUPO VANGUARDIA, de conformidad con lo descrito en el presente Aviso de Privacidad.</li>
                 </ol>
-                <p>GRUPO VANGUARDIA se compromete a no transferir su informaciÛn personal a terceros, sin su consentimiento, salvo las excepciones previstas en el artÌculo 37 de la Ley Federal de ProtecciÛn de Datos Personales en PosesiÛn de los Particulares.</p>
+                <p>GRUPO VANGUARDIA se compromete a no transferir su informaci√≥n personal a terceros, sin su consentimiento, salvo las excepciones previstas en el art√≠culo 37 de la Ley Federal de Protecci√≥n de Datos Personales en Posesi√≥n de los Particulares.</p>
 
-                <h2><span class="num">8</span> OposiciÛn a la Transferencia de sus Datos Personales</h2>
-                <p>Para el caso que Usted se oponga a la transferencia de sus datos personales, tendr· 5 dÌas naturales, a partir de que tenga conocimiento de este aviso de privacidad, para manifestar su oposiciÛn mediante documento escrito y dirigido al encargado indicado en este instrumento para el ejercicio del Derecho de ARCO. De no hacerlo, se entender· que est· otorgando su consentimiento para realizar la transferencia de sus datos.</p>
+                <!-- 8 -->
+                <h2><span class="num">8</span> Oposici√≥n a la Transferencia de sus Datos Personales</h2>
+                <p>Para el caso que Usted se oponga a la transferencia de sus datos personales, tendr√° 5 d√≠as naturales, a partir de que tenga conocimiento de este aviso de privacidad, para manifestar su oposici√≥n mediante documento escrito y dirigido al encargado indicado en este instrumento para el ejercicio del Derecho de ARCO. De no hacerlo, se entender√° que est√° otorgando su consentimiento para realizar la transferencia de sus datos.</p>
 
+                <!-- 9 -->
                 <h2><span class="num">9</span> Derecho ARCO</h2>
-                <p>Usted o su representante legal tienen derecho a conocer quÈ datos personales tenemos de usted, para quÈ los utilizamos y las condiciones de uso que les damos (<strong>Acceso</strong>). Asimismo, es su derecho solicitar la correcciÛn de su informaciÛn personal en caso de que estÈ desactualizada, sea inexacta o incompleta (<strong>RectificaciÛn</strong>); que la eliminemos de nuestros registros o bases de datos cuando considere que la misma no est· siendo utilizada conforme a los principios, deberes y obligaciones previstas en la Ley (<strong>CancelaciÛn</strong>); asÌ como oponerse al uso de sus datos personales para fines especÌficos (<strong>OposiciÛn</strong>).</p>
-                <p>Las ˙nicas personas facultadas para ejercer el derecho de ARCO, es el Titular de los Datos Personales o su Representante Legal, quien deber· ejercerlo ante el responsable del tratamiento de datos personales.</p>
+                <p>Usted o su representante legal tienen derecho a conocer qu√© datos personales tenemos de usted, para qu√© los utilizamos y las condiciones de uso que les damos (<strong>Acceso</strong>). Asimismo, es su derecho solicitar la correcci√≥n de su informaci√≥n personal en caso de que est√© desactualizada, sea inexacta o incompleta (<strong>Rectificaci√≥n</strong>); que la eliminemos de nuestros registros o bases de datos cuando considere que la misma no est√° siendo utilizada conforme a los principios, deberes y obligaciones previstas en la Ley (<strong>Cancelaci√≥n</strong>); as√≠ como oponerse al uso de sus datos personales para fines espec√≠ficos (<strong>Oposici√≥n</strong>).</p>
+                <p>Las √∫nicas personas facultadas para ejercer el derecho de ARCO, es el Titular de los Datos Personales o su Representante Legal, quien deber√° ejercerlo ante el responsable del tratamiento de datos personales.</p>
+
                 <h3>Procedimiento y Requisitos para el Ejercicio de los Derechos ARCO</h3>
-                <p>Requisitar el formato de solicitud de derecho ARCO <em>GV FOR GDP 007</em>, el cual puede solicitar al correo: <a href="mailto:comentarios@ccgvic.com">comentarios@ccgvic.com</a>, y entregarse personalmente en Calz. de Tlalpan no. 609, Col. ¡lamos, C.P. 03400, AlcaldÌa Benito Ju·rez, CDMX o vÌa correo electrÛnico en la direcciÛn: <a href="mailto:comentarios@ccgvic.com">comentarios@ccgvic.com</a>, adjuntando la siguiente documentaciÛn:</p>
+                <p>Requisitar el formato de solicitud de derecho ARCO <em>GV FOR GDP 007</em>, el cual puede solicitar al correo: <a href="mailto:comentarios@ccgvic.com">comentarios@ccgvic.com</a>, y entregarse personalmente en Calz. de Tlalpan no. 609, Col. √Ålamos, C.P. 03400, Alcald√≠a Benito Ju√°rez, CDMX o v√≠a correo electr√≥nico en la direcci√≥n: <a href="mailto:comentarios@ccgvic.com">comentarios@ccgvic.com</a>, adjuntando la siguiente documentaci√≥n:</p>
                 <ol>
-                    <li>IdentificaciÛn oficial con la que acredite su personalidad (Credencial para votar emitida por el INE, Pasaporte vigente, CÈdula Profesional, o en caso de ser de nacionalidad extranjera, su documento migratorio vigente).</li>
-                    <li>En caso de no ser el titular quien presente la solicitud, el documento que acredite la existencia de la representaciÛn, es decir instrumento p˙blico o carta poder firmada ante dos testigos, junto con la identificaciÛn del titular y del representante legal.</li>
-                    <li>DescripciÛn clara y precisa de los datos personales respecto de los que requiere ejercer sus Derechos ARCO, precisando si requiere actualizar, rectificar, cancelar u oponerse al uso de sus datos, asÌ como las razones por las que efect˙a su solicitud.</li>
-                    <li>Cualquier documento o informaciÛn que facilite la localizaciÛn de sus datos personales que se encuentran en propiedad de GRUPO VANGUARDIA.</li>
-                    <li>En caso de solicitar la rectificaciÛn de datos, se indicar·n las modificaciones a efectuarse y se aportar· la documentaciÛn que sustente su peticiÛn.</li>
+                    <li>Identificaci√≥n oficial con la que acredite su personalidad (Credencial para votar emitida por el INE, Pasaporte vigente, C√©dula Profesional, o en caso de ser de nacionalidad extranjera, su documento migratorio vigente).</li>
+                    <li>En caso de no ser el titular quien presente la solicitud, el documento que acredite la existencia de la representaci√≥n, es decir instrumento p√∫blico o carta poder firmada ante dos testigos, junto con la identificaci√≥n del titular y del representante legal.</li>
+                    <li>Descripci√≥n clara y precisa de los datos personales respecto de los que requiere ejercer sus Derechos ARCO, precisando si requiere actualizar, rectificar, cancelar u oponerse al uso de sus datos, as√≠ como las razones por las que efect√∫a su solicitud.</li>
+                    <li>Cualquier documento o informaci√≥n que facilite la localizaci√≥n de sus datos personales que se encuentran en propiedad de GRUPO VANGUARDIA.</li>
+                    <li>En caso de solicitar la rectificaci√≥n de datos, se indicar√°n las modificaciones a efectuarse y se aportar√° la documentaci√≥n que sustente su petici√≥n.</li>
                     <li>Indicar el medio y forma en que podremos contactarlo para notificarle la respuesta a su solicitud.</li>
                 </ol>
+
                 <a href="https://gpovanguardia.com.mx/wp-content/uploads/2026/01/GV-FOR-GDP-007-Formato-Derecho-ARCO-v2.pdf" target="_blank" rel="noopener" class="download-btn">
                     <i class="fas fa-file-download"></i> Descargar formato de derechos ARCO
                 </a>
-                <h3>Encargado de AtenciÛn a la Solicitud</h3>
-                <p>El Departamento JurÌdico de GRUPO VANGUARDIA es el responsable de dar tr·mite a las solicitudes de los titulares para el ejercicio de los derechos contenidos en la Ley Federal de ProtecciÛn de Datos Personales en PosesiÛn de Particulares.</p>
-                <h3>Plazo para la AtenciÛn de Solicitudes</h3>
-                <p>El Departamento JurÌdico de GRUPO VANGUARDIA responder· su solicitud en un tÈrmino de <strong>20 (veinte) dÌas</strong> contados a partir de que se le envÌe acuse de recibo de la misma.</p>
+
+                <h3>Encargado de Atenci√≥n a la Solicitud</h3>
+                <p>El Departamento Jur√≠dico de GRUPO VANGUARDIA es el responsable de dar tr√°mite a las solicitudes de los titulares para el ejercicio de los derechos contenidos en la Ley Federal de Protecci√≥n de Datos Personales en Posesi√≥n de Particulares.</p>
+
+                <h3>Plazo para la Atenci√≥n de Solicitudes</h3>
+                <p>El Departamento Jur√≠dico de GRUPO VANGUARDIA responder√° su solicitud en un t√©rmino de <strong>20 (veinte) d√≠as</strong> contados a partir de que se le env√≠e acuse de recibo de la misma.</p>
+                <p>Cuando la solicitud sea procedente y se hayan llevado a cabo los cotejos correspondientes, los t√©rminos para llevar a cabo la solicitud ser√°n los siguientes:</p>
                 <ol>
-                    <li>Para el acceso de los datos: dentro de un plazo de 15 (quince) dÌas contados a partir de la respuesta afirmativa.</li>
-                    <li>Para la rectificaciÛn de los datos: dentro de un plazo de 15 (quince) dÌas contados a partir de la respuesta afirmativa.</li>
-                    <li>Para la cancelaciÛn u oposiciÛn de los datos: se har· primero el bloqueo de los mismos, previo cotejo de la documentaciÛn original requerida. En caso de respuesta afirmativa, dentro de un plazo de 15 (quince) dÌas contados a partir de dicha respuesta.</li>
+                    <li>Para el acceso de los datos: dentro de un plazo de 15 (quince) d√≠as contados a partir de la respuesta afirmativa.</li>
+                    <li>Para la rectificaci√≥n de los datos: dentro de un plazo de 15 (quince) d√≠as contados a partir de la respuesta afirmativa.</li>
+                    <li>Para la cancelaci√≥n u oposici√≥n de los datos: se har√° primero el bloqueo de los mismos, previo cotejo de la documentaci√≥n original requerida. En caso de respuesta afirmativa, dentro de un plazo de 15 (quince) d√≠as contados a partir de dicha respuesta.</li>
                 </ol>
+
                 <h3>Negativa al Ejercicio de Derechos ARCO</h3>
-                <p>GRUPO VANGUARDIA podr· negar el ejercicio de los Derechos ARCO, en los siguientes supuestos:</p>
+                <p>GRUPO VANGUARDIA podr√° negar el ejercicio de los Derechos ARCO, en los siguientes supuestos:</p>
                 <ul>
-                    <li>a) Cuando usted no sea el titular de los datos personales o no haya acreditado la representaciÛn del titular.</li>
+                    <li>a) Cuando usted no sea el titular de los datos personales o no haya acreditado la representaci√≥n del titular.</li>
                     <li>b) Cuando sus datos personales no obren en la base de datos de la empresa.</li>
                     <li>c) Cuando se lesionen los derechos de un tercero.</li>
-                    <li>d) Cuando exista un impedimento legal o la resoluciÛn de una autoridad competente que restrinja sus Derechos ARCO.</li>
-                    <li>e) Cuando la cancelaciÛn u oposiciÛn haya sido previamente realizada.</li>
+                    <li>d) Cuando exista un impedimento legal o la resoluci√≥n de una autoridad competente que restrinja sus Derechos ARCO.</li>
+                    <li>e) Cuando la cancelaci√≥n u oposici√≥n haya sido previamente realizada.</li>
                 </ul>
                 <div class="legal-note">
-                    "ArtÌculo 10 LFPDPPP. No ser· necesario el consentimiento para el tratamiento de los datos personales cuando: Tenga el propÛsito de cumplir obligaciones derivadas de una relaciÛn jurÌdica entre el titular y el responsable"
+                    &ldquo;Art√≠culo 10 LFPDPPP.&mdash; No ser√° necesario el consentimiento para el tratamiento de los datos personales cuando: Tenga el prop√≥sito de cumplir obligaciones derivadas de una relaci√≥n jur√≠dica entre el titular y el responsable&hellip;&rdquo;
                 </div>
 
-                <h2><span class="num">10</span> RevocaciÛn del Consentimiento</h2>
-                <p>Usted podr· revocar su consentimiento que, en su caso, haya otorgado a GRUPO VANGUARDIA para el tratamiento de sus datos personales mediante escrito entregado de forma personal al Encargado, siempre y cuando no sean necesarios para cumplimentar las finalidades indispensables antes descritas, dentro de los lÌmites previstos en ley.</p>
-                <p>Asimismo, usted deber· considerar que, para ciertos fines, la revocaciÛn de consentimiento implicar· que no le sigamos prestando el servicio que nos solicitÛ o la conclusiÛn de la relaciÛn con nosotros.</p>
+                <!-- 10 -->
+                <h2><span class="num">10</span> Revocaci√≥n del Consentimiento</h2>
+                <p>Usted podr√° revocar su consentimiento que, en su caso, haya otorgado a GRUPO VANGUARDIA para el tratamiento de sus datos personales mediante escrito entregado de forma personal al Encargado, siempre y cuando no sean necesarios para cumplimentar las finalidades indispensables antes descritas, dentro de los l√≠mites previstos en ley.</p>
+                <p>Asimismo, usted deber√° considerar que, para ciertos fines, la revocaci√≥n de consentimiento implicar√° que no le sigamos prestando el servicio que nos solicit√≥ o la conclusi√≥n de la relaci√≥n con nosotros.</p>
 
+                <!-- 11 -->
                 <h2><span class="num">11</span> Obligaciones como Encargado del Tratamiento de Datos Personales</h2>
-                <p>GRUPO VANGUARDIA recibe de terceros, transferencias de datos personales de titulares que tienen relaciones jurÌdicas pendientes de cumplir con ellos o para cumplir con los diferentes servicios para lo cual nos contratan los terceros. De estos datos, GRUPO VANGUARDIA es ENCARGADO y por Ley est· impedido para resolver derechos de ARCO.</p>
+                <p>GRUPO VANGUARDIA recibe de terceros, transferencias de datos personales de titulares que tienen relaciones jur√≠dicas pendientes de cumplir con ellos o para cumplir con los diferentes servicios para lo cual nos contratan los terceros. De estos datos, GRUPO VANGUARDIA es ENCARGADO y por Ley est√° impedido para resolver derechos de ARCO.</p>
                 <p>En estos supuestos si usted desea ejercer sus derechos de ARCO, lo debe hacer ante el Responsable de dicho tratamiento, de acuerdo al Aviso de Privacidad que le dio a conocer el Responsable de sus datos.</p>
 
-                <h2><span class="num">12</span> Vigencia de la InformaciÛn</h2>
+                <!-- 12 -->
+                <h2><span class="num">12</span> Vigencia de la Informaci√≥n</h2>
                 <ul>
-                    <li><strong>a) Reclutamiento, selecciÛn y contrataciÛn de personal, asÌ como selecciÛn de proveedores:</strong> Ser·n destruidos a los 24 meses despuÈs de la conclusiÛn de las obligaciones contractuales o de aquellas que se hayan generado derivado del proceso de reclutamiento y que no fueron contratados. Salvo el nombre mismo que ser·n utilizados para efectos de referencias laborales.</li>
-                    <li><strong>b) Registro de Visitantes a las instalaciones de GRUPO VANGUARDIA:</strong> Ser·n destruidos y/o eliminados dentro del plazo que la organizaciÛn estipule a partir de la visita del titular.</li>
+                    <li><strong>a) Reclutamiento, selecci√≥n y contrataci√≥n de personal, as√≠ como selecci√≥n de proveedores:</strong> Ser√°n destruidos a los 24 meses despu√©s de la conclusi√≥n de las obligaciones contractuales o de aquellas que se hayan generado derivado del proceso de reclutamiento y que no fueron contratados. Salvo el nombre mismo que ser√°n utilizados para efectos de referencias laborales.</li>
+                    <li><strong>b) Registro de Visitantes a las instalaciones de GRUPO VANGUARDIA:</strong> Ser√°n destruidos y/o eliminados dentro del plazo que la organizaci√≥n estipule a partir de la visita del titular.</li>
                 </ul>
 
-                <h2><span class="num">13</span> AceptaciÛn de los TÈrminos</h2>
-                <p>Este Aviso de Privacidad forma un acuerdo jurÌdicamente v·lido y por tanto se entiende que usted acepta el tratamiento de sus Datos Personales, si en un plazo de <strong>5 dÌas</strong> a partir de que tenga conocimiento de dicho Aviso de Privacidad, no manifiesta su oposiciÛn.</p>
+                <!-- 13 -->
+                <h2><span class="num">13</span> Aceptaci√≥n de los T√©rminos</h2>
+                <p>Este Aviso de Privacidad forma un acuerdo jur√≠dicamente v√°lido y por tanto se entiende que usted acepta el tratamiento de sus Datos Personales, si en un plazo de <strong>5 d√≠as</strong> a partir de que tenga conocimiento de dicho Aviso de Privacidad, no manifiesta su oposici√≥n.</p>
 
+                <!-- 14 -->
                 <h2><span class="num">14</span> Cambios al Aviso de Privacidad</h2>
-                <p>Cualquier cambio que se realice al presente aviso de privacidad, ser· comunicado mediante publicaciÛn en su p·gina de internet: <a href="https://gpovanguardia.com.mx/aviso-de-privacidad/" target="_blank" rel="noopener">https://gpovanguardia.com.mx/aviso-de-privacidad/</a></p>
+                <p>Cualquier cambio que se realice al presente aviso de privacidad, ser√° comunicado mediante publicaci√≥n en su p√°gina de internet:</p>
+                <p><a href="https://gpovanguardia.com.mx/aviso-de-privacidad/" target="_blank" rel="noopener">https://gpovanguardia.com.mx/aviso-de-privacidad/</a></p>
 
-                <h2><span class="num">15</span> Encargado en la ProtecciÛn de los Datos Personales</h2>
-                <p>El encargado en la protecciÛn de los datos personales dentro de GRUPO VANGUARDIA es:</p>
+                <!-- 15 -->
+                <h2><span class="num">15</span> Encargado en la Protecci√≥n de los Datos Personales</h2>
+                <p>El encargado en la protecci√≥n de los datos personales dentro de GRUPO VANGUARDIA es:</p>
                 <ul>
-                    <li><strong>Jeniffer Haide LÛpez Romero</strong></li>
-                    <li>Correo electrÛnico: <a href="mailto:comentarios@ccgvic.com">comentarios@ccgvic.com</a></li>
+                    <li><strong>Jeniffer Haide L√≥pez Romero</strong></li>
+                    <li>Correo electr√≥nico: <a href="mailto:comentarios@ccgvic.com">comentarios@ccgvic.com</a></li>
                 </ul>
-                <p>Si requiere mayor informaciÛn, envÌe sus dudas al correo electrÛnico: <a href="mailto:comentarios@ccgvic.com">comentarios@ccgvic.com</a>.</p>
-                <p><strong>ActualizaciÛn de Aviso de Privacidad: 30 de mayo de 2025.</strong></p>
+                <p>Si requiere mayor informaci√≥n, env√≠e sus dudas al correo electr√≥nico: <a href="mailto:comentarios@ccgvic.com">comentarios@ccgvic.com</a>.</p>
+                <p><strong>Actualizaci√≥n de Aviso de Privacidad: 30 de mayo de 2025.</strong></p>
             </div>
         </div>
     </section>
 
+    <!-- ===== FOOTER ===== -->
     <footer class="footer">
         <div class="container">
             <div class="footer-top">
                 <div class="footer-about">
                     <div class="footer-brand">
-                        <img src="{{ asset(''images/logo.png'') }}" alt="GPO Vanguardia">
+                        <img src="{{ asset('images/logo.png') }}" alt="GPO Vanguardia">
                         <span>Grupo Vanguardia</span>
                     </div>
-                    <p>Soluciones empresariales que marcan la diferencia. LÌderes en BPO, IA, ciberseguridad y transformaciÛn tecnolÛgica.</p>
+                    <p>Soluciones empresariales que marcan la diferencia. L√≠deres en BPO, IA, ciberseguridad y transformaci√≥n tecnol√≥gica.</p>
                     <div class="footer-socials">
                         <a href="https://www.facebook.com/callcentergrupovanguardia" target="_blank" rel="noopener" title="Facebook"><i class="fab fa-facebook-f"></i></a>
                         <a href="https://www.linkedin.com/company/gpo-vanguardia" target="_blank" rel="noopener" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
@@ -279,22 +537,22 @@
                     </div>
                 </div>
                 <div class="footer-col">
-                    <h6>NavegaciÛn</h6>
+                    <h6>Navegaci√≥n</h6>
                     <ul>
-                        <li><a href="{{ route(''home'') }}">Inicio</a></li>
-                        <li><a href="{{ route(''home'') }}#proposito">MisiÛn y VisiÛn</a></li>
-                        <li><a href="{{ route(''servicios'') }}">Servicios</a></li>
-                        <li><a href="{{ route(''clientes'') }}">Clientes</a></li>
-                        <li><a href="{{ route(''contacto'') }}">Contacto</a></li>
+                        <li><a href="{{ route('home') }}">Inicio</a></li>
+                        <li><a href="{{ route('home') }}#proposito">Misi√≥n y Visi√≥n</a></li>
+                        <li><a href="{{ route('servicios') }}">Servicios</a></li>
+                        <li><a href="{{ route('clientes') }}">Clientes</a></li>
+                        <li><a href="{{ route('contacto') }}">Contacto</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h6>Servicios</h6>
                     <ul>
-                        <li><a href="{{ route(''call-center'') }}">Call Center Omnicanal</a></li>
-                        <li><a href="{{ route(''chatbots'') }}">Chat Bots y AI</a></li>
-                        <li><a href="{{ route(''mesa-servicios'') }}">Mesa de Servicios</a></li>
-                        <li><a href="{{ route(''cctv'') }}">CCTV</a></li>
+                        <li><a href="{{ route('call-center') }}">Call Center Omnicanal</a></li>
+                        <li><a href="{{ route('chatbots') }}">Chat Bots y AI</a></li>
+                        <li><a href="{{ route('mesa-servicios') }}">Mesa de Servicios</a></li>
+                        <li><a href="{{ route('cctv') }}">CCTV</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
@@ -302,22 +560,23 @@
                     <ul>
                         <li><a href="tel:5585263542"><i class="fas fa-phone-alt"></i>55 8526 3542</a></li>
                         <li><a href="mailto:soporte@ccgvic.com"><i class="fas fa-envelope"></i>soporte@ccgvic.com</a></li>
-                        <li><a href="{{ route(''contacto'') }}"><i class="fas fa-map-marker-alt"></i>CDMX, MÈxico</a></li>
-                        <li><a href="{{ route(''aviso'') }}"><i class="fas fa-shield-alt"></i>Aviso de privacidad</a></li>
+                        <li><a href="{{ route('contacto') }}"><i class="fas fa-map-marker-alt"></i>CDMX, M√©xico</a></li>
+                        <li><a href="{{ route('aviso') }}"><i class="fas fa-shield-alt"></i>Aviso de privacidad</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; {{ date(''Y'') }} Grupo Vanguardia. Todos los derechos reservados. &middot; <a href="{{ route(''terminos'') }}" style="color: rgba(255,255,255,0.55); text-decoration: none;">TÈrminos y Condiciones</a> &middot; <a href="{{ route(''aviso'') }}" style="color: rgba(255,255,255,0.55); text-decoration: none;">Aviso de Privacidad</a></p>
+                <p>&copy; {{ date('Y') }} Grupo Vanguardia. Todos los derechos reservados. &middot; <a href="{{ route('terminos') }}" style="color: rgba(255,255,255,0.55); text-decoration: none;">T√©rminos y Condiciones</a> &middot; <a href="{{ route('aviso') }}" style="color: rgba(255,255,255,0.55); text-decoration: none;">Aviso de Privacidad</a></p>
             </div>
         </div>
     </footer>
 
+    <!-- Bootstrap 5.3 JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        window.addEventListener(''scroll'', () => {
-            const nav = document.getElementById(''mainNav'');
-            nav.classList.toggle(''scrolled'', window.scrollY > 50);
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('mainNav');
+            nav.classList.toggle('scrolled', window.scrollY > 50);
         });
     </script>
 </body>
