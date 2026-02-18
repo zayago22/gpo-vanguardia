@@ -7,11 +7,13 @@ use App\Models\RedSocial;
 
 class BlogController extends Controller
 {
+
     public function index()
     {
         $posts = Post::publicados()->paginate(9);
         $redes = RedSocial::activas()->get();
-        return view('blog.index', compact('posts', 'redes'));
+        $company = config('seo.company');
+        return view('blog.index', compact('posts', 'redes', 'company'));
     }
 
     public function show(Post $post)
@@ -21,6 +23,7 @@ class BlogController extends Controller
         }
         $redes = RedSocial::activas()->get();
         $related = Post::publicados()->where('id', '!=', $post->id)->take(3)->get();
-        return view('blog.show', compact('post', 'redes', 'related'));
+        $company = config('seo.company');
+        return view('blog.show', compact('post', 'redes', 'related', 'company'));
     }
 }

@@ -1,50 +1,44 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog — GPO Vanguardia</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+@extends('layouts.public')
+
+@section('title', 'Blog — GPO Vanguardia')
+
+@section('styles')
     <style>
-        :root { --primary: #4338CA; --primary-light: #6366F1; --dark: #1E1B4B; }
-        body { font-family: 'Montserrat', sans-serif; color: #334155; }
-        .navbar-blog { background: var(--dark); padding: 14px 0; }
-        .navbar-blog .navbar-brand img { height: 36px; }
-        .navbar-blog .nav-link { color: rgba(255,255,255,0.8) !important; font-size: 14px; font-weight: 500; }
-        .navbar-blog .nav-link:hover { color: #fff !important; }
-        .blog-hero { background: linear-gradient(135deg, var(--primary), var(--primary-light)); padding: 80px 0 50px; text-align: center; }
+        :root {
+            --primary: #4338CA;
+            --primary-light: #6366F1;
+            --primary-dark: #3730A3;
+            --secondary: #818CF8;
+            --accent: #A78BFA;
+            --dark: #1E1B4B;
+            --gray-50: #F8FAFC;
+            --gray-100: #F1F5F9;
+            --gray-200: #E2E8F0;
+            --gray-400: #94A3B8;
+            --gray-500: #64748B;
+            --gray-600: #475569;
+            --gray-700: #334155;
+            --gray-800: #1E293B;
+            --white: #FFFFFF;
+            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 50%, var(--secondary) 100%);
+        }
+        body { font-family: 'Montserrat', sans-serif; color: var(--gray-700); background: var(--gray-50); }
+        .blog-hero { background: var(--gradient); padding: 80px 0 50px; text-align: center; margin-top: 70px; }
         .blog-hero h1 { color: #fff; font-size: 36px; font-weight: 800; }
         .blog-hero p { color: rgba(255,255,255,0.8); font-size: 16px; }
-        .post-card { background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); border: 1px solid #E2E8F0; transition: all 0.3s; }
+        .post-card { background: var(--white); border-radius: 14px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); border: 1px solid var(--gray-200); transition: all 0.3s; }
         .post-card:hover { transform: translateY(-4px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
         .post-card img { width: 100%; height: 200px; object-fit: cover; }
         .post-card-body { padding: 20px; }
         .post-card-body h3 { font-size: 18px; font-weight: 700; color: var(--dark); margin-bottom: 8px; }
         .post-card-body h3 a { color: inherit; text-decoration: none; }
         .post-card-body h3 a:hover { color: var(--primary); }
-        .post-card-body p { font-size: 14px; color: #64748B; line-height: 1.6; }
-        .post-card-meta { font-size: 12px; color: #94A3B8; }
-        .footer-blog { background: var(--dark); padding: 24px 0; text-align: center; }
-        .footer-blog p { color: rgba(255,255,255,0.5); font-size: 13px; margin: 0; }
-        .footer-blog a { color: rgba(255,255,255,0.7); margin: 0 8px; }
+        .post-card-body p { font-size: 14px; color: var(--gray-500); line-height: 1.6; }
+        .post-card-meta { font-size: 12px; color: var(--gray-400); }
     </style>
-</head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-blog">
-        <div class="container">
-            <a class="navbar-brand" href="{{ route('home') }}"><img src="{{ asset('images/logo.png') }}" alt="GPO Vanguardia"></a>
-            <div class="collapse navbar-collapse justify-content-end">
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="{{ route('blog.index') }}">Blog</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('home') }}#contacto">Contacto</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+@endsection
 
+@section('content')
     <section class="blog-hero">
         <div class="container">
             <h1>Blog</h1>
@@ -91,20 +85,4 @@
             @endif
         </div>
     </section>
-
-    <footer class="footer-blog">
-        <div class="container">
-            @if($redes->count() > 0)
-            <div class="mb-2">
-                @foreach($redes as $red)
-                    <a href="{{ $red->url }}" target="_blank"><i class="{{ $red->icono }}"></i></a>
-                @endforeach
-            </div>
-            @endif
-            <p>&copy; {{ date('Y') }} Grupo Vanguardia. Todos los derechos reservados.</p>
-        </div>
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+@endsection

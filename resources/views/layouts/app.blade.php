@@ -5,7 +5,17 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+
+        {{-- SEO Meta Tags --}}
+        @php
+            use App\Helpers\SeoHelper;
+            $meta = SeoHelper::meta($page ?? null, $meta ?? []);
+        @endphp
+        @include('components.seo.meta-tags', ['meta' => $meta])
+
+        {{-- Schema.org Organization y LocalBusiness --}}
+        @include('components.seo.schema-organization')
+        @include('components.seo.schema-local-business')
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -29,7 +39,11 @@
 
             <!-- Page Content -->
             <main>
-                {{ $slot }}
+                @hasSection('content')
+                    @yield('content')
+                @else
+                    {{ $slot ?? '' }}
+                @endif
             </main>
         </div>
     </body>

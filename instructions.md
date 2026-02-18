@@ -78,6 +78,12 @@ php artisan serve --port=8001
 - **Email**: admin@gpovanguardia.com
 - **Password**: Vanguardia2025!
 
+#### Funcionalidades del panel admin:
+- CRUD de Blog (posts)
+- CRUD de Testimonios
+- Ver y gestionar mensajes de contacto
+- CRUD de Redes Sociales
+
 > Para crear el usuario admin en local, ejecutar:
 > ```bash
 > php artisan tinker --execute="App\Models\User::create(['name'=>'Admin','email'=>'admin@gpovanguardia.com','password'=>bcrypt('Vanguardia2025!')])"
@@ -85,13 +91,14 @@ php artisan serve --port=8001
 
 ---
 
-## Estructura del Proyecto
 
+
+## Estructura del Proyecto
 ```
 gpo-vanguardia/
 ├── app/
-│   ├── Models/                    → Servicio, Post, GaleriaImagen, Testimonio,
-│   │                                RedSocial, Contact, ValorCorporativo
+│   ├── Models/                    → Servicio, Post, GaleriaImagen, Testimonio, RedSocial, Contact, ValorCorporativo
+│   ├── Helpers/                   → SeoHelper.php (funciones SEO centralizadas)
 │   └── Http/Controllers/
 │       ├── HomeController.php     → Landing page, CCTV, Términos
 │       ├── ContactController.php  → Formulario de contacto (AJAX)
@@ -105,7 +112,11 @@ gpo-vanguardia/
 │           ├── RedSocialController.php
 │           ├── ContactoAdminController.php
 │           └── ValorController.php
+├── config/
+│   └── seo.php                    → Configuración centralizada de meta tags y schema.org
 ├── resources/views/
+│   ├── components/seo/            → Blade components SEO (meta-tags, schema-organization, schema-local-business)
+│   ├── layouts/app.blade.php      → Layout principal con inclusión automática de meta tags y schema
 │   ├── home.blade.php             → Landing page principal (todas las secciones)
 │   ├── servicios.blade.php        → Página de servicios
 │   ├── clientes.blade.php         → Casos de éxito
@@ -116,18 +127,79 @@ gpo-vanguardia/
 │   ├── cctv.blade.php             → CCTV + RFID
 │   ├── terminos.blade.php         → Términos y Condiciones
 │   ├── aviso.blade.php            → Aviso de Privacidad (15 secciones)
-│   ├── admin/                     → Panel admin (layouts + CRUD views)
+│   └── admin/                     → Panel admin (layouts + CRUD views)
+│       ├── posts/ (CRUD Blog)
+│       ├── testimonios/ (CRUD Testimonios)
+│       ├── contactos/ (ver y gestionar mensajes)
+│       └── redes/ (CRUD Redes Sociales)
 │   └── blog/                      → Blog index + show
 ├── routes/web.php                 → Todas las rutas
 ├── database/
-│   ├── migrations/                → Tablas: servicios, posts, galeria_imagenes,
-│   │                                testimonios, redes_sociales, contacts, valores_corporativos
+│   ├── migrations/                → Tablas: servicios, posts, galeria_imagenes, testimonios, redes_sociales, contacts, valores_corporativos
 │   └── seeders/ContentSeeder.php  → Datos iniciales
 ├── docker/                        → Dockerfile, nginx.conf, supervisord.conf, entrypoint.sh
 ├── public/images/                 → Logos, casos, imágenes estáticas
 ├── MEMORY.md                      → Memoria del proyecto (historial de sesiones)
 └── instructions.md                → Este archivo
 ```
+
+---
+
+## SEO Centralizado y Personalización de Meta Tags
+
+### Configuración
+- Todos los meta tags y datos de empresa están centralizados en `config/seo.php`.
+- El helper `App\Helpers\SeoHelper` permite obtener los meta tags por página y los datos de schema.org.
+- Los componentes Blade en `resources/views/components/seo/` generan los meta tags y schema automáticamente.
+- El layout `layouts/app.blade.php` incluye estos componentes en el `<head>`.
+
+### Personalización por Página
+- Para personalizar los meta tags de una página, pasa la variable `$page` (clave de la página en config/seo.php) y opcionalmente `$meta` (array de overrides) desde el controlador o la vista:
+
+```php
+// Ejemplo en un controlador
+return view('servicios', [
+   'page' => 'servicios',
+   'meta' => [
+      'title' => 'Título personalizado',
+      'meta_description' => 'Descripción SEO personalizada',
+   ]
+]);
+```
+
+---
+
+## Arquitectura de Layouts
+
+El proyecto tiene **3 tipos de vistas** con diferentes estructuras:
+
+### 1. Páginas públicas standalone (home, servicios, cctv, etc.)
+- **NO usan layout compartido**
+- Todo inline: `<!DOCTYPE html>`, CSS en `<style>`, navbar, footer
+- Archivos: `home.blade.php`, `servicios.blade.php`, `cctv.blade.php`, `contacto.blade.php`, etc.
+
+### 2. Blog público (`/blog`)
+- **USA**: `@extends('layouts.public')`
+- Layout incluye navbar público + footer completo
+- Archivos: `blog/index.blade.php`, `blog/show.blade.php`
+
+### 3. Admin panel (`/admin`)
+- **USA**: `@extends('layouts.app')` (Breeze)
+- Layout incluye navigation admin + componentes SEO
+- Solo para usuarios autenticados
+
+### ⚠️ REGLAS CRÍTICAS:
+
+1. **NUNCA** usar `layouts/app.blade.php` para páginas públicas (causa errores de auth y SEO)
+2. El blog SIEMPRE debe usar `layouts/public.blade.php`
+3. Al crear nuevas páginas públicas, elegir:
+   - Standalone (como home.blade.php) para landing pages
+   - `@extends('layouts.public')` para páginas que necesiten navbar/footer consistente
+
+### Componentes SEO
+- Los componentes en `components/seo/` usan `data_get()` para acceso seguro a arrays anidados
+- Solo se incluyen en `layouts/app.blade.php` (admin)
+- NO incluir en páginas públicas standalone
 
 ---
 

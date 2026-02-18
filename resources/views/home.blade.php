@@ -1003,7 +1003,56 @@
             </div>
         </div>
     </section>
+
     @endif
+
+    <!-- ===== BLOG (ARTÍCULOS RECIENTES) ===== -->
+    <section class="section section-gray" id="blog-home">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Blog</h2>
+                <p class="section-subtitle">Últimos artículos y novedades de Grupo Vanguardia</p>
+            </div>
+            @if($posts->count() > 0)
+            <div class="row g-4 justify-content-center">
+                @foreach($posts as $post)
+                <div class="col-lg-4 col-md-6">
+                    <div class="post-card">
+                        @if($post->imagen_portada)
+                            <img src="{{ asset('storage/' . $post->imagen_portada) }}" alt="{{ $post->titulo }}">
+                        @else
+                            <div style="width: 100%; height: 200px; background: linear-gradient(135deg, #4338CA, #6366F1); display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-newspaper" style="font-size: 40px; color: rgba(255,255,255,0.3);"></i>
+                            </div>
+                        @endif
+                        <div class="post-card-body">
+                            <div class="post-card-meta mb-2">
+                                <i class="fas fa-calendar me-1"></i> {{ $post->fecha_publicacion?->format('d M Y') }}
+                            </div>
+                            <h3 style="font-size:18px;font-weight:700;color:var(--dark);margin-bottom:8px;"><a href="{{ route('blog.show', $post) }}" style="color:inherit;text-decoration:none;">{{ $post->titulo }}</a></h3>
+                            <p style="font-size:14px;color:#64748B;line-height:1.6;">{{ Str::limit($post->extracto ?? strip_tags($post->contenido), 120) }}</p>
+                            <a href="{{ route('blog.show', $post) }}" style="color: var(--primary); font-size: 14px; font-weight: 600; text-decoration: none;">
+                                Leer más <i class="fas fa-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+            <div class="mt-4 text-center">
+                <a href="{{ route('blog.index') }}" class="btn-hero" style="background: var(--primary); color: #fff; font-size: 15px; font-weight: 600; border-radius: 50px; padding: 12px 32px; text-decoration: none; display: inline-block;">
+                    Ver todos los artículos <i class="fas fa-arrow-right ms-1"></i>
+                </a>
+            </div>
+            @else
+            <div class="text-center py-5">
+                <i class="fas fa-newspaper fa-3x mb-3" style="color: #94A3B8;"></i>
+                <h3 style="color: #64748B;">Próximamente</h3>
+                <p class="text-muted">Estamos preparando contenido interesante para ti.</p>
+            </div>
+            @endif
+        </div>
+    </section>
 
     <!-- ===== CONTACTO ===== -->
     <section class="contacto-section" id="contacto">

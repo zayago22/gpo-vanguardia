@@ -10,6 +10,7 @@ Corporate website for **Grupo Vanguardia** — a company specializing in BPO, AI
 - **Auth**: Laravel Breeze (Blade stack), registration disabled
 - **Deploy**: Docker → Coolify v4 (Traefik proxy)
 
+
 ## Project Structure
 ```
 app/Models/       → Servicio, Post, GaleriaImagen, Testimonio, RedSocial, Contact, ValorCorporativo
@@ -18,6 +19,10 @@ app/Http/Controllers/Admin/ → DashboardController, ServicioController, PostCon
 app/Http/Controllers/       → HomeController, ContactController, BlogController
 resources/views/home.blade.php → Main landing page (all-in-one sections)
 resources/views/admin/      → Admin panel (layouts/app.blade.php + CRUD views)
+  ├── posts/ (CRUD Blog)
+  ├── testimonios/ (CRUD Testimonios)
+  ├── contactos/ (ver y gestionar mensajes)
+  ├── redes/ (CRUD Redes Sociales)
 resources/views/blog/       → Blog index + show pages
 docker/                     → Dockerfile, nginx.conf, supervisord.conf, entrypoint.sh
 ```
@@ -29,12 +34,18 @@ docker/                     → Dockerfile, nginx.conf, supervisord.conf, entryp
 - `GET /blog` → BlogController@index
 - `GET /blog/{post:slug}` → BlogController@show
 
+
 ### Admin (auth required, prefix /admin)
 - `GET /admin` → Dashboard
-- Resources: servicios, posts, galeria, testimonios, valores, redes-sociales
-- `GET /admin/contactos` → List contacts
-- `PATCH /admin/contactos/{id}/leido` → Mark read
-- `DELETE /admin/contactos/{id}` → Delete
+- `/admin/servicios` → CRUD Servicios
+- `/admin/posts` → CRUD Blog Posts
+- `/admin/galeria` → CRUD Galería de Imágenes
+- `/admin/testimonios` → CRUD Testimonios
+- `/admin/valores` → CRUD Valores Corporativos
+- `/admin/redes-sociales` → CRUD Redes Sociales
+- `/admin/contactos` → Ver y gestionar mensajes de contacto
+- `PATCH /admin/contactos/{id}/leido` → Marcar contacto como leído
+- `DELETE /admin/contactos/{id}` → Eliminar contacto
 
 ## Design
 - **Colors**: Gradient #4338CA → #6366F1 (indigo/purple)
@@ -48,22 +59,25 @@ docker/                     → Dockerfile, nginx.conf, supervisord.conf, entryp
 
 ## Credentials (local dev)
 - **Admin**: admin@gpovanguardia.com / Vanguardia2025!
+  (Acceso: http://127.0.0.1:8001/admin)
+
 
 ## Deployment (Coolify)
 1. Create MySQL service on separate server (security: DB isolated from app)
 2. Create new Laravel resource pointing to Git repo
 3. Set environment variables:
-   - DB_CONNECTION=mysql
-   - DB_HOST=(IP or hostname of separate MySQL server)
-   - DB_PORT=3306
-   - DB_DATABASE=gpo_vanguardia
-   - DB_USERNAME=gpo_vanguardia
-   - DB_PASSWORD=(secure password)
-   - APP_URL=https://your-domain.com
-   - ADMIN_EMAIL=admin@gpovanguardia.com
-   - ADMIN_PASSWORD=(set a strong password)
+  - DB_CONNECTION=mysql
+  - DB_HOST=(IP or hostname of separate MySQL server)
+  - DB_PORT=3306
+  - DB_DATABASE=gpo_vanguardia
+  - DB_USERNAME=gpo_vanguardia
+  - DB_PASSWORD=(secure password)
+  - APP_URL=https://your-domain.com
+  - ADMIN_EMAIL=admin@gpovanguardia.com
+  - ADMIN_PASSWORD=(set a strong password)
 4. Set domain in Coolify
 5. Deploy — entrypoint.sh handles migrations, seeding, admin creation, caching
+6. Admin CRUD para posts, testimonios, contactos y redes sociales disponible en `/admin`.
 
 ## Design System (Figma-matched)
 - **Primary Color**: `--primary: #4338CA` (indigo)
@@ -229,3 +243,50 @@ docker/                     → Dockerfile, nginx.conf, supervisord.conf, entryp
 | `/blog` | blog/index.blade.php | Blog listing |
 | `/blog/{slug}` | blog/show.blade.php | Blog post |
 | `/admin` | admin/ | Admin panel (CRUD) |
+
+
+### Session 11 (Implementación SEO centralizada) — Commit `seo-centralizado`
+- Se implementó configuración SEO centralizada en `config/seo.php` con meta tags por defecto y por página.
+- Se creó el helper `app/Helpers/SeoHelper.php` para obtener meta tags y datos de empresa desde cualquier controlador o vista.
+- Se añadieron componentes Blade en `resources/views/components/seo/` para meta tags (`meta-tags.blade.php`) y schema.org (`schema-organization.blade.php`, `schema-local-business.blade.php`).
+- Se integró la inclusión automática de meta tags y schema en el `<head>` de `layouts/app.blade.php`.
+- Ahora es posible personalizar meta tags dinámicamente por página usando `$page` y `$meta` desde los controladores o vistas.
+
+### Session 12 (Fix Blog Layout + SEO Components) — [2026-02-18]
+
+#### Problemas resueltos:
+1. **Bug SEO schema-organization.blade.php**: Error `unexpected end of file` por acceso a arrays anidados null.
+   - Solución: Cambiar `$company['address']['street'] ?? ''` por `data_get($company, 'address.street', '')`
+   - Aplicado a `schema-organization.blade.php` y `schema-local-business.blade.php`
+
+2. **Bug blog/index.blade.php y blog/show.blade.php**: Faltaba `</style>` antes de las secciones HTML.
+   - Causa: CSS inline no cerrado correctamente.
+
+3. **Bug Layout incompatible**: El blog usaba `layouts/app.blade.php` (Breeze/admin) que incluye componentes SEO y navigation de admin.
+   - Solución: Crear nuevo layout `layouts/public.blade.php` específico para páginas públicas.
+
+#### Cambios realizados:
+- **Nuevo archivo**: `resources/views/layouts/public.blade.php`
+  - Navbar público con logo, menú de navegación, dropdown de servicios
+  - Footer completo con 4 columnas: About, Navegación, Servicios, Contacto
+  - Redes sociales, copyright, links legales
+  - Efecto scroll en navbar
+  - NO incluye componentes SEO de Breeze
+
+- **Actualizados**: `blog/index.blade.php` y `blog/show.blade.php`
+  - Cambiado de `@extends('layouts.app')` → `@extends('layouts.public')`
+  - Removido footer duplicado (ahora viene del layout)
+  - Limpiados estilos CSS innecesarios (.navbar-blog, .footer-blog)
+  - Agregado `margin-top: 70px` a hero para compensar navbar fixed
+
+#### Arquitectura de Layouts:
+| Layout | Uso | Incluye |
+|--------|-----|--------|
+| `layouts/app.blade.php` | Admin panel (Breeze) | Navigation admin, SEO components, @vite |
+| `layouts/public.blade.php` | Blog público | Navbar público, Footer completo, Bootstrap CDN |
+| Páginas públicas (home, servicios, etc.) | Landing pages | Todo inline (no usan layout) |
+
+#### ⚠️ REGLA IMPORTANTE:
+- **NUNCA** usar `layouts/app.blade.php` para páginas públicas
+- Las páginas del blog DEBEN usar `layouts/public.blade.php`
+- Las páginas de servicio (home, servicios, cctv, etc.) son standalone con todo inline
