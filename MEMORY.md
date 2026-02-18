@@ -6,8 +6,7 @@ Corporate website for **Grupo Vanguardia** — a company specializing in BPO, AI
 ## Tech Stack
 - **Backend**: Laravel 12.52.0, PHP 8.3
 - **Frontend**: Blade templates, Bootstrap 5.3 CDN, Font Awesome 6.4
-- **DB (local)**: SQLite
-- **DB (production)**: PostgreSQL (Coolify separate service)
+- **DB**: MySQL (servidor separado por seguridad)
 - **Auth**: Laravel Breeze (Blade stack), registration disabled
 - **Deploy**: Docker → Coolify v4 (Traefik proxy)
 
@@ -51,15 +50,15 @@ docker/                     → Dockerfile, nginx.conf, supervisord.conf, entryp
 - **Admin**: admin@gpovanguardia.com / Vanguardia2025!
 
 ## Deployment (Coolify)
-1. Create PostgreSQL service
+1. Create MySQL service on separate server (security: DB isolated from app)
 2. Create new Laravel resource pointing to Git repo
 3. Set environment variables:
-   - DB_CONNECTION=pgsql
-   - DB_HOST=(PostgreSQL internal hostname)
-   - DB_PORT=5432
+   - DB_CONNECTION=mysql
+   - DB_HOST=(IP or hostname of separate MySQL server)
+   - DB_PORT=3306
    - DB_DATABASE=gpo_vanguardia
-   - DB_USERNAME=postgres
-   - DB_PASSWORD=(from PostgreSQL service)
+   - DB_USERNAME=gpo_vanguardia
+   - DB_PASSWORD=(secure password)
    - APP_URL=https://your-domain.com
    - ADMIN_EMAIL=admin@gpovanguardia.com
    - ADMIN_PASSWORD=(set a strong password)
@@ -196,6 +195,19 @@ docker/                     → Dockerfile, nginx.conf, supervisord.conf, entryp
 - Actualización: 30 de mayo de 2025
 - **Fix encoding UTF-8**: archivo reconstruido desde cero por corrupción de caracteres (PowerShell heredoc convirtió acentos en `�` y `'` en `''`)
 - Navbar y footer consistentes con todas las demás páginas
+
+### Session 10 (Documentación + MySQL) — Commits `9920567`, `03df046`
+- **instructions.md creado** — guía de referencia completa del proyecto:
+  - Stack tecnológico, instalación local paso a paso, estructura del proyecto
+  - Tabla de rutas públicas y admin, sistema de diseño (colores, tipografía, componentes)
+  - Información de la empresa, comandos útiles (artisan, git, docker)
+  - Deploy en Coolify, convenciones de código, modelos de BD
+- **Base de datos cambiada a MySQL** (servidor separado por seguridad):
+  - Decisión: la BD no comparte servidor con la app por seguridad
+  - Actualizado en instructions.md: requisitos, instalación, deploy, advertencias
+  - Actualizado en MEMORY.md: Tech Stack, Deployment
+  - Local: MySQL de Laragon (`127.0.0.1:3306`, charset `utf8mb4`)
+  - Producción: servidor MySQL dedicado (IP privada o hostname interno)
 
 ### ⚠️ Nota importante para futuras sesiones
 - **NO usar PowerShell heredoc (`@' ... '@`)** para escribir archivos Blade con acentos/español — corrompe el encoding
