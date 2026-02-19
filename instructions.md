@@ -11,6 +11,7 @@ Sitio web corporativo para **Grupo Vanguardia**, empresa especializada en BPO, I
 |---|---|
 | Backend | Laravel 12.52.0, PHP 8.3 |
 | Frontend | Blade templates, Bootstrap 5.3 (CDN), Font Awesome 6.4 |
+| Editor Blog | Summernote 0.8.20 WYSIWYG + jQuery 3.7.1 (CDN) |
 | Fuente | Montserrat (Google Fonts, pesos 300-900) |
 | Base de datos | MySQL (servidor separado por seguridad) |
 | Autenticación | Laravel Breeze (Blade stack), registro público deshabilitado |
@@ -84,7 +85,7 @@ php artisan serve --port=8001
 > - Cambiar `ADMIN_PREFIX` en producción para mayor seguridad
 
 #### Funcionalidades del panel admin:
-- CRUD de Blog (posts)
+- CRUD de Blog (posts) — **Editor WYSIWYG Summernote** con soporte HTML completo y upload de imágenes
 - CRUD de Testimonios
 - CRUD de Valores Corporativos
 - CRUD de Galería de Imágenes
@@ -236,6 +237,14 @@ El proyecto tiene **3 tipos de vistas** con diferentes estructuras:
 
 ### Blog — Notas importantes
 - El formulario de creación de posts (`admin/posts/form.blade.php`) tiene el checkbox "Publicado" **marcado por defecto** para que los posts nuevos sean visibles automáticamente en el frontend.
+- **Editor WYSIWYG Summernote 0.8.20** (Bootstrap 5, locale español) reemplaza el textarea plano.
+  - Toolbar: estilos, fuente, color, párrafo, tablas, insertar (enlace/imagen/video), vista código HTML.
+  - Upload de imágenes directo desde el editor vía AJAX (`POST /{prefix}/posts/upload-image`).
+  - Imágenes almacenadas en `storage/app/public/posts/content` (max 2MB, jpeg/png/gif/webp).
+  - Validación: contenido max 100,000 caracteres.
+  - Dependencias CDN: jQuery 3.7.1 + Summernote CSS/JS.
+- El contenido HTML se renderiza sin escape en `blog/show.blade.php` (`{!! $post->contenido !!}`).
+- CSS `.content-body` da estilo a: encabezados h2-h5, listas ul/ol, blockquote (borde indigo), links, imágenes (rounded+shadow), tablas (hover), código pre/code, hr.
 - Campo **Categoría** agregado al formulario de posts; se almacena en `posts.categoria`.
 - Filtros en `/blog`: categoría, buscador (título/extracto/contenido) y rango de fechas (desde/hasta). La paginación preserva los filtros.
 - Las imágenes de los posts son **clickeables** y llevan al artículo en: home (sección Blog), blog/index, y artículos relacionados en blog/show.
@@ -272,7 +281,8 @@ El proyecto tiene **3 tipos de vistas** con diferentes estructuras:
 |---|---|
 | `GET /{prefix}` | Dashboard |
 | `/{prefix}/servicios` | CRUD Servicios |
-| `/{prefix}/posts` | CRUD Blog Posts |
+| `/{prefix}/posts` | CRUD Blog Posts (editor WYSIWYG Summernote) |
+| `POST /{prefix}/posts/upload-image` | Upload imágenes del editor WYSIWYG |
 | `/{prefix}/galeria` | CRUD Galería de Imágenes |
 | `/{prefix}/testimonios` | CRUD Testimonios |
 | `/{prefix}/valores` | CRUD Valores Corporativos |

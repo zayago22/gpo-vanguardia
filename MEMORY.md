@@ -6,6 +6,7 @@ Corporate website for **Grupo Vanguardia** — a company specializing in BPO, AI
 ## Tech Stack
 - **Backend**: Laravel 12.52.0, PHP 8.3
 - **Frontend**: Blade templates, Bootstrap 5.3 CDN, Font Awesome 6.4
+- **Editor Blog**: Summernote 0.8.20 (WYSIWYG) + jQuery 3.7.1
 - **DB**: MySQL (servidor separado por seguridad)
 - **Auth**: Laravel Breeze (Blade stack), registration disabled
 - **Deploy**: Docker → Coolify v4 (Traefik proxy)
@@ -41,7 +42,8 @@ docker/                     → Dockerfile, nginx.conf, supervisord.conf, entryp
 - Prefijo por defecto: `gpo-panel-v25` (cambiar en producción)
 - `GET /{prefix}` → Dashboard
 - `/{prefix}/servicios` → CRUD Servicios
-- `/{prefix}/posts` → CRUD Blog Posts
+- `/{prefix}/posts` → CRUD Blog Posts (editor WYSIWYG Summernote)
+- `POST /{prefix}/posts/upload-image` → PostController@uploadImage (AJAX, imágenes en posts)
 - `/{prefix}/galeria` → CRUD Galería de Imágenes
 - `/{prefix}/testimonios` → CRUD Testimonios
 - `/{prefix}/valores` → CRUD Valores Corporativos
@@ -616,3 +618,41 @@ APP_KEY=base64:BcttqP3lTzreeabZOHq2PjFHhvKb+2IxucDaxtIYJRI=
 8. Cache config/routes/views
 9. Storage link
 10. Inicia Supervisor (PHP-FPM + Nginx)
+
+### Session 22 (Editor WYSIWYG para Blog) — [2026-02-19]
+
+#### Cambio: Blog con soporte HTML completo (Summernote WYSIWYG)
+
+**Problema**: El blog solo aceptaba texto plano. El contenido se renderizaba con `nl2br(e(...))` escapando todo HTML.
+
+**Solución implementada**:
+1. **Editor Summernote 0.8.20** (Bootstrap 5 + locale español) en `admin/posts/form.blade.php`
+   - jQuery 3.7.1 + Summernote CSS/JS desde CDN
+   - Toolbar completo: estilos, fuente, color, párrafo, tablas, insertar (enlace/imagen/video), vista código HTML
+   - Upload de imágenes vía AJAX a `POST /{prefix}/posts/upload-image`
+   - Textarea con `id="contenido"` inicializada como Summernote
+   - Usó `@push('styles')` y `@push('scripts')` en lugar de `@section`
+
+2. **Layout admin** (`admin/layouts/app.blade.php`): Añadido `@stack('styles')` en `<head>`
+
+3. **Renderizado HTML** en `blog/show.blade.php`:
+   - Antes: `{!! nl2br(e($post->contenido)) !!}` (escapaba HTML)
+   - Después: `{!! $post->contenido !!}` (renderiza HTML crudo)
+   - CSS extenso para `.content-body`: h2-h5, ul/ol/li, blockquote (borde indigo), links, imágenes (rounded+shadow), tablas (hover), hr, pre/code
+
+4. **Ruta de upload**: `POST /{prefix}/posts/upload-image` → `PostController@uploadImage`
+   - Valida imagen max 2MB (jpeg, png, gif, webp)
+   - Almacena en `storage/app/public/posts/content`
+   - Retorna JSON `{url: ...}` para inserción en editor
+
+5. **Validación**: `contenido` max aumentado de 50,000 a 100,000 caracteres
+
+#### Archivos modificados:
+- `resources/views/admin/posts/form.blade.php` — Editor Summernote con upload
+- `resources/views/admin/layouts/app.blade.php` — `@stack('styles')`
+- `resources/views/blog/show.blade.php` — HTML crudo + CSS content-body
+- `app/Http/Controllers/Admin/PostController.php` — `uploadImage()` + max 100000
+- `routes/web.php` — Ruta `posts/upload-image`
+
+#### Commit:
+- `17004d3` Feature: WYSIWYG HTML editor (Summernote) for blog posts with image upload
