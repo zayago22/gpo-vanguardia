@@ -5,7 +5,8 @@ cd /var/www/html
 # Create .env file from environment variables (Coolify injects env vars, artisan needs .env file)
 if [ ! -f .env ]; then
     echo "Creating .env from environment..."
-    env | grep -E '^(APP_|DB_|ADMIN_|SESSION_|CACHE_|QUEUE_|MAIL_|FILESYSTEM_|LOG_|BCRYPT_|BROADCAST_|REDIS_|VITE_)' | sort > .env
+    # Quote all values to handle spaces (e.g. APP_NAME="GPO Vanguardia")
+    env | grep -E '^(APP_|DB_|ADMIN_|SESSION_|CACHE_|QUEUE_|MAIL_|FILESYSTEM_|LOG_|BCRYPT_|BROADCAST_|REDIS_|VITE_)' | sort | sed 's/=\(.*\)/="\1"/' > .env
 fi
 
 # APP_KEY check
@@ -18,20 +19,26 @@ mkdir -p storage/framework/{sessions,views,cache} storage/logs 2>/dev/null
 chmod -R 775 storage bootstrap/cache 2>/dev/null
 chown -R www-data:www-data storage bootstrap/cache 2>/dev/null
 
-# Wait for MySQL (max 60s)
+# Wait for MySQL (max 60s) — try php connection if mysqladmin fails
 echo "Waiting for database..."
-max_retries=30
+max_retries=15
 retry=0
-until mysqladmin ping -h "$DB_HOST" -P "${DB_PORT:-3306}" -u "$DB_USERNAME" -p"$DB_PASSWORD" --silent 2>/dev/null; do
+db_ready=false
+while [ "$db_ready" = "false" ] && [ $retry -lt $max_retries ]; do
     retry=$((retry+1))
-    if [ $retry -ge $max_retries ]; then
-        echo "Database not available after $max_retries attempts, proceeding anyway..."
-        break
+    # Try PHP PDO connection (more reliable than mysqladmin in Docker networks)
+    if php -r "try { new PDO('mysql:host='.\$_SERVER['DB_HOST'].';port='.(\$_SERVER['DB_PORT']??3306).';dbname='.\$_SERVER['DB_DATABASE'], \$_SERVER['DB_USERNAME'], \$_SERVER['DB_PASSWORD']); echo 'OK'; } catch(Exception \$e) { exit(1); }" 2>/dev/null; then
+        db_ready=true
+    else
+        echo "Waiting for MySQL... ($retry/$max_retries)"
+        sleep 3
     fi
-    echo "Waiting for MySQL... ($retry/$max_retries)"
-    sleep 2
 done
-echo "Database connection check done."
+if [ "$db_ready" = "true" ]; then
+    echo "Database connected."
+else
+    echo "Database not available after $max_retries attempts, proceeding anyway..."
+fi
 
 # Run migrations
 echo "Running migrations..."

@@ -536,3 +536,52 @@ Sistema de webhooks configurable desde admin para integrar con n8n. Cada formula
   }
 }
 ```
+
+### Session 20 (Seguridad admin + Deploy Coolify) — [2026-02-18]
+
+#### Seguridad del panel admin:
+1. **URL ofuscada**: Prefijo `/admin` cambiado a configurable via `ADMIN_PREFIX` en `.env` (default: `gpo-panel-v25`)
+2. **Honeypot**: `ANY /admin*` devuelve 404 para bots/scanners
+3. **Rate limiting login**: `throttle:5,1` en `POST /login` (5 intentos/minuto por IP)
+4. **Ruta `/dashboard`** redirige a `admin.dashboard`
+
+#### Deploy Coolify:
+- **Repo**: https://github.com/zayago22/gpo-vanguardia (branch: `main`)
+- **Build Pack**: Dockerfile
+- **Puerto**: 80
+
+#### Credenciales MySQL Producción (Coolify):
+```
+DB_CONNECTION=mysql
+DB_HOST=jgk8ooko80w088g404oggwks
+DB_PORT=3306
+DB_DATABASE=gpo_vanguardia
+DB_USERNAME=gpo_vanguardia
+DB_PASSWORD=e6aTEPqtJ6Fskm9vtuuQCNvgkoRPuEoHPx2xDChPhZGBhozbf2VW2UM8uQrAKYCE
+```
+URL: `mysql://gpo_vanguardia:e6aTEPqtJ6Fskm9vtuuQCNvgkoRPuEoHPx2xDChPhZGBhozbf2VW2UM8uQrAKYCE@jgk8ooko80w088g404oggwks:3306/gpo_vanguardia`
+
+#### APP_KEY Producción:
+```
+APP_KEY=base64:BcttqP3lTzreeabZOHq2PjFHhvKb+2IxucDaxtIYJRI=
+```
+
+#### Fixes de deploy aplicados:
+1. **entrypoint.sh**: Eliminado `set -e` — script ya no muere si un paso falla (ej: seeder con datos duplicados)
+2. **entrypoint.sh**: Crea `.env` desde variables de entorno de Coolify (artisan necesita archivo físico)
+3. **entrypoint.sh**: Cada comando tiene `|| true` o `|| echo` para no bloquear inicio de Supervisor
+4. **entrypoint.sh**: APP_KEY se debe configurar en Coolify Environment Variables (no se autogenera)
+5. **supervisord.conf**: PHP-FPM + Nginx en paralelo
+
+#### Archivos modificados:
+- `docker/entrypoint.sh` — múltiples fixes de resiliencia
+- `routes/web.php` — prefijo admin configurable + honeypot /admin
+- `routes/auth.php` — throttle en POST /login
+- `.env` / `.env.example` — ADMIN_PREFIX añadido
+
+#### Commits:
+- `7f2ab14` Sessions 17-20: SEO, favicon, login branding, webhooks, admin security
+- `4809079` Fix: add APP_KEY generation and storage dirs to entrypoint.sh
+- `2590c89` Fix: create .env file before key:generate in entrypoint
+- `1cb67a9` Fix: use Coolify env vars directly, require APP_KEY in env vars
+- `47b53de` Fix: remove set -e, make entrypoint resilient to errors
