@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\JobApplicationController;
+use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ServicioController;
 use App\Http\Controllers\Admin\PostController;
@@ -12,6 +14,7 @@ use App\Http\Controllers\Admin\TestimonioController;
 use App\Http\Controllers\Admin\RedSocialController;
 use App\Http\Controllers\Admin\ContactoAdminController;
 use App\Http\Controllers\Admin\ValorController;
+use App\Http\Controllers\Admin\WebhookController;
 use Illuminate\Support\Facades\Route;
 
 // ===== RUTAS PÚBLICAS =====
@@ -25,12 +28,16 @@ Route::get('/contacto', function() { return view('contacto'); })->name('contacto
 Route::get('/call-center-omnicanal', function() { return view('call-center'); })->name('call-center');
 Route::get('/chat-bots-y-ai', function() { return view('chatbots'); })->name('chatbots');
 Route::get('/mesa-de-servicios', function() { return view('mesa-servicios'); })->name('mesa-servicios');
+Route::get('/bolsa-de-empleo', function() { return view('bolsa'); })->name('bolsa');
 Route::post('/contacto', [ContactController::class, 'store'])->middleware('throttle:5,1')->name('contacto.store');
+Route::post('/bolsa-de-empleo', [JobApplicationController::class, 'store'])->name('bolsa.store');
 Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
 Route::get('/blog/{post:slug}', [BlogController::class, 'show'])->name('blog.show');
+Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
 
 // ===== ADMIN ROUTES =====
-Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
+// Prefijo configurable via .env para ocultar URL del panel
+Route::middleware(['auth'])->prefix(env('ADMIN_PREFIX', 'gpo-panel-v25'))->name('admin.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('servicios', ServicioController::class);
     Route::resource('posts', PostController::class);
@@ -41,11 +48,20 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::get('/contactos', [ContactoAdminController::class, 'index'])->name('contactos.index');
     Route::patch('/contactos/{contact}/leido', [ContactoAdminController::class, 'marcarLeido'])->name('contactos.leido');
     Route::delete('/contactos/{contact}', [ContactoAdminController::class, 'destroy'])->name('contactos.destroy');
+    Route::get('/webhooks', [WebhookController::class, 'index'])->name('webhooks.index');
+    Route::put('/webhooks/{webhook}', [WebhookController::class, 'update'])->name('webhooks.update');
+    Route::get('/webhooks/{webhook}/test', [WebhookController::class, 'test'])->name('webhooks.test');
 });
 
+// Redirigir /dashboard al panel admin
 Route::get('/dashboard', function () {
     return redirect()->route('admin.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+// Honeypot: /admin devuelve 404 para bots/scanners
+Route::any('/admin{any?}', function () {
+    abort(404);
+})->where('any', '.*');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

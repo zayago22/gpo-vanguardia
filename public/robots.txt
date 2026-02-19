@@ -1,2 +1,13 @@
 User-agent: *
-Disallow:
+Allow: /
+
+# Protect admin and auth routes
+Disallow: /admin
+Disallow: /login
+Disallow: /register
+Disallow: /password
+Disallow: /profile
+Disallow: /dashboard
+
+# Sitemap
+Sitemap: https://gpovanguardia.com.mx/sitemap.xml

@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Aviso de Privacidad Integral de Grupo Vanguardia en Información y Conocimiento S.A. de C.V.">
-    <title>Aviso de Privacidad — GPO Vanguardia</title>
-    <link rel="icon" href="{{ asset('images/logo.png') }}" type="image/png">
+    <meta name="description" content="{{ config('seo.pages.aviso.meta_description', 'Aviso de Privacidad de Grupo Vanguardia') }}">
+    <title>{{ config('seo.pages.aviso.title', 'Aviso de Privacidad — GPO Vanguardia') }}</title>
+    <link rel="icon" href="{{ asset('images/favicon.png') }}" type="image/png">
+    @include('partials.seo-head', ['seoPage' => 'aviso'])
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

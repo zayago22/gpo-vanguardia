@@ -6,6 +6,27 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'GPO Vanguardia')</title>
     <meta name="description" content="@yield('description', 'Grupo Vanguardia: líderes en contact center, BPO y call center outsourcing en CDMX.')">
+    <link rel="icon" href="{{ asset('images/favicon.png') }}" type="image/png">
+    <link rel="canonical" href="{{ url()->current() }}">
+    <meta name="robots" content="@yield('robots', 'index, follow')">
+    <meta name="author" content="{{ config('seo.site_name') }}">
+
+    {{-- Open Graph --}}
+    <meta property="og:site_name" content="{{ config('seo.site_name') }}">
+    <meta property="og:locale" content="es_MX">
+    <meta property="og:title" content="@yield('title', config('seo.defaults.title'))">
+    <meta property="og:description" content="@yield('description', config('seo.defaults.meta_description'))">
+    <meta property="og:image" content="@yield('og_image', config('seo.site_url') . '/images/logo.png')">
+    <meta property="og:type" content="@yield('og_type', 'website')">
+    <meta property="og:url" content="{{ url()->current() }}">
+
+    {{-- Twitter Card --}}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="@yield('title', config('seo.defaults.title'))">
+    <meta name="twitter:description" content="@yield('description', config('seo.defaults.meta_description'))">
+    <meta name="twitter:image" content="@yield('og_image', config('seo.site_url') . '/images/logo.png')">
+
+    @yield('seo_extra')
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -234,6 +255,7 @@
                         <li><a href="{{ route('home') }}">Inicio</a></li>
                         <li><a href="{{ route('servicios') }}">Servicios</a></li>
                         <li><a href="{{ route('clientes') }}">Clientes</a></li>
+                        <li><a href="{{ route('bolsa') }}">Bolsa de empleo</a></li>
                         <li><a href="{{ route('blog.index') }}">Blog</a></li>
                     </ul>
                 </div>

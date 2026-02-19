@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
+use App\Models\Webhook;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -24,14 +25,19 @@ class PostController extends Controller
     {
         $data = $request->validate([
             'titulo' => 'required|max:255',
+            'slug' => 'nullable|max:255|alpha_dash',
             'extracto' => 'nullable|max:500',
+            'categoria' => 'nullable|max:100',
+            'meta_description' => 'nullable|max:160',
             'contenido' => 'required|max:50000',
             'imagen_portada' => 'nullable|image|max:2048',
             'publicado' => 'boolean',
             'fecha_publicacion' => 'nullable|date',
         ]);
 
-        $data['slug'] = Str::slug($data['titulo']);
+        // Generate slug from custom input or from title, ensuring uniqueness
+        $slugBase = !empty($data['slug']) ? $data['slug'] : $data['titulo'];
+        $data['slug'] = Post::generateUniqueSlug($slugBase);
         $data['publicado'] = $request->has('publicado');
         $data['user_id'] = auth()->id();
         $data['fecha_publicacion'] = $data['fecha_publicacion'] ?? now();
@@ -41,6 +47,18 @@ class PostController extends Controller
         }
 
         Post::create($data);
+
+        // Disparar webhook si es un post publicado
+        if (!empty($data['publicado'])) {
+            Webhook::dispatch('post_creado', [
+                'titulo'    => $data['titulo'],
+                'slug'      => $data['slug'],
+                'extracto'  => $data['extracto'] ?? '',
+                'categoria' => $data['categoria'] ?? '',
+                'url'       => route('blog.show', $data['slug']),
+            ]);
+        }
+
         return redirect()->route('admin.posts.index')->with('success', 'Post creado correctamente.');
     }
 
@@ -53,14 +71,19 @@ class PostController extends Controller
     {
         $data = $request->validate([
             'titulo' => 'required|max:255',
+            'slug' => 'nullable|max:255|alpha_dash',
             'extracto' => 'nullable|max:500',
+            'categoria' => 'nullable|max:100',
+            'meta_description' => 'nullable|max:160',
             'contenido' => 'required|max:50000',
             'imagen_portada' => 'nullable|image|max:2048',
             'publicado' => 'boolean',
             'fecha_publicacion' => 'nullable|date',
         ]);
 
-        $data['slug'] = Str::slug($data['titulo']);
+        // Generate slug from custom input or from title, ensuring uniqueness (exclude current post)
+        $slugBase = !empty($data['slug']) ? $data['slug'] : $data['titulo'];
+        $data['slug'] = Post::generateUniqueSlug($slugBase, $post->id);
         $data['publicado'] = $request->has('publicado');
 
         if ($request->hasFile('imagen_portada')) {

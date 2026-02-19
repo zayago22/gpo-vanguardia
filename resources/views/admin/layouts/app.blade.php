@@ -141,6 +141,9 @@
                     <span class="badge bg-danger rounded-pill ms-auto">{{ $noLeidos }}</span>
                 @endif
             </a>
+            <a href="{{ route('admin.webhooks.index') }}" class="sidebar-link {{ request()->routeIs('admin.webhooks.*') ? 'active' : '' }}">
+                <i class="fas fa-plug"></i> Webhooks
+            </a>
             <hr style="border-color: rgba(255,255,255,0.1); margin: 12px 20px;">
             <a href="{{ route('home') }}" class="sidebar-link" target="_blank">
                 <i class="fas fa-external-link-alt"></i> Ver Sitio
@@ -173,6 +176,13 @@
         @if(session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert" style="border-radius: 10px; font-size: 14px;">
                 <i class="fas fa-check-circle me-2"></i>{{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        @endif
+
+        @if(session('error'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert" style="border-radius: 10px; font-size: 14px;">
+                <i class="fas fa-exclamation-circle me-2"></i>{{ session('error') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
         @endif

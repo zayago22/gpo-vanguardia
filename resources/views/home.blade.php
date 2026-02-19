@@ -8,9 +8,10 @@
     <meta property="og:title" content="GPO Vanguardia — Soluciones Empresariales">
     <meta property="og:description" content="Líderes en BPO y transformación tecnológica con servicios certificados para el crecimiento de su empresa.">
     <meta property="og:image" content="{{ asset('images/logo.png') }}">
-    <title>GPO Vanguardia — Soluciones Empresariales</title>
-    <link rel="icon" href="{{ asset('images/logo.png') }}" type="image/png">
+    <title>{{ config('seo.pages.home.title', 'GPO Vanguardia — Soluciones Empresariales') }}</title>
+    <link rel="icon" href="{{ asset('images/favicon.png') }}" type="image/png">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    @include('partials.seo-head', ['seoPage' => 'home'])
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -792,6 +793,130 @@
             .hero::after { height: 30px; }
             .section-title { font-size: 22px; }
         }
+
+        /* ===== BLOG CARDS ===== */
+        .post-card {
+            background: var(--white);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(67,56,202,0.08);
+            border: 1px solid var(--gray-200);
+            transition: all 0.4s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .post-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(67,56,202,0.15);
+            border-color: rgba(67,56,202,0.2);
+        }
+        .post-card-img {
+            position: relative;
+            width: 100%;
+            padding-top: 100%;
+            overflow: hidden;
+            border-radius: 24px 24px 0 0;
+        }
+        .post-card-img img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .post-card:hover .post-card-img img {
+            transform: scale(1.08);
+        }
+        .post-card-img .placeholder-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 50%, var(--secondary) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .post-card-img .placeholder-img i {
+            font-size: 60px;
+            color: rgba(255,255,255,0.25);
+        }
+        .post-card-body {
+            padding: 24px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .post-card-meta {
+            font-size: 13px;
+            color: var(--gray-400);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .post-card-meta i { color: var(--primary-light); }
+        .post-card-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+        .post-card-title a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .post-card-title a:hover { color: var(--primary); }
+        .post-card-excerpt {
+            font-size: 15px;
+            color: var(--gray-500);
+            line-height: 1.7;
+            margin-bottom: 16px;
+            flex: 1;
+        }
+        .post-card-link {
+            color: var(--primary);
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+        .post-card-link:hover {
+            color: var(--primary-dark);
+            gap: 12px;
+        }
+        .btn-view-all {
+            background: var(--gradient);
+            color: var(--white);
+            font-size: 15px;
+            font-weight: 600;
+            border-radius: 50px;
+            padding: 14px 36px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+            border: none;
+        }
+        .btn-view-all:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(67,56,202,0.35);
+            color: var(--white);
+        }
+        @media (max-width: 767px) {
+            .post-card-img { padding-top: 80%; }
+            .post-card-title { font-size: 18px; }
+        }
     </style>
 </head>
 <body>
@@ -1018,37 +1143,43 @@
                 @foreach($posts as $post)
                 <div class="col-lg-4 col-md-6">
                     <div class="post-card">
-                        @if($post->imagen_portada)
-                            <img src="{{ asset('storage/' . $post->imagen_portada) }}" alt="{{ $post->titulo }}">
-                        @else
-                            <div style="width: 100%; height: 200px; background: linear-gradient(135deg, #4338CA, #6366F1); display: flex; align-items: center; justify-content: center;">
-                                <i class="fas fa-newspaper" style="font-size: 40px; color: rgba(255,255,255,0.3);"></i>
-                            </div>
-                        @endif
+                        <a href="{{ route('blog.show', $post) }}" class="post-card-img" style="display:block;text-decoration:none;">
+                            @if($post->imagen_portada)
+                                <img src="{{ asset('storage/' . $post->imagen_portada) }}" alt="{{ $post->titulo }}">
+                            @else
+                                <div class="placeholder-img">
+                                    <i class="fas fa-newspaper"></i>
+                                </div>
+                            @endif
+                        </a>
                         <div class="post-card-body">
-                            <div class="post-card-meta mb-2">
-                                <i class="fas fa-calendar me-1"></i> {{ $post->fecha_publicacion?->format('d M Y') }}
+                            <div class="post-card-meta">
+                                <i class="fas fa-calendar-alt"></i> {{ $post->fecha_publicacion?->format('d M Y') }}
                             </div>
-                            <h3 style="font-size:18px;font-weight:700;color:var(--dark);margin-bottom:8px;"><a href="{{ route('blog.show', $post) }}" style="color:inherit;text-decoration:none;">{{ $post->titulo }}</a></h3>
-                            <p style="font-size:14px;color:#64748B;line-height:1.6;">{{ Str::limit($post->extracto ?? strip_tags($post->contenido), 120) }}</p>
-                            <a href="{{ route('blog.show', $post) }}" style="color: var(--primary); font-size: 14px; font-weight: 600; text-decoration: none;">
-                                Leer más <i class="fas fa-arrow-right ms-1"></i>
+                            <h3 class="post-card-title">
+                                <a href="{{ route('blog.show', $post) }}">{{ $post->titulo }}</a>
+                            </h3>
+                            <p class="post-card-excerpt">{{ Str::limit($post->extracto ?? strip_tags($post->contenido), 120) }}</p>
+                            <a href="{{ route('blog.show', $post) }}" class="post-card-link">
+                                Leer más <i class="fas fa-arrow-right"></i>
                             </a>
                         </div>
                     </div>
                 </div>
                 @endforeach
             </div>
-            <div class="mt-4 text-center">
-                <a href="{{ route('blog.index') }}" class="btn-hero" style="background: var(--primary); color: #fff; font-size: 15px; font-weight: 600; border-radius: 50px; padding: 12px 32px; text-decoration: none; display: inline-block;">
-                    Ver todos los artículos <i class="fas fa-arrow-right ms-1"></i>
+            <div class="mt-5 text-center">
+                <a href="{{ route('blog.index') }}" class="btn-view-all">
+                    Ver todos los artículos <i class="fas fa-arrow-right"></i>
                 </a>
             </div>
             @else
             <div class="text-center py-5">
-                <i class="fas fa-newspaper fa-3x mb-3" style="color: #94A3B8;"></i>
-                <h3 style="color: #64748B;">Próximamente</h3>
-                <p class="text-muted">Estamos preparando contenido interesante para ti.</p>
+                <div style="width: 100px; height: 100px; background: var(--gradient); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+                    <i class="fas fa-newspaper" style="font-size: 40px; color: rgba(255,255,255,0.8);"></i>
+                </div>
+                <h3 style="color: var(--dark); font-weight: 700; margin-bottom: 10px;">Próximamente</h3>
+                <p style="color: var(--gray-500);">Estamos preparando contenido interesante para ti.</p>
             </div>
             @endif
         </div>
@@ -1147,6 +1278,7 @@
                         <li><a href="{{ route('servicios') }}">Servicios</a></li>
                         <li><a href="{{ route('clientes') }}">Clientes</a></li>
                         <li><a href="#valores">Valores</a></li>
+                        <li><a href="{{ route('bolsa') }}">Bolsa de empleo</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">

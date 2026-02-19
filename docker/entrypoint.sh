@@ -3,9 +3,17 @@ set -e
 
 cd /var/www/html
 
-# Wait for PostgreSQL
+# Wait for MySQL
 echo "Waiting for database..."
-until php artisan db:monitor --databases=pgsql 2>/dev/null; do
+max_retries=30
+retry=0
+until mysqladmin ping -h "$DB_HOST" -P "${DB_PORT:-3306}" -u "$DB_USERNAME" -p"$DB_PASSWORD" --silent 2>/dev/null; do
+    retry=$((retry+1))
+    if [ $retry -ge $max_retries ]; then
+        echo "Database not available after $max_retries attempts, proceeding anyway..."
+        break
+    fi
+    echo "Waiting for MySQL... ($retry/$max_retries)"
     sleep 2
 done
 echo "Database ready."

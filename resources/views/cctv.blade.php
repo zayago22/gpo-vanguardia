@@ -8,9 +8,10 @@
     <meta property="og:title" content="CCTV — GPO Vanguardia">
     <meta property="og:description" content="Servicio integral de sistemas de seguridad CCTV con tecnología de vanguardia.">
     <meta property="og:image" content="{{ asset('images/logo.png') }}">
-    <title>CCTV — GPO Vanguardia</title>
-    <link rel="icon" href="{{ asset('images/logo.png') }}" type="image/png">
+    <title>{{ config('seo.pages.cctv.title', 'CCTV — GPO Vanguardia') }}</title>
+    <link rel="icon" href="{{ asset('images/favicon.png') }}" type="image/png">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    @include('partials.seo-head', ['seoPage' => 'cctv'])
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

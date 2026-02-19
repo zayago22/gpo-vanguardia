@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contact;
+use App\Models\Webhook;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
@@ -17,7 +18,17 @@ class ContactController extends Controller
             'mensaje'  => 'required|string|max:5000',
         ]);
 
-        Contact::create($validated);
+        $contact = Contact::create($validated);
+
+        // Disparar webhook si está configurado
+        Webhook::dispatch('contacto', [
+            'id'       => $contact->id,
+            'nombre'   => $contact->nombre,
+            'email'    => $contact->email,
+            'telefono' => $contact->telefono,
+            'empresa'  => $contact->empresa,
+            'mensaje'  => $contact->mensaje,
+        ]);
 
         return response()->json([
             'success' => true,

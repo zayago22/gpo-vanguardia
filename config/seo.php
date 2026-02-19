@@ -37,10 +37,9 @@ return [
             'longitude' => -99.1437,
         ],
         'social' => [
-            'facebook'  => 'https://www.facebook.com/TU_PAGINA_REAL',
-            'instagram' => 'https://www.instagram.com/TU_PAGINA_REAL',
-            'linkedin'  => 'https://www.linkedin.com/company/TU_PAGINA_REAL',
-            'twitter'   => 'https://twitter.com/TU_PAGINA_REAL',
+            'facebook'  => 'https://www.facebook.com/callcentergrupovanguardia',
+            'instagram' => 'https://www.instagram.com/gpovanguardia',
+            'linkedin'  => 'https://www.linkedin.com/company/gpo-vanguardia',
         ],
         'opening_hours' => [
             'days'  => ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
@@ -111,6 +110,36 @@ return [
         'cotizacion' => [
             'title'            => 'Solicitar Cotización | Contact Center y BPO | Grupo Vanguardia',
             'meta_description' => 'Solicita una cotización gratuita para servicios de contact center, BPO, desarrollo web o ciberseguridad. Respuesta en menos de 24 horas.',
+        ],
+        'chatbots' => [
+            'title'            => 'Chatbots e Inteligencia Artificial para Empresas | Grupo Vanguardia',
+            'meta_description' => 'Automatiza tu atención al cliente con chatbots inteligentes y procesamiento de lenguaje natural (PNL). Respuestas 24/7, empáticas y eficientes.',
+            'meta_keywords'    => 'chatbot IA México, inteligencia artificial empresas, automatización atención cliente, chatbot WhatsApp',
+        ],
+        'mesa-servicios' => [
+            'title'            => 'Mesa de Servicios IT | Soporte Técnico Outsourcing | Grupo Vanguardia',
+            'meta_description' => 'Mesa de servicios y soporte técnico outsourcing en CDMX. Help desk nivel 1, 2 y 3. ITIL. Reduce tiempos de respuesta y mejora la experiencia de usuario.',
+            'meta_keywords'    => 'mesa de servicios IT México, help desk outsourcing, soporte técnico empresarial CDMX, ITIL',
+        ],
+        'bolsa' => [
+            'title'            => 'Bolsa de Empleo | Trabaja en Grupo Vanguardia CDMX',
+            'meta_description' => 'Únete a Grupo Vanguardia. Vacantes en contact center, tecnología, desarrollo web y más. Envía tu CV. Trabajamos en CDMX.',
+            'meta_keywords'    => 'empleo contact center CDMX, vacantes tecnología México, trabajo BPO',
+        ],
+        'blog' => [
+            'title'            => 'Blog | Noticias y Artículos de Tecnología | Grupo Vanguardia',
+            'meta_description' => 'Lee artículos sobre contact center, BPO, inteligencia artificial, ciberseguridad y tendencias tecnológicas en el blog de Grupo Vanguardia.',
+            'meta_keywords'    => 'blog tecnología México, artículos contact center, noticias BPO, tendencias IA',
+        ],
+        'terminos' => [
+            'title'            => 'Términos y Condiciones | Grupo Vanguardia',
+            'meta_description' => 'Términos y condiciones de uso del sitio web de Grupo Vanguardia en Información y Conocimiento S.A. de C.V.',
+            'robots'           => 'noindex, follow',
+        ],
+        'aviso' => [
+            'title'            => 'Aviso de Privacidad | Grupo Vanguardia',
+            'meta_description' => 'Aviso de privacidad integral de Grupo Vanguardia. Conoce cómo protegemos tus datos personales conforme a la LFPDPPP.',
+            'robots'           => 'noindex, follow',
         ],
     ],
 ];

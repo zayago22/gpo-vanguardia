@@ -2,14 +2,14 @@
 @php $company = \App\Helpers\SeoHelper::company() ?? []; @endphp
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
+  "@@context": "https://schema.org",
+  "@@type": "LocalBusiness",
   "name": "{{ data_get($company, 'legal_name', '') }}",
   "description": "{{ data_get($company, 'description', '') }}",
   "telephone": "{{ data_get($company, 'phone', '') }}",
   "email": "{{ data_get($company, 'email', '') }}",
   "address": {
-    "@type": "PostalAddress",
+    "@@type": "PostalAddress",
     "streetAddress": "{{ data_get($company, 'address.street', '') }}",
     "addressLocality": "{{ data_get($company, 'address.city', '') }}",
     "addressRegion": "{{ data_get($company, 'address.region', '') }}",
@@ -17,7 +17,7 @@
     "addressCountry": "{{ data_get($company, 'address.country', '') }}"
   },
   "geo": {
-    "@type": "GeoCoordinates",
+    "@@type": "GeoCoordinates",
     "latitude": {{ data_get($company, 'geo.latitude', 0) }},
     "longitude": {{ data_get($company, 'geo.longitude', 0) }}
   },

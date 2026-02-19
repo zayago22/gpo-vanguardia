@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat Bots y AI | Grupo Vanguardia</title>
-    <link rel="icon" href="{{ asset('images/logo.png') }}" type="image/png">
+    <title>{{ config('seo.pages.chatbots.title', 'Chat Bots y AI | Grupo Vanguardia') }}</title>
+    <meta name="description" content="{{ config('seo.pages.chatbots.meta_description') }}">
+    <meta name="keywords" content="{{ config('seo.pages.chatbots.meta_keywords') }}">
+    <link rel="icon" href="{{ asset('images/favicon.png') }}" type="image/png">
+    @include('partials.seo-head', ['seoPage' => 'chatbots'])
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
