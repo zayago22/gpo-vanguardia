@@ -41,6 +41,7 @@ Route::middleware(['auth'])->prefix(env('ADMIN_PREFIX', 'gpo-panel-v25'))->name(
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('servicios', ServicioController::class);
     Route::resource('posts', PostController::class);
+    Route::post('posts/upload-image', [PostController::class, 'uploadImage'])->name('posts.upload-image');
     Route::resource('galeria', GaleriaController::class);
     Route::resource('testimonios', TestimonioController::class);
     Route::resource('redes-sociales', RedSocialController::class)->parameters(['redes-sociales' => 'redSocial']);

@@ -1,6 +1,15 @@
 @extends('admin.layouts.app')
 @section('title', isset($post) ? 'Editar Post' : 'Nuevo Post')
 
+@push('styles')
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-bs5.min.css" rel="stylesheet">
+<style>
+    .note-editor.note-frame { border-radius: 8px; border-color: #dee2e6; }
+    .note-editor.note-frame .note-editing-area .note-editable { font-family: 'Montserrat', sans-serif; font-size: 15px; min-height: 300px; }
+    .note-editor .note-toolbar { background: #f8f9fa; border-bottom: 1px solid #dee2e6; border-radius: 8px 8px 0 0; }
+</style>
+@endpush
+
 @section('content')
 <div class="row justify-content-center">
     <div class="col-lg-9">
@@ -37,7 +46,8 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Contenido *</label>
-                        <textarea class="form-control" name="contenido" rows="12" required>{{ old('contenido', $post->contenido ?? '') }}</textarea>
+                        <textarea class="form-control" name="contenido" id="contenido" rows="12" required>{{ old('contenido', $post->contenido ?? '') }}</textarea>
+                        <small class="text-muted mt-1 d-block"><i class="fas fa-info-circle me-1"></i>Usa el editor para dar formato: negritas, listas, encabezados, enlaces, imágenes, etc.</small>
                     </div>
                     <div class="row">
                         <div class="col-md-6 mb-3">
@@ -69,8 +79,50 @@
 </div>
 @endsection
 
-@section('scripts')
+@push('scripts')
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-bs5.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/lang/summernote-es-ES.min.js"></script>
 <script>
+$(document).ready(function() {
+    $('#contenido').summernote({
+        lang: 'es-ES',
+        height: 350,
+        placeholder: 'Escribe el contenido del artículo...',
+        toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture', 'video', 'hr']],
+            ['view', ['fullscreen', 'codeview', 'help']]
+        ],
+        styleTags: ['p', 'h2', 'h3', 'h4', 'h5', 'blockquote'],
+        callbacks: {
+            onImageUpload: function(files) {
+                // Upload image via AJAX
+                var formData = new FormData();
+                formData.append('image', files[0]);
+                formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
+                $.ajax({
+                    url: '{{ route("admin.posts.upload-image") }}',
+                    method: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(data) {
+                        $('#contenido').summernote('insertImage', data.url);
+                    },
+                    error: function() {
+                        alert('Error al subir la imagen. Máximo 2MB.');
+                    }
+                });
+            }
+        }
+    });
+});
+
 // Auto-generate slug from title (only if slug field is empty)
 const tituloInput = document.getElementById('titulo');
 const slugInput = document.getElementById('slug');
@@ -103,4 +155,4 @@ if (metaDesc) {
     });
 }
 </script>
-@endsection
+@endpush

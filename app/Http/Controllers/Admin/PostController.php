@@ -29,7 +29,7 @@ class PostController extends Controller
             'extracto' => 'nullable|max:500',
             'categoria' => 'nullable|max:100',
             'meta_description' => 'nullable|max:160',
-            'contenido' => 'required|max:50000',
+            'contenido' => 'required|max:100000',
             'imagen_portada' => 'nullable|image|max:2048',
             'publicado' => 'boolean',
             'fecha_publicacion' => 'nullable|date',
@@ -75,7 +75,7 @@ class PostController extends Controller
             'extracto' => 'nullable|max:500',
             'categoria' => 'nullable|max:100',
             'meta_description' => 'nullable|max:160',
-            'contenido' => 'required|max:50000',
+            'contenido' => 'required|max:100000',
             'imagen_portada' => 'nullable|image|max:2048',
             'publicado' => 'boolean',
             'fecha_publicacion' => 'nullable|date',
@@ -103,5 +103,21 @@ class PostController extends Controller
     {
         $post->delete();
         return redirect()->route('admin.posts.index')->with('success', 'Post eliminado.');
+    }
+
+    /**
+     * Upload an image from the WYSIWYG editor (Summernote).
+     */
+    public function uploadImage(Request $request)
+    {
+        $request->validate([
+            'image' => 'required|image|max:2048',
+        ]);
+
+        $path = $request->file('image')->store('posts/content', 'public');
+
+        return response()->json([
+            'url' => asset('storage/' . $path),
+        ]);
     }
 }

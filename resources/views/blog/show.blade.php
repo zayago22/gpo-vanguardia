@@ -164,6 +164,64 @@
             margin-top: 32px;
             margin-bottom: 16px;
         }
+        .content-body h2 { font-size: 28px; }
+        .content-body h3 { font-size: 22px; }
+        .content-body h4 { font-size: 18px; }
+        .content-body h5 { font-size: 16px; font-weight: 600; color: var(--dark); margin-top: 24px; margin-bottom: 12px; }
+        .content-body ul, .content-body ol {
+            margin-bottom: 20px;
+            padding-left: 28px;
+        }
+        .content-body li { margin-bottom: 8px; }
+        .content-body blockquote {
+            border-left: 4px solid var(--primary);
+            padding: 16px 24px;
+            margin: 24px 0;
+            background: var(--gray-50);
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+            color: var(--gray-600);
+        }
+        .content-body a { color: var(--primary); text-decoration: underline; transition: color 0.3s; }
+        .content-body a:hover { color: var(--primary-dark); }
+        .content-body img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            margin: 20px 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        .content-body table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .content-body table th, .content-body table td {
+            padding: 12px 16px;
+            border: 1px solid var(--gray-200);
+            text-align: left;
+        }
+        .content-body table th {
+            background: var(--gray-100);
+            font-weight: 600;
+            color: var(--dark);
+        }
+        .content-body table tr:hover { background: var(--gray-50); }
+        .content-body hr {
+            border: none;
+            border-top: 2px solid var(--gray-200);
+            margin: 32px 0;
+        }
+        .content-body pre, .content-body code {
+            background: var(--gray-100);
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        .content-body code { padding: 2px 6px; }
+        .content-body pre { padding: 16px; overflow-x: auto; margin: 20px 0; }
+        .content-body pre code { padding: 0; background: transparent; }
         
         /* Compartir */
         .share-section {
@@ -328,7 +386,7 @@
                         </div>
                     @endif
                     <div class="content-body">
-                        {!! nl2br(e($post->contenido)) !!}
+                        {!! $post->contenido !!}
                     </div>
                     
                     <!-- Compartir -->
