@@ -585,3 +585,34 @@ APP_KEY=base64:BcttqP3lTzreeabZOHq2PjFHhvKb+2IxucDaxtIYJRI=
 - `2590c89` Fix: create .env file before key:generate in entrypoint
 - `1cb67a9` Fix: use Coolify env vars directly, require APP_KEY in env vars
 - `47b53de` Fix: remove set -e, make entrypoint resilient to errors
+- `21c5626` Fix: quote .env values for spaces, use PHP PDO for DB wait check
+
+### Session 21 (Deploy exitoso en Coolify) — [2026-02-19]
+
+#### Estado: ✅ PRODUCCIÓN FUNCIONANDO
+
+#### Problemas resueltos durante deploy:
+1. **APP_KEY vacío**: `key:generate` no funcionaba sin `.env` físico → solución: configurar APP_KEY directamente en Coolify Environment Variables
+2. **`.env` con espacios sin comillas**: `env | grep` produce `APP_NAME=GPO Vanguardia` → dotenv parser falla → solución: `sed 's/=\(.*\)/="\1"/'` envuelve valores en comillas
+3. **MySQL no conecta (mysqladmin)**: `mysqladmin ping` no funciona en red interna Docker → solución: usar PHP PDO directamente para verificar conexión
+4. **`set -e` mata el script**: Seeder con datos duplicados devuelve error → `set -e` mata entrypoint → Supervisor nunca inicia → solución: eliminado `set -e`, cada comando tiene `|| true`
+5. **Seeder duplicados**: `ContentSeeder` falla con "Duplicate entry" si datos ya existen → solución: `|| echo` para ignorar error
+
+#### Lecciones Coolify/Docker:
+- Coolify inyecta variables de entorno al container, NO crea `.env` físico
+- `php artisan key:generate` necesita `.env` físico → en Docker generar key fuera y pegar en Coolify
+- `APP_KEY` como env var del container SOBREESCRIBE cualquier valor en `.env` → si está vacío en Coolify, Laravel falla
+- Las DB y apps en Coolify deben estar en la misma Docker network para verse por hostname interno
+- `mysqladmin` puede no resolver hostnames internos de Docker → usar PHP PDO como alternativa
+
+#### Entrypoint final (`docker/entrypoint.sh`):
+1. Crea `.env` desde env vars con valores entre comillas
+2. Verifica APP_KEY
+3. Crea directorios storage + permisos
+4. Espera MySQL con PHP PDO (15 intentos x 3s)
+5. `migrate --force`
+6. `db:seed` (ignora errores de duplicados)
+7. Crea admin user si no existe
+8. Cache config/routes/views
+9. Storage link
+10. Inicia Supervisor (PHP-FPM + Nginx)

@@ -808,3 +808,51 @@ La página de login (`/login`) tiene branding completo de GPO Vanguardia:
 - Sin dependencia de Tailwind/Vite (CSS standalone)
 - `noindex, nofollow` para evitar indexación
 - Archivos: `layouts/guest.blade.php`, `auth/login.blade.php`
+
+---
+
+### Deploy en Producción (Coolify)
+
+#### Configuración exitosa:
+- **Plataforma**: Coolify v4 (localhost) con Traefik proxy
+- **Build Pack**: Dockerfile
+- **Repo**: https://github.com/zayago22/gpo-vanguardia (branch: `main`)
+- **Puerto**: 80
+- **MySQL**: Servicio separado en Coolify (hostname interno `jgk8ooko80w088g404oggwks`)
+
+#### Variables de Entorno requeridas en Coolify:
+```env
+APP_NAME="GPO Vanguardia"
+APP_ENV=production
+APP_KEY=base64:BcttqP3lTzreeabZOHq2PjFHhvKb+2IxucDaxtIYJRI=
+APP_DEBUG=false
+APP_URL=https://tu-dominio.com
+ADMIN_PREFIX=gpo-panel-v25
+APP_LOCALE=es
+BCRYPT_ROUNDS=12
+LOG_CHANNEL=stack
+LOG_LEVEL=error
+DB_CONNECTION=mysql
+DB_HOST=jgk8ooko80w088g404oggwks
+DB_PORT=3306
+DB_DATABASE=gpo_vanguardia
+DB_USERNAME=gpo_vanguardia
+DB_PASSWORD=e6aTEPqtJ6Fskm9vtuuQCNvgkoRPuEoHPx2xDChPhZGBhozbf2VW2UM8uQrAKYCE
+ADMIN_EMAIL=admin@gpovanguardia.com
+ADMIN_PASSWORD=Vanguardia2025!
+SESSION_DRIVER=database
+FILESYSTEM_DISK=local
+QUEUE_CONNECTION=database
+CACHE_STORE=database
+```
+
+> **IMPORTANTE**: `APP_KEY` DEBE tener valor. Generarlo con: `php -r "echo 'base64:' . base64_encode(random_bytes(32));"`
+
+#### Problemas conocidos y soluciones:
+| Problema | Causa | Solución |
+|---|---|---|
+| Error 500 | APP_KEY vacío | Configurar APP_KEY en Coolify env vars |
+| `.env` invalid | Valores con espacios sin comillas | entrypoint usa `sed` para envolver en comillas |
+| MySQL timeout | `mysqladmin` no resuelve hostname Docker | entrypoint usa PHP PDO para check |
+| Seeder duplicados | ContentSeeder en re-deploy | entrypoint ignora error con `\|\| echo` |
+| Container crash loop | `set -e` + cualquier error | Eliminado `set -e` del entrypoint |
