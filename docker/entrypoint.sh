@@ -3,16 +3,16 @@ set -e
 
 cd /var/www/html
 
-# Create .env file if not exists (Coolify injects env vars, but some artisan commands need the file)
+# Create .env file from environment variables (Coolify injects env vars, artisan needs .env file)
 if [ ! -f .env ]; then
-    echo "Creating .env from .env.example..."
-    cp .env.example .env 2>/dev/null || touch .env
+    echo "Creating .env from environment..."
+    env | grep -E '^(APP_|DB_|ADMIN_|SESSION_|CACHE_|QUEUE_|MAIL_|FILESYSTEM_|LOG_|BCRYPT_|BROADCAST_|REDIS_|VITE_)' | sort > .env
 fi
 
-# Generate APP_KEY if not set
+# Generate APP_KEY only if truly not set anywhere
 if [ -z "$APP_KEY" ] || [ "$APP_KEY" = "" ]; then
-    echo "Generating APP_KEY..."
-    php artisan key:generate --force || true
+    echo "WARNING: APP_KEY not set. Generate one and add it to Coolify Environment Variables."
+    echo "Run: php -r \"echo 'base64:' . base64_encode(random_bytes(32));\""
 fi
 
 # Ensure storage directories exist
