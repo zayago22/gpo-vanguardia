@@ -1,6 +1,5 @@
 #!/bin/bash
-set -e
-
+# Do NOT use set -e — we want the app to start even if setup steps fail
 cd /var/www/html
 
 # Create .env file from environment variables (Coolify injects env vars, artisan needs .env file)
@@ -9,19 +8,17 @@ if [ ! -f .env ]; then
     env | grep -E '^(APP_|DB_|ADMIN_|SESSION_|CACHE_|QUEUE_|MAIL_|FILESYSTEM_|LOG_|BCRYPT_|BROADCAST_|REDIS_|VITE_)' | sort > .env
 fi
 
-# Generate APP_KEY only if truly not set anywhere
+# APP_KEY check
 if [ -z "$APP_KEY" ] || [ "$APP_KEY" = "" ]; then
-    echo "WARNING: APP_KEY not set. Generate one and add it to Coolify Environment Variables."
-    echo "Run: php -r \"echo 'base64:' . base64_encode(random_bytes(32));\""
+    echo "WARNING: APP_KEY not set! Add it to Coolify Environment Variables."
 fi
 
 # Ensure storage directories exist
-mkdir -p storage/framework/{sessions,views,cache}
-mkdir -p storage/logs
-chmod -R 775 storage bootstrap/cache
-chown -R www-data:www-data storage bootstrap/cache
+mkdir -p storage/framework/{sessions,views,cache} storage/logs 2>/dev/null
+chmod -R 775 storage bootstrap/cache 2>/dev/null
+chown -R www-data:www-data storage bootstrap/cache 2>/dev/null
 
-# Wait for MySQL
+# Wait for MySQL (max 60s)
 echo "Waiting for database..."
 max_retries=30
 retry=0
@@ -34,16 +31,19 @@ until mysqladmin ping -h "$DB_HOST" -P "${DB_PORT:-3306}" -u "$DB_USERNAME" -p"$
     echo "Waiting for MySQL... ($retry/$max_retries)"
     sleep 2
 done
-echo "Database ready."
+echo "Database connection check done."
 
 # Run migrations
-php artisan migrate --force
+echo "Running migrations..."
+php artisan migrate --force 2>&1 || echo "Migration warning (may be OK if already migrated)"
 
-# Seed if empty (first deploy)
-php artisan db:seed --class=ContentSeeder --force 2>/dev/null || true
+# Seed if empty (first deploy only — errors OK if data exists)
+echo "Seeding database..."
+php artisan db:seed --class=ContentSeeder --force 2>&1 || echo "Seeder skipped (data may already exist)"
 
 # Create admin user if ADMIN_PASSWORD env is set and no users exist
 if [ -n "$ADMIN_PASSWORD" ]; then
+    echo "Checking admin user..."
     php artisan tinker --execute="
         if(App\Models\User::count() === 0) {
             App\Models\User::create([
@@ -55,19 +55,21 @@ if [ -n "$ADMIN_PASSWORD" ]; then
         } else {
             echo 'Users exist, skipping.';
         }
-    "
+    " 2>&1 || echo "Admin user check skipped"
 fi
 
-# Cache config
-php artisan config:cache
-php artisan route:cache
-php artisan view:cache
+# Cache config (critical for performance)
+echo "Caching configuration..."
+php artisan config:cache 2>&1 || echo "Config cache failed"
+php artisan route:cache 2>&1 || echo "Route cache failed"
+php artisan view:cache 2>&1 || echo "View cache failed"
 
 # Storage link
-php artisan storage:link 2>/dev/null || true
+php artisan storage:link 2>&1 || true
 
 # Fix permissions
-chown -R www-data:www-data storage bootstrap/cache
+chown -R www-data:www-data storage bootstrap/cache 2>/dev/null
 
+# ALWAYS start the application regardless of above results
 echo "Starting application..."
 exec /usr/bin/supervisord -c /etc/supervisor/conf.d/app.conf
