@@ -3,6 +3,18 @@ set -e
 
 cd /var/www/html
 
+# Generate APP_KEY if not set
+if [ -z "$APP_KEY" ] || [ "$APP_KEY" = "" ]; then
+    echo "Generating APP_KEY..."
+    php artisan key:generate --force
+fi
+
+# Ensure storage directories exist
+mkdir -p storage/framework/{sessions,views,cache}
+mkdir -p storage/logs
+chmod -R 775 storage bootstrap/cache
+chown -R www-data:www-data storage bootstrap/cache
+
 # Wait for MySQL
 echo "Waiting for database..."
 max_retries=30

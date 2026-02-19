@@ -73,19 +73,21 @@ docker/                     → Dockerfile, nginx.conf, supervisord.conf, entryp
 ## Deployment (Coolify)
 1. Create MySQL service on separate server (security: DB isolated from app)
 2. Create new Laravel resource pointing to Git repo
-3. Set environment variables:
-  - DB_CONNECTION=mysql
-  - DB_HOST=(IP or hostname of separate MySQL server)
-  - DB_PORT=3306
-  - DB_DATABASE=gpo_vanguardia
-  - DB_USERNAME=gpo_vanguardia
-  - DB_PASSWORD=(secure password)
-  - APP_URL=https://your-domain.com
-  - ADMIN_EMAIL=admin@gpovanguardia.com
-  - ADMIN_PASSWORD=(set a strong password)
+3. Set environment variables (ver bloque abajo)
 4. Set domain in Coolify
 5. Deploy — entrypoint.sh handles migrations, seeding, admin creation, caching
 6. Admin CRUD disponible en `/{ADMIN_PREFIX}` (configurar en .env, NO usar /admin)
+
+### Credenciales MySQL Producción (Coolify)
+```
+DB_CONNECTION=mysql
+DB_HOST=jgk8ooko80w088g404oggwks
+DB_PORT=3306
+DB_DATABASE=gpo_vanguardia
+DB_USERNAME=gpo_vanguardia
+DB_PASSWORD=e6aTEPqtJ6Fskm9vtuuQCNvgkoRPuEoHPx2xDChPhZGBhozbf2VW2UM8uQrAKYCE
+```
+URL completa: `mysql://gpo_vanguardia:e6aTEPqtJ6Fskm9vtuuQCNvgkoRPuEoHPx2xDChPhZGBhozbf2VW2UM8uQrAKYCE@jgk8ooko80w088g404oggwks:3306/gpo_vanguardia`
 
 ## Instrucciones de Acceso Rápido
 
